@@ -1,11 +1,16 @@
+#if run
+#undef _WIN32_WINNT
+#define _WIN32_WINNT 0x502
 #include <windows.h>
-#include <commctrl.h>
 #include <stdio.h>
-#include "resource.h"
+#endif
 
+#include "resource.h"
 #include "init.h";
+#include "class\layer.h"
 
 HINSTANCE hInst;
+layer_c * layer;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -52,6 +57,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   hInst=hInstance;
   init();
 //////////////////////////////////////////////////////////////
+// Prepare Layer if requested
+  if (strlen(runconfig->ExeLayers) > 0) {
+    layer = new layer_c(exefile);
+    printf("%s\n","Need a Layer");
+  }
+//////////////////////////////////////////////////////////////
   STARTUPINFO info={sizeof(info)};
   PROCESS_INFORMATION processInfo;
   CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
@@ -68,6 +79,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       CloseHandle(processInfo.hThread);
       CloseHandle(processInfo.hProcess);
       //-- save the exit code
+//////////////////////////////////////////////////////////////
+// Remove Layer if requested
+  if (strlen(runconfig->ExeLayers) > 0) {
+    delete layer;
+    printf("%s\n","Remove a Layer");
+  }
+//////////////////////////////////////////////////////////////
       lExitCode = dwExitCode;
       return 0;
     } else {

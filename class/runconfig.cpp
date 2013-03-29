@@ -8,6 +8,8 @@ runconfig_c::runconfig_c(char * fname):xmlfile_c()
 {
   ExeFile = new char[10];
   ExeFile[0] = 0;
+  ExeLayers = new char[10];
+  ExeLayers[0] = 0;
   if (OpenReadXMLFile(fname)) {
     loadConfig();
     CloseXMLFile();
@@ -24,7 +26,7 @@ int runconfig_c::loadConfig() {
     if (strcmp(TagName,"AppData") == 0) {
       loadAppData();
     } else {
-      printf("%s\n",TagName);
+//      printf("%s\n",TagName);
     }
   }
   return 0;
@@ -39,10 +41,15 @@ int runconfig_c::loadAppData() {
       ExeFile = new char[strlen(TagString)+1];
       memcpy(ExeFile,TagString,strlen(TagString));
       ExeFile[strlen(TagString)] = 0;
-      printf("%s\n",TagString);
+      getXMLTag();
+    } else if (strcmp(TagName,"ExeLayer") == 0) {
+      delete ExeLayers;
+      ExeLayers = new char[strlen(TagString)+1];
+      memcpy(ExeLayers,TagString,strlen(TagString));
+      ExeLayers[strlen(TagString)] = 0;
       getXMLTag();
     } else {
-      printf("%s\n",TagName);
+//      printf("%s\n",TagName);
     }
   }
   return 0;

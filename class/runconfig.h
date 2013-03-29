@@ -10,6 +10,7 @@ class runconfig_c : public xmlfile_c
         runconfig_c(char *);
         virtual ~runconfig_c();
         char * ExeFile;
+        char * ExeLayers;
     protected:
       int loadConfig();
       int loadAppData();

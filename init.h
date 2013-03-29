@@ -5,7 +5,8 @@
 #include "class/runconfig.h"
 
 extern char * exefile;
-extern  SystemDefault_c * systemdefault;
+extern SystemDefault_c * systemdefault;
+extern runconfig_c * runconfig;
 
 int init();
 
