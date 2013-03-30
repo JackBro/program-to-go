@@ -68,7 +68,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //      printf("I Need to Move\n");
       GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
       if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false;};
-      printf("%s\n",TempFolder);
+// Ändern des Exefiles in das Tempdir
+      delete exefile;
+      exefile = new char[strlen(TempFolder)+strlen(runconfig->ExeFile)+2];
+      sprintf(exefile,"%s%s\0",TempFolder,runconfig->ExeFile);
+      exefile[strlen(TempFolder)+strlen(runconfig->ExeFile)] = 0;
+      for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
+      printf("%s\n",exefile);
     }
     layer = new layer_c(exefile);
     printf("%s\n","Need a Layer");
