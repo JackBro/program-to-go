@@ -1,8 +1,6 @@
 #include "runconfig.h"
 
-#if debug
 #include <stdio.h>
-#endif // debug
 
 runconfig_c::runconfig_c(char * fname):xmlfile_c()
 {

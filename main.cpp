@@ -8,9 +8,11 @@
 #include "resource.h"
 #include "init.h";
 #include "class\layer.h"
+#include "..\share\tools.h"
 
 HINSTANCE hInst;
 layer_c * layer;
+char TempFolder[MAX_PATH];
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -62,7 +64,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       ((systemdefault->HiVersion > runconfig->HiLayer) ||
       ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
     if (systemdefault->DriveRemovable()) {
-      printf("I Need to Move\n");
+//      printf("I Need to Move\n");
+      GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
+      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {
+        GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
+        CopyFolder(appdir,TempFolder,hwnd);
+      };
+
+      printf("%s\n",TempFolder);
     }
     layer = new layer_c(exefile);
     printf("%s\n","Need a Layer");
@@ -89,6 +98,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   if ((strlen(runconfig->ExeLayers) > 0) &
       ((systemdefault->HiVersion > runconfig->HiLayer) ||
       ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
+    if (systemdefault->DriveRemovable()) {
+//      printf("I Need to Move\n");
+      DeleteFolder(TempFolder);
+    }
     delete layer;
     printf("%s\n","Remove a Layer");
   }

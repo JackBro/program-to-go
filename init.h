@@ -5,6 +5,7 @@
 #include "class/runconfig.h"
 
 extern char * exefile;
+extern char * appdir;
 extern SystemDefault_c * systemdefault;
 extern runconfig_c * runconfig;
 

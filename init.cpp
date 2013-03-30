@@ -1,12 +1,11 @@
 #include "init.h"
 
-#if Debug
 #include <stdio.h>
-#endif // Debug
 
 SystemDefault_c * systemdefault;
 runconfig_c * runconfig;
 char * configfile;
+char * appdir;
 char * exefile;
 
 char conf[] = "setup\\run.xml";
@@ -28,5 +27,9 @@ int init() {
 #if Debug
 //  printf("%s\n",exefile);
 #endif
+  appdir = new char[strlen(exefile)+5];
+  sprintf(appdir,"%s%s\\\0\0",systemdefault->ExePath,"App");
+  appdir[strlen(appdir)] = 0;
+  appdir[strlen(appdir)+1] = 0;
   return 0;
 }
