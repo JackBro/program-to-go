@@ -26,10 +26,9 @@ int CopyFolder(char * from, char * to, HWND wnd) {
   sfo.lpszProgressTitle="Copy files...";
   sfo.pFrom=from;
   sfo.pTo=to;
-  int res = SHFileOperation(&sfo);
-  if (res == 124) { res = SHFileOperation(&sfo);}
-  printf("copy %X\n%s\n%s\n",res,from,to);
-  if (res == 87) { return 1;}
+  if (1223 == SHFileOperation(&sfo)) {
+    return 1;
+  }
   return 0;
 }
 
