@@ -2,25 +2,26 @@
 
 #include <stdio.h>
 
-layer_c::layer_c(char * exefile)
+layer_c::layer_c(char * exefile,char * layer)
 {
-  LARGE_INTEGER asize;
-  char * key = new char[strlen(exefile)+40];
-  HANDLE hFile = CreateFile(exefile, GENERIC_READ,
-        FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING,
-        FILE_ATTRIBUTE_NORMAL, NULL);
-  GetFileSizeEx(hFile,&asize);
-  CloseHandle(hFile);
-  exefile = exefile+3;
-  sprintf(key,"SIGN.MEDIA=%X",asize);
-  sprintf(key,"%s %s",key,exefile);
-  for (int i=0; i<strlen(key); i++) {
-    if (key[i] == '/') {key[i] = '\\';}
-  }
-  printf("%s\n%s\n",key,exefile);
+  OpenKey(HKEY_CURRENT_USER,"Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers");
+  data = new char[512];
+  DWORD asize = 512;
+  if (QueryValue(exefile,data,&asize) == 1) {
+    asize = 0;
+    data[0] = 0;
+  };
+  SetValue(exefile, layer);
+  value = new char[strlen(exefile)+5];
+  sprintf(value,"%s",exefile);
+  value[strlen(exefile)] = 0;
 }
 
 layer_c::~layer_c()
 {
-    //dtor
+  DeleteValue(value);
+  if (strlen(data) > 0) {
+    SetValue(value,data);
+  }
+  CloseKey();
 }

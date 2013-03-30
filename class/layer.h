@@ -14,10 +14,12 @@
 class layer_c : public registry_c
 {
     public:
-        layer_c(char * exefile);
+        layer_c(char * exefile,char * layer);
         virtual ~layer_c();
 //        hkResult CurrUser
     protected:
+        char * data;
+        char * value;
     private:
 };
 

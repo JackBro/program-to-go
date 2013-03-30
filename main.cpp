@@ -76,8 +76,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
       printf("%s\n",exefile);
     }
-    layer = new layer_c(exefile);
-    printf("%s\n","Need a Layer");
+    layer = new layer_c(exefile,runconfig->ExeLayers);
   }
 //////////////////////////////////////////////////////////////
     STARTUPINFO info={sizeof(info)};
@@ -107,7 +106,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       DeleteFolder(TempFolder);
     }
     delete layer;
-    printf("%s\n","Remove a Layer");
   }
 //////////////////////////////////////////////////////////////
       lExitCode = dwExitCode;
