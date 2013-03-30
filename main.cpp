@@ -54,7 +54,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                         NULL,
                         hInstance,
                         NULL);
-  ShowWindow(hwnd, SW_SHOW);              //display the window on the SW_SHOW
+  ShowWindow(hwnd, SW_HIDE);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
   hInst=hInstance;
   init();
@@ -74,15 +74,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       sprintf(exefile,"%s%s\0",TempFolder,runconfig->ExeFile);
       exefile[strlen(TempFolder)+strlen(runconfig->ExeFile)] = 0;
       for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
-      printf("%s\n",exefile);
     }
     layer = new layer_c(exefile,runconfig->ExeLayers);
   }
 //////////////////////////////////////////////////////////////
     STARTUPINFO info={sizeof(info)};
     PROCESS_INFORMATION processInfo;
+printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
   if (CanStart) {
-    CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
+    CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
   }
     DWORD lExitCode;
   while (true) {
