@@ -60,28 +60,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   init();
 //////////////////////////////////////////////////////////////
 // Prepare Layer if requeste
+  bool CanStart = true;
   if ((strlen(runconfig->ExeLayers) > 0) &
       ((systemdefault->HiVersion > runconfig->HiLayer) ||
       ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
     if (systemdefault->DriveRemovable()) {
 //      printf("I Need to Move\n");
       GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
-      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {
-        GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
-        CopyFolder(appdir,TempFolder,hwnd);
-      };
-
+      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false;};
       printf("%s\n",TempFolder);
     }
     layer = new layer_c(exefile);
     printf("%s\n","Need a Layer");
   }
 //////////////////////////////////////////////////////////////
-  STARTUPINFO info={sizeof(info)};
-  PROCESS_INFORMATION processInfo;
-  CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
-  DWORD lExitCode;
-
+    STARTUPINFO info={sizeof(info)};
+    PROCESS_INFORMATION processInfo;
+  if (CanStart) {
+    CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
+  }
+    DWORD lExitCode;
   while (true) {
   //-- see if the task has terminated
     DWORD dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
