@@ -18,7 +18,7 @@ int init() {
   memcpy(configfile+strlen(systemdefault->ExePath),conf,strlen(conf));
   configfile[strlen(systemdefault->ExePath)+strlen(conf)] = 0;
 #if Debug
-  printf("%s\n%s\n",systemdefault->ExePath, configfile);
+//  printf("%s\n%s\n%s\n%s\n",systemdefault->ExePath, configfile, systemdefault->Drive, systemdefault->TempPath);
 #endif
   runconfig = new runconfig_c(configfile);
   exefile = new char[strlen(systemdefault->ExePath)+strlen(runconfig->ExeFile)+1];
@@ -26,7 +26,7 @@ int init() {
   memcpy(exefile+strlen(systemdefault->ExePath),runconfig->ExeFile,strlen(runconfig->ExeFile));
   exefile[strlen(systemdefault->ExePath)+strlen(runconfig->ExeFile)] = 0;
 #if Debug
-  printf("%s\n",exefile);
+//  printf("%s\n",exefile);
 #endif
   return 0;
 }

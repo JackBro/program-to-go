@@ -26,7 +26,7 @@ int runconfig_c::loadConfig() {
     if (strcmp(TagName,"AppData") == 0) {
       loadAppData();
     } else {
-//      printf("%s\n",TagName);
+      printf("%s\n",TagName);
     }
   }
   return 0;
@@ -42,14 +42,33 @@ int runconfig_c::loadAppData() {
       memcpy(ExeFile,TagString,strlen(TagString));
       ExeFile[strlen(TagString)] = 0;
       getXMLTag();
+    } else if (strcmp(TagName,"Layer") == 0) {
+      loadLayer();
+    } else {
+      printf("%s\n",TagName);
+    }
+  }
+  return 0;
+}
+
+int runconfig_c::loadLayer() {
+  while (getXMLTag()) {
+    if (strcmp(TagName,"/Layer") == 0) {
+      return 0;
     } else if (strcmp(TagName,"ExeLayer") == 0) {
       delete ExeLayers;
       ExeLayers = new char[strlen(TagString)+1];
       memcpy(ExeLayers,TagString,strlen(TagString));
       ExeLayers[strlen(TagString)] = 0;
       getXMLTag();
+    } else if (strcmp(TagName,"HiVersion") == 0) {
+      HiLayer = TagIntger;
+      getXMLTag();
+    } else if (strcmp(TagName,"LoVersion") == 0) {
+      LoLayer = TagIntger;
+      getXMLTag();
     } else {
-//      printf("%s\n",TagName);
+      printf("%s\n",TagName);
     }
   }
   return 0;

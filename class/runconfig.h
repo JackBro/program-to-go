@@ -11,9 +11,12 @@ class runconfig_c : public xmlfile_c
         virtual ~runconfig_c();
         char * ExeFile;
         char * ExeLayers;
+        int HiLayer;
+        int LoLayer;
     protected:
       int loadConfig();
       int loadAppData();
+      int loadLayer();
     private:
 };
 

@@ -57,8 +57,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   hInst=hInstance;
   init();
 //////////////////////////////////////////////////////////////
-// Prepare Layer if requested
-  if (strlen(runconfig->ExeLayers) > 0) {
+// Prepare Layer if requeste
+  if ((strlen(runconfig->ExeLayers) > 0) &
+      ((systemdefault->HiVersion > runconfig->HiLayer) ||
+      ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
+    if (systemdefault->DriveRemovable()) {
+      printf("I Need to Move\n");
+    }
     layer = new layer_c(exefile);
     printf("%s\n","Need a Layer");
   }
@@ -81,7 +86,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       //-- save the exit code
 //////////////////////////////////////////////////////////////
 // Remove Layer if requested
-  if (strlen(runconfig->ExeLayers) > 0) {
+  if ((strlen(runconfig->ExeLayers) > 0) &
+      ((systemdefault->HiVersion > runconfig->HiLayer) ||
+      ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
     delete layer;
     printf("%s\n","Remove a Layer");
   }
