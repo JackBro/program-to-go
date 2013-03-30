@@ -8,7 +8,7 @@ SystemDefault_c::SystemDefault_c()
 {
   GetModuleFileName(NULL,ExeFile,MAX_PATH);
 #ifdef debug
-  printf("Exefile %s\n",ExeFile);
+//  printf("Exefile %s\n",ExeFile);
 #endif
   char slash[2] = "\\";
   strcpy(ExePath,ExeFile);
@@ -16,11 +16,33 @@ SystemDefault_c::SystemDefault_c()
     ExePath[strlen(ExePath)-1] = 0;
   }
 #ifdef debug
-  printf("ExePath %s\n",ExePath);
+//  printf("ExePath %s\n",ExePath);
+#endif
+  memcpy(Drive,ExeFile,3);
+  Drive[3] = 0;
+#ifdef debug
+//  printf("ExePath %s\n",Drive);
+#endif
+  DriveMode = GetDriveType(Drive);
+#ifdef debug
+//  printf("%d\n",DriveMode);
+#endif
+  GetTempPath(MAX_PATH, TempPath);
+  _OSVERSIONINFOA Version;
+  Version.dwOSVersionInfoSize = sizeof(_OSVERSIONINFOA);
+  GetVersionEx(&Version);
+  HiVersion = Version.dwMajorVersion;
+  LoVersion = Version.dwMinorVersion;
+#ifdef debug
+//  printf("%d %d\n",HiVersion,LoVersion);
 #endif
 }
 
 SystemDefault_c::~SystemDefault_c()
 {
     //dtor
+}
+
+bool SystemDefault_c::DriveRemovable() {
+  return (DRIVE_CDROM == DriveMode) || (DRIVE_REMOVABLE == DriveMode);
 }
