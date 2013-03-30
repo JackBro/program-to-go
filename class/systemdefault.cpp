@@ -20,6 +20,9 @@ SystemDefault_c::SystemDefault_c()
 #endif
   memcpy(Drive,ExeFile,3);
   Drive[3] = 0;
+  GetCurrentDirectory(MAX_PATH,PrgPath);
+  PrgPath[strlen(PrgPath)+1] = 0;
+  PrgPath[strlen(PrgPath)] = '\\';
 #ifdef debug
 //  printf("ExePath %s\n",Drive);
 #endif

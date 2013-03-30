@@ -11,6 +11,7 @@ class SystemDefault_c
         char ExeFile[MAX_PATH];
         char ExePath[MAX_PATH];
         char TempPath[MAX_PATH];
+        char PrgPath[MAX_PATH];
         char Drive[4];
         SystemDefault_c();
         virtual ~SystemDefault_c();
