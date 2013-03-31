@@ -19,6 +19,7 @@ class languagefile_c : public xmlfile_c
         char * base;
         char * id;
         char * getText(int id);
+
     protected:
     private:
        char * Name;
