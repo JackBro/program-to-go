@@ -1,13 +1,11 @@
 #include "language.h"
 
-#if debug
 #include <stdio.h>
-#endif
 
 language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : collection_c() {
   current = -1;
   langDir = new char[MAX_PATH];
-  strcpy(langDir,SystemDefault->ExePath);
+  strcpy(langDir,SystemDefault->PrgPath);
   strcat(langDir,"lang\\");
   char * SerPath = new char[MAX_PATH];
   strcpy(SerPath,langDir);
@@ -46,7 +44,6 @@ int language_c::LoadLanguageFile(char * aName) {
   languagefile_c * file = new languagefile_c;
   add((zeiger)file);
   file->loadlanguage(fName,aName);
-
   delete fName;
   return 0;
 }
