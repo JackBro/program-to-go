@@ -2,7 +2,11 @@
 #define INIT_H
 
 #include "..\share\class\systemdefault.h"
-#include "class\language.h"
+#include "..\share\class\language.h"
+#include "..\share\class\controlcollections.h"
+#include "class/setupfile.h"
+
+extern font_c * font;
 
 int init();
 
