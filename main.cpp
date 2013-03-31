@@ -52,7 +52,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                         NULL);
   ShowWindow(hwnd, SW_SHOW);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
-  init();
+  init(hwnd);
 //////////////////////////////////////////////////////////////
   while(GetMessage(&msg, NULL, 0, 0)) {
     TranslateMessage(&msg);
@@ -69,15 +69,37 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       return 0;}
    case WM_INITDIALOG:{
    }
-   case WM_DESTROY:
+   case WM_DESTROY: {
+     setup->checkSave();
      PostQuitMessage(0);
-   return 0;
-   return TRUE;
+     PostQuitMessage(0);
+     return 0;}
    case WM_COMMAND: {
-     switch(LOWORD(wParam)) {
-     }
+      if ((HWND)lParam == pages->getCloseButtonHwnd()) {
+        SendMessage(hwnd,WM_DESTROY,0,0);
+      } else if ((DWORD)lParam == (DWORD)langlist->Wnd) {
+        if (CBN_SELCHANGE == HIWORD(wParam)) {
+          delete language->setCurrentByLabel(langlist->getCurText());
+          setup->setLang(language->getCurLang());
+          controls->setLanguage(language);
+        }
+      } else if ((HWND)lParam == pages->getNextButtonHwnd()) {
+        pages->nextPage();
+      } else if ((HWND)lParam == pages->getPrevButtonHwnd()) {
+        pages->prevPage();
+      }
     }
     return TRUE;
+    case WM_TIMER:{
+    switch (wParam) {
+      case TIMER_START: {
+        KillTimer(hwnd,TIMER_START);
+//        edit->setText(data->getHttp());
+        return 0;
+      }
+    }
+    }
+    return 0;
   }
   return DefWindowProc(hwnd, msg, wParam, lParam);
 }
