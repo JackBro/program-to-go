@@ -57,8 +57,10 @@ int setupfile_c::loadConfig() {
 }
 
 int setupfile_c::setLang(const char * aLang) {
-  memcpy(language,aLang,strlen(aLang)+1);
-  changed = true;
+  if (strcmp(language,aLang) != 0) {
+    memcpy(language,aLang,strlen(aLang)+1);
+    changed = true;
+  }
   return 0;
 }
 
