@@ -4,6 +4,7 @@
 #include "..\share\class\systemdefault.h"
 #include "..\share\class\language.h"
 #include "..\share\class\controlcollections.h"
+#include "..\share\class\pages.h"
 #include "class/setupfile.h"
 
 extern font_c * font;
