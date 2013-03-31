@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- LanguageFile - Configfile V1.00 -->
+<LanguageData>
+  <Description>
+    <Label type="String">English</Label>
+	<Base type="String">9</Base>
+	<Id type="String">409</Id>
+  </Description>
+  <List>
+    <Entry>
+	  <Id type="Integer">1</Id>
+	  <Value type="String">Language:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">2</Id>
+	  <Value type="String">Back</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">3</Id>
+	  <Value type="String">Next</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">4</Id>
+	  <Value type="String">Finish</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">5</Id>
+	  <Value type="String">Webpage:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">init curl</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">Could not start curl</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Load page</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">New Page</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Compare Page</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Finish</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Show</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Save and Show</Value>
+	</Entry>
+  </List>
+</LanguageData>

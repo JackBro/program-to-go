@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- LanguageFile - Configfile V1.00 -->
+<LanguageData>
+  <Description>
+    <Label type="String">Deutsch</Label>
+	<Base type="String">7</Base>
+	<Id type="String">407</Id>
+  </Description>
+  <List>
+    <Entry>
+	  <Id type="Integer">1</Id>
+	  <Value type="String">Sprache:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">2</Id>
+	  <Value type="String">Zur&uuml;ck</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">3</Id>
+	  <Value type="String">Weiter</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">4</Id>
+	  <Value type="String">Beenden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">5</Id>
+	  <Value type="String">Webseite:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">Initialisiere cUrl</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">cUrl konnte nicht gestartet werden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Lade Seite</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">Neue Seite</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Vergleiche Seite</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Fertig</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Anzeigen</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Sichern und Anzeigen</Value>
+	</Entry>
+  </List>
+</LanguageData>
