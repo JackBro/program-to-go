@@ -1,7 +1,10 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <stdio.h>
+
 #include "resource.h"
+#include "init.h"
+
 
 HINSTANCE hInst;
 
@@ -49,8 +52,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                         NULL);
   ShowWindow(hwnd, SW_SHOW);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
-//  init();
-
+  init();
+//////////////////////////////////////////////////////////////
   while(GetMessage(&msg, NULL, 0, 0)) {
     TranslateMessage(&msg);
     DispatchMessage(&msg);
@@ -64,22 +67,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:{
       SendMessage(hwnd, (UINT)WM_SETICON, (WPARAM)ICON_BIG, (LPARAM)LoadIcon(hInst, MAKEINTRESOURCE(ICON_MAIN)));
       return 0;}
-   case WM_INITDIALOG:
-    {
-    }
-    case WM_DESTROY:
-      PostQuitMessage(0);
-      return 0;
-
-    return TRUE;
-
-    case WM_COMMAND:
-    {
-        switch(LOWORD(wParam))
-        {
-        }
+   case WM_INITDIALOG:{
+   }
+   case WM_DESTROY:
+     PostQuitMessage(0);
+   return 0;
+   return TRUE;
+   case WM_COMMAND: {
+     switch(LOWORD(wParam)) {
+     }
     }
     return TRUE;
-    }
+  }
   return DefWindowProc(hwnd, msg, wParam, lParam);
 }
