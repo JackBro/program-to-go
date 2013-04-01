@@ -34,10 +34,7 @@ int init(HWND hwnd) {
   pages->newPage();
   pages->addControl(
     controls->addControl(
-      new edit_c(hwnd, 10, 35, 346, 24)));
-  pages->addControl(
-    controls->addControl(
-      new buttonicon_c(hwnd, ICON_FOLDER, 356, 35, 24, 24)));
+      new folderedit_c(hwnd,ICON_FOLDER, 10, 35, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
