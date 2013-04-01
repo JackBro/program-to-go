@@ -9,6 +9,8 @@
 #include <commctrl.h>
 #endif
 
+#include "language.h"
+
 extern bool ControlsInited;
 
 class initcontrols_c
@@ -18,6 +20,7 @@ class initcontrols_c
         virtual ~initcontrols_c();
         HWND Wnd;
         virtual int setFont(HFONT font);
+        int setLanguage(language_c * aLang);
         int langId;
         int enable();
         int disable();
@@ -26,8 +29,9 @@ class initcontrols_c
         int setText(char * aText);
         char * getText();
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
+        int setCurLang();
     protected:
-
+        language_c * lang;
     private:
 };
 

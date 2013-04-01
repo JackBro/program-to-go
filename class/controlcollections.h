@@ -12,10 +12,12 @@ class controlcollections_c : public collection_c
         controlcollections_c();
         virtual ~controlcollections_c();
         int setFont(font_c * hFont);
+        int setLanguage(language_c * aLang);
         initcontrols_c * addControl(initcontrols_c * aControl);
-        int setLanguage(language_c * lang);
+        int setCurLanguage();
     protected:
         font_c * hFont;
+        language_c * hLang;
     private:
 };
 

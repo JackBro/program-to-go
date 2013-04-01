@@ -12,6 +12,7 @@ class dropdownlist_c : public initcontrols_c
         int selectByText(const char * text);
         int getCurSel();
         char * getCurText();
+        int setLangList();
     protected:
     private:
 };

@@ -10,7 +10,8 @@
 #include "../../share/class/systemdefault.h"
 #include "../../share/class/collection.h"
 #include "../../share/class/languagefile.h"
-#include "../../share/class/dropdownlist.h"
+//#include "../../share/class/initcontrols.h"
+//#include "../../share/class/dropdownlist.h"
 //#include "setupfile.h"
 
 class language_c : public collection_c {
@@ -18,15 +19,17 @@ class language_c : public collection_c {
       language_c(char * setupLang, SystemDefault_c * SystemDefault);
       virtual ~language_c();
       int LoadLanguageFile(char * aFile);
-      int allLangToCombo(dropdownlist_c * list);
+//      int allLangToCombo(dropdownlist_c * list);
       char * getLang(int id);
       char * setCurrentByLabel(char * aLabel);
+      char * getLangName(int id);
 //      int setSetup(setupfile_c * aSetup);
-      int setControlText(initcontrols_c * control,int id);
+//      int setControlText(initcontrols_c * control,int id);
       char * getCurLang();
+      char * getLangText(int id);
+      int current;
     protected:
       char * langDir;
-      int current;
     private:
       int getLangIDMain(int lang);
       int getLangID(int lang);

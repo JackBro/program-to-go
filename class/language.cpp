@@ -48,7 +48,7 @@ int language_c::LoadLanguageFile(char * aName) {
   return 0;
 }
 
-int language_c::allLangToCombo(dropdownlist_c * list) {
+/*int language_c::allLangToCombo(dropdownlist_c * list) {
   languagefile_c * lang;
   for (int i=0; i < Count; i++) {
     lang = (languagefile_c *)getByIndex(i);
@@ -57,7 +57,7 @@ int language_c::allLangToCombo(dropdownlist_c * list) {
   lang = (languagefile_c *)getByIndex(current);
   list->selectByText(lang->label);
   return 0;
-}
+}*/
 
 language_c::~language_c() {
 }
@@ -118,11 +118,11 @@ char * language_c::setCurrentByLabel(char * aLabel) {
   return aLabel;
 }
 
-int language_c::setControlText(initcontrols_c * control,int id) {
+/*int language_c::setControlText(initcontrols_c * control,int id) {
   languagefile_c * file = (languagefile_c*)getByIndex(current);
   SendMessage(control->Wnd,WM_SETTEXT,0,(LPARAM)file->getText(id));
   return 0;
-}
+}*/
 
 char * language_c::getCurLang() {
   if (current != -1) {
@@ -134,4 +134,18 @@ char * language_c::getCurLang() {
     temp[1] = 0;
   }
 
+}
+
+char * language_c::getLangName(int id) {
+  if (id < Count) {
+    languagefile_c * file = (languagefile_c*)getByIndex(id);
+    return file->label;
+  } else {
+    return NULL;
+  }
+}
+
+char * language_c::getLangText(int id) {
+  languagefile_c * file = (languagefile_c*)getByIndex(current);
+  return file->getText(id);
 }

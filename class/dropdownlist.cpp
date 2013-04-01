@@ -23,6 +23,16 @@ dropdownlist_c::~dropdownlist_c()
     //dtor
 }
 
+int dropdownlist_c::setLangList() {
+  if (lang != NULL) {
+    for (int i=0; i<lang->Count; i++) {
+      addEntry(lang->getLangName(i));
+    }
+  }
+  selectByText(lang->getLangName(lang->current));
+  return 0;
+}
+
 int dropdownlist_c::addEntry(char * text) {
   SendMessage(Wnd,CB_ADDSTRING,0, (LPARAM)text);
   return 0;

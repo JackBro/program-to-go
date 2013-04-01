@@ -11,6 +11,7 @@ initcontrols_c::initcontrols_c() {
     InitCommonControlsEx(&iccx);
   }
   langId = -1;
+  lang = NULL;
 }
 
 initcontrols_c::~initcontrols_c() {
@@ -58,4 +59,17 @@ char * initcontrols_c::getText() {
 
 bool initcontrols_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
   return false;
+}
+
+int initcontrols_c::setLanguage(language_c * aLang) {
+  lang = aLang;
+  return 0;
+}
+
+int initcontrols_c::setCurLang() {
+  if (langId >= 0) {
+//    languagefile_c * file = (languagefile_c*)lang->getByIndex(current);
+    SendMessage(Wnd,WM_SETTEXT,0,(LPARAM)lang->getLangText(langId));
+  }
+  return 0;
 }
