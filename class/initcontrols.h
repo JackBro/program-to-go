@@ -23,8 +23,8 @@ class initcontrols_c
         int langId;
         int enable();
         int disable();
-        int hide();
-        int show();
+        virtual int hide();
+        virtual int show();
         int setText(char * aText);
         char * getText();
     protected:
