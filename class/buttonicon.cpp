@@ -6,7 +6,7 @@ buttonicon_c::buttonicon_c(HWND hWnd, int icon, int left, int top, int width, in
 {
    Wnd = CreateWindow("BUTTON",
                       "",
-                      WS_VISIBLE | WS_CHILD | BS_BITMAP | BS_ICON,
+                      WS_VISIBLE | WS_CHILD |  BS_ICON,
                       left,
                       top,
                       width,

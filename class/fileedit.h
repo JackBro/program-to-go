@@ -1,5 +1,5 @@
-#ifndef FOLDEREDIT_H
-#define FOLDEREDIT_H
+#ifndef FILEEDIT_H
+#define FILEEDIT_H
 
 #include <windows.h>
 #include <shlobj.h>
@@ -8,11 +8,11 @@
 #include "edit.h";
 #include "buttonicon.h";
 
-class folderedit_c : public initcontrols_c
+class fileedit_c : public initcontrols_c
 {
     public:
-        folderedit_c(HWND hWnd, int Icon, int TextLabel, int left, int top, int width, int height);
-        virtual ~folderedit_c();
+        fileedit_c(HWND hWnd, int Icon, int TextLabel, int left, int top, int width, int height);
+        virtual ~fileedit_c();
         virtual int show();
         virtual int hide();
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
