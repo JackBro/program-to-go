@@ -9,6 +9,7 @@ controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
 dropdownlist_c * langlist;
+folderedit_c * installpath;
 
 int init(HWND hwnd) {
   SystemDefault = new SystemDefault_c;
@@ -32,7 +33,7 @@ int init(HWND hwnd) {
        new dropdownlist_c(hwnd, 10, 35, 370, 12)));
 ////////////
   pages->newPage();
-  pages->addControl(
+  installpath = (folderedit_c*)pages->addControl(
     controls->addControl(
       new folderedit_c(hwnd,ICON_FOLDER, 10, 35, 370, 24)));
 ////////////
