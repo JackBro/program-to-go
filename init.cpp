@@ -17,6 +17,7 @@ int init(HWND hwnd) {
   language = new language_c(setup->getLang(), SystemDefault);
   setup->setLang(language->getCurLang());
   controls = new controlcollections_c;
+  controls->setLanguage(language);
   font = new font_c;
   font->setSizeName(10,"Tahoma");
   font->create();
@@ -47,8 +48,8 @@ int init(HWND hwnd) {
     (button_c*)controls->addControl(
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
 ////////////
-  language->allLangToCombo(langlist);
-  controls->setLanguage(language);
+  langlist->setLangList();
+  controls->setCurLanguage();
 ////////////
   if (setup->changed) {
     pages->setPage(0);

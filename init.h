@@ -8,6 +8,7 @@
 #include "..\share\class\staticlabel.h"
 #include "..\share\class\buttonIcon.h"
 #include "..\share\class\folderedit.h"
+#include "..\share\class\dropdownlist.h"
 #include "class/setupfile.h"
 #include "resource.h"
 

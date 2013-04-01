@@ -83,7 +83,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         if (CBN_SELCHANGE == HIWORD(wParam)) {
           delete language->setCurrentByLabel(langlist->getCurText());
           setup->setLang(language->getCurLang());
-          controls->setLanguage(language);
+          controls->setCurLanguage();
+//          controls->setLanguage(language);
         }
       } else if ((HWND)lParam == pages->getNextButtonHwnd()) {
         pages->nextPage();
