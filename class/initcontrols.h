@@ -27,6 +27,7 @@ class initcontrols_c
         virtual int show();
         int setText(char * aText);
         char * getText();
+        virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
     protected:
 
     private:

@@ -55,3 +55,7 @@ char * initcontrols_c::getText() {
   SendMessage(Wnd,WM_GETTEXT,size+1,(LPARAM)text);
   return text;
 }
+
+bool initcontrols_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
+  return false;
+}
