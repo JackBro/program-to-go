@@ -2,10 +2,12 @@
 
 #include <stdio.h>
 
-folderedit_c::folderedit_c(HWND hWnd, int Icon, int left, int top, int width, int height):initcontrols_c()
+folderedit_c::folderedit_c(HWND hWnd, int Icon, int TextLabel, int left, int top, int width, int height):initcontrols_c()
 {
   edit = new edit_c(hWnd, left, top, width-height, height);
   button = new buttonicon_c(hWnd, Icon,left+width-height, top, height, height);
+  aTextLabel = TextLabel;
+  parent = hWnd;
 }
 
 folderedit_c::~folderedit_c()
@@ -33,12 +35,10 @@ bool folderedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
       BROWSEINFO   bi       = { 0 };
       LPITEMIDLIST pidl     = NULL;
       char Folder[MAX_PATH];
-      char szFolder[MAX_PATH];
-      char text[] = "Dies ist eine Nachricht";
-      bi.hwndOwner      = Wnd;
+      bi.hwndOwner      = parent;
       bi.pszDisplayName = Folder;
 	  bi.pidlRoot       = NULL;  //StartFolder
-	  bi.lpszTitle      = text;
+	  bi.lpszTitle      = lang->getLangText(aTextLabel);
       bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_USENEWUI;
       if ((pidl = SHBrowseForFolder(&bi)) != NULL) {
 		SHGetPathFromIDList(pidl, Folder);
@@ -51,5 +51,10 @@ bool folderedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
 
 int folderedit_c::setFont(HFONT font) {
   SendMessage(edit->Wnd,WM_SETFONT,(WPARAM)font,true);
+  return 0;
+}
+
+int folderedit_c::setText(char * aText) {
+  edit->setText(aText);
   return 0;
 }

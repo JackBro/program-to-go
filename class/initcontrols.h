@@ -27,7 +27,7 @@ class initcontrols_c
         int disable();
         virtual int hide();
         virtual int show();
-        int setText(char * aText);
+        virtual int setText(char * aText);
         char * getText();
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
         int setCurLang();
