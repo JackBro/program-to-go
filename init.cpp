@@ -32,8 +32,12 @@ int init(HWND hwnd) {
        new dropdownlist_c(hwnd, 10, 35, 370, 12)));
 ////////////
   pages->newPage();
-  controls->addControl(
-    new buttonicon_c(hwnd, ICON_FOLDER, 207, 037, 24, 24));
+  pages->addControl(
+    controls->addControl(
+      new edit_c(hwnd, 10, 35, 346, 24)));
+  pages->addControl(
+    controls->addControl(
+      new buttonicon_c(hwnd, ICON_FOLDER, 356, 35, 24, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
