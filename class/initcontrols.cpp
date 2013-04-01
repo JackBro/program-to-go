@@ -73,3 +73,9 @@ int initcontrols_c::setCurLang() {
   }
   return 0;
 }
+
+int initcontrols_c::setLangId(int id) {
+  langId = id;
+  setCurLang();
+  return 0;
+}

@@ -21,6 +21,7 @@ class initcontrols_c
         HWND Wnd;
         virtual int setFont(HFONT font);
         int setLanguage(language_c * aLang);
+        int setLangId(int id);
         int langId;
         int enable();
         int disable();
