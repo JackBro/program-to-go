@@ -3,7 +3,8 @@
 #endif
 
 // ID of ICON
-#define ICON_MAIN 301
+#define ICON_MAIN   301
+#define ICON_FOLDER 302
 
 // ID of Timers
 #define TIMER_START 1
