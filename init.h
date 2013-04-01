@@ -17,6 +17,7 @@ extern pages_c * pages;
 extern dropdownlist_c * langlist;
 extern controlcollections_c * controls;
 extern language_c * language;
+extern folderedit_c * installpath;
 
 int init(HWND hwnd);
 
