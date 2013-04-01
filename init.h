@@ -7,6 +7,7 @@
 #include "..\share\class\pages.h"
 #include "..\share\class\staticlabel.h"
 #include "..\share\class\buttonIcon.h"
+#include "..\share\class\edit.h"
 #include "class/setupfile.h"
 #include "resource.h"
 
