@@ -8,6 +8,7 @@
 #include "..\share\class\staticlabel.h"
 #include "..\share\class\buttonIcon.h"
 #include "..\share\class\folderedit.h"
+#include "..\share\class\fileedit.h"
 #include "..\share\class\dropdownlist.h"
 #include "class/setupfile.h"
 #include "resource.h"
@@ -20,6 +21,7 @@ extern controlcollections_c * controls;
 extern language_c * language;
 extern folderedit_c * installpath;
 extern SystemDefault_c * SystemDefault;
+extern fileedit_c * runfile;
 
 int init(HWND hwnd);
 

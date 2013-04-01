@@ -10,6 +10,7 @@ font_c * font;
 pages_c * pages;
 dropdownlist_c * langlist;
 folderedit_c * installpath;
+fileedit_c * runfile;
 
 int init(HWND hwnd) {
   SystemDefault = new SystemDefault_c;
@@ -43,6 +44,9 @@ int init(HWND hwnd) {
   pages->addControl(
     controls->addControl(
        new staticlabel_c(hwnd, "App:", 7, 10, 75, 200, 24)));
+  runfile = (fileedit_c*)pages->addControl(
+    controls->addControl(
+      new fileedit_c(hwnd, ICON_FILE, 5, 10, 100, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(

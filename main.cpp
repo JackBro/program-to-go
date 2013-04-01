@@ -77,6 +77,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
    case WM_COMMAND: {
       if (installpath->event(hwnd, wParam, lParam)) {
         return 0;
+      } else if (runfile->event(hwnd, wParam, lParam)) {
+        return 0;
       } else if ((HWND)lParam == pages->getCloseButtonHwnd()) {
         SendMessage(hwnd,WM_DESTROY,0,0);
       } else if ((DWORD)lParam == (DWORD)langlist->Wnd) {
