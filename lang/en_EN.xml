@@ -25,39 +25,15 @@
 	</Entry>
     <Entry>
 	  <Id type="Integer">5</Id>
-	  <Value type="String">Webpage:</Value>
+	  <Value type="String">Select the Folder to create the package inside</Value>
 	</Entry>
     <Entry>
 	  <Id type="Integer">6</Id>
-	  <Value type="String">init curl</Value>
+	  <Value type="String">Folder for the package:</Value>
 	</Entry>
     <Entry>
 	  <Id type="Integer">7</Id>
-	  <Value type="String">Could not start curl</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">8</Id>
-	  <Value type="String">Load page</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">9</Id>
-	  <Value type="String">New Page</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">10</Id>
-	  <Value type="String">Compare Page</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">11</Id>
-	  <Value type="String">Finish</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">12</Id>
-	  <Value type="String">Show</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">13</Id>
-	  <Value type="String">Save and Show</Value>
+	  <Value type="String">File to start:</Value>
 	</Entry>
   </List>
 </LanguageData>

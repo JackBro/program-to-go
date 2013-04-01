@@ -97,6 +97,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch (wParam) {
       case TIMER_START: {
         KillTimer(hwnd,TIMER_START);
+        installpath->setText(SystemDefault->PrgPath);
 //        edit->setText(data->getHttp());
         return 0;
       }

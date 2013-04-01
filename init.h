@@ -19,6 +19,7 @@ extern dropdownlist_c * langlist;
 extern controlcollections_c * controls;
 extern language_c * language;
 extern folderedit_c * installpath;
+extern SystemDefault_c * SystemDefault;
 
 int init(HWND hwnd);
 

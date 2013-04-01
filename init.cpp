@@ -34,9 +34,15 @@ int init(HWND hwnd) {
        new dropdownlist_c(hwnd, 10, 35, 370, 12)));
 ////////////
   pages->newPage();
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Folder:", 6, 10, 10, 200, 24)));
   installpath = (folderedit_c*)pages->addControl(
     controls->addControl(
-      new folderedit_c(hwnd,ICON_FOLDER, 10, 35, 370, 24)));
+      new folderedit_c(hwnd, ICON_FOLDER, 5, 10, 35, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "App:", 7, 10, 75, 200, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
