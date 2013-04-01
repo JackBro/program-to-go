@@ -9,8 +9,6 @@
 #include <commctrl.h>
 #endif
 
-//#include "language.h"
-
 extern bool ControlsInited;
 
 class initcontrols_c
@@ -19,7 +17,7 @@ class initcontrols_c
         initcontrols_c();
         virtual ~initcontrols_c();
         HWND Wnd;
-        int setFont(HFONT font);
+        virtual int setFont(HFONT font);
         int langId;
         int enable();
         int disable();

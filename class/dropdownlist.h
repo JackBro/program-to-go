@@ -3,7 +3,6 @@
 
 #include "initcontrols.h"
 
-
 class dropdownlist_c : public initcontrols_c
 {
     public:

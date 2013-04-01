@@ -24,3 +24,32 @@ int folderedit_c::hide() {
   button->hide();
   return 0;
 }
+
+bool folderedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
+  bool ok = ((HWND)lParam == edit->Wnd);
+  if (!ok) {
+    ok = ((HWND)lParam == button->Wnd);
+    if (ok) {
+      BROWSEINFO   bi       = { 0 };
+      LPITEMIDLIST pidl     = NULL;
+      char Folder[MAX_PATH];
+      char szFolder[MAX_PATH];
+      char text[] = "Dies ist eine Nachricht";
+      bi.hwndOwner      = Wnd;
+      bi.pszDisplayName = Folder;
+	  bi.pidlRoot       = NULL;  //StartFolder
+	  bi.lpszTitle      = text;
+      bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_USENEWUI;
+      if ((pidl = SHBrowseForFolder(&bi)) != NULL) {
+		SHGetPathFromIDList(pidl, Folder);
+		SendMessage(edit->Wnd,WM_SETTEXT,0,(LPARAM)&Folder);
+	  }
+    }
+  }
+  return ok;
+}
+
+int folderedit_c::setFont(HFONT font) {
+  SendMessage(edit->Wnd,WM_SETFONT,(WPARAM)font,true);
+  return 0;
+}
