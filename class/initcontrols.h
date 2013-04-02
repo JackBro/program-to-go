@@ -13,6 +13,8 @@
 
 extern bool ControlsInited;
 
+typedef char * (*cb_getText)();
+
 class initcontrols_c
 {
     public:
@@ -28,7 +30,7 @@ class initcontrols_c
         virtual int hide();
         virtual int show();
         virtual int setText(char * aText);
-        char * getText();
+        virtual char * getText();
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
         int setCurLang();
     protected:

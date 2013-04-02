@@ -18,6 +18,7 @@ class folderedit_c : public initcontrols_c
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
         virtual int setFont(HFONT font);
         virtual int setText(char * aText);
+        virtual char * getText();
     protected:
         edit_c * edit;
         buttonicon_c * button;

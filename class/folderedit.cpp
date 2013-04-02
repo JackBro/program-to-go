@@ -58,3 +58,7 @@ int folderedit_c::setText(char * aText) {
   edit->setText(aText);
   return 0;
 }
+
+char * folderedit_c::getText() {
+  return edit->getText();
+}

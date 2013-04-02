@@ -4,6 +4,7 @@
 
 fileedit_c::fileedit_c(HWND hWnd, int Icon, int TextLabel, int left, int top, int width, int height):initcontrols_c()
 {
+  getdefPfad = NULL;
   edit = new edit_c(hWnd, left, top, width-height, height);
   button = new buttonicon_c(hWnd, Icon,left+width-height, top, height, height);
   aTextLabel = TextLabel;
@@ -34,11 +35,16 @@ bool fileedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
     if (ok) {
       OPENFILENAME ofn;
       char szFileName[MAX_PATH] = "";
+      char * pfad = NULL;
+      if (getdefPfad != NULL) {
+        pfad = getdefPfad();
+      }
       ZeroMemory(&ofn, sizeof(ofn));
       ofn.lStructSize = sizeof(ofn); // SEE NOTE BELOW
       ofn.hwndOwner = hwnd;
-      ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+      ofn.lpstrFilter = "";
       ofn.lpstrFile = szFileName;
+      ofn.lpstrInitialDir = pfad;
       ofn.nMaxFile = MAX_PATH;
       ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY|OFN_ALLOWMULTISELECT;
       ofn.lpstrDefExt = "txt";
@@ -47,6 +53,7 @@ bool fileedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
 //      	SHGetPathFromIDList(pidl, Folder);
 //		SendMessage(edit->Wnd,WM_SETTEXT,0,(LPARAM)&Folder);
 	  }
+	  delete pfad;
     }
   }
   return ok;
@@ -59,5 +66,10 @@ int fileedit_c::setFont(HFONT font) {
 
 int fileedit_c::setText(char * aText) {
   edit->setText(aText);
+  return 0;
+}
+
+int fileedit_c::SetGetPfad(cb_getText aProc) {
+  getdefPfad = aProc;
   return 0;
 }
