@@ -12,6 +12,10 @@ dropdownlist_c * langlist;
 folderedit_c * installpath;
 fileedit_c * runfile;
 
+char * getPfad() {
+  return installpath->getText();
+}
+
 int init(HWND hwnd) {
   SystemDefault = new SystemDefault_c;
   setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
@@ -47,6 +51,7 @@ int init(HWND hwnd) {
   runfile = (fileedit_c*)pages->addControl(
     controls->addControl(
       new fileedit_c(hwnd, ICON_FILE, 5, 10, 100, 370, 24)));
+  runfile->SetGetPfad(&getPfad);
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
