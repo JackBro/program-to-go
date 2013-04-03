@@ -16,7 +16,7 @@ buttonicon_c::buttonicon_c(HWND hWnd, int icon, int left, int top, int width, in
                       NULL,
                       NULL);    //ctor
   HICON hMyIcon=(HICON)LoadImage(GetModuleHandle(NULL),MAKEINTRESOURCE(icon), IMAGE_ICON,
-	16, 16, NULL);
+	16, 16, 0);
   SendMessage (Wnd, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hMyIcon);
   }
 

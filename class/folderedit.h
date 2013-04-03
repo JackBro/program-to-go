@@ -5,8 +5,8 @@
 #include <shlobj.h>
 
 #include "initcontrols.h"
-#include "edit.h";
-#include "buttonicon.h";
+#include "edit.h"
+#include "buttonicon.h"
 
 class folderedit_c : public initcontrols_c
 {

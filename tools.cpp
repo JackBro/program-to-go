@@ -2,12 +2,12 @@
 
 int WINAPI GetTempFolderName(char * lpPathName, char * lpPrefixString, int uUnique, char * lpTempFileName) {
   if (uUnique != 0) {
-    snprintf(lpTempFileName, MAX_PATH, "%s%s%X\\\0\0", lpPathName, lpPrefixString, uUnique);
+    snprintf(lpTempFileName, MAX_PATH, "%s%s%X\\", lpPathName, lpPrefixString, uUnique);
   } else {
     uUnique = GetTickCount();
     do {
       uUnique++;
-      snprintf(lpTempFileName, MAX_PATH, "%s%s%X\\\0\0", lpPathName, lpPrefixString, uUnique);
+      snprintf(lpTempFileName, MAX_PATH, "%s%s%X\\", lpPathName, lpPrefixString, uUnique);
     }
     while (!CreateDirectory(lpTempFileName,NULL));
   }
@@ -41,5 +41,6 @@ int DeleteFolder(char * from) {
   sfo.lpszProgressTitle="Copy files...";
   sfo.pFrom=from;
   SHFileOperation(&sfo);
+  return 0;
 }
 

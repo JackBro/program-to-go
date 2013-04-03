@@ -39,19 +39,20 @@ bool fileedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
       if (getdefPfad != NULL) {
         pfad = getdefPfad();
       }
+      char * filter = lang->getLangText(aTextLabel);
+      int len = strlen(filter);
+      for (int i=0; i<len; i++) {if (filter[i] == ';'){filter[i]=0;};};
       ZeroMemory(&ofn, sizeof(ofn));
       ofn.lStructSize = sizeof(ofn); // SEE NOTE BELOW
       ofn.hwndOwner = hwnd;
-      ofn.lpstrFilter = "";
+      ofn.lpstrFilter = filter;
       ofn.lpstrFile = szFileName;
       ofn.lpstrInitialDir = pfad;
       ofn.nMaxFile = MAX_PATH;
       ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY|OFN_ALLOWMULTISELECT;
       ofn.lpstrDefExt = "txt";
       if(GetOpenFileName(&ofn)) {
-
-//      	SHGetPathFromIDList(pidl, Folder);
-//		SendMessage(edit->Wnd,WM_SETTEXT,0,(LPARAM)&Folder);
+        edit->setText(szFileName);
 	  }
 	  delete pfad;
     }

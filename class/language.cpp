@@ -132,8 +132,8 @@ char * language_c::getCurLang() {
     char * temp = new char[2];
     temp[0] = 0;
     temp[1] = 0;
+    return temp;
   }
-
 }
 
 char * language_c::getLangName(int id) {

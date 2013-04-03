@@ -7,10 +7,11 @@ charcollection_c::charcollection_c()
 
 charcollection_c::~charcollection_c()
 {
-  for(int i; i<Count; i++) {
-    i = i * 1;
+  int i;
+  for(i=0; i<Count; i++) {
     delete getByIndexChar(i);
   }
+   return;
 }
 
 int charcollection_c::addByIndexChar(int i, char * text) {
