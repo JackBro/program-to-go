@@ -8,9 +8,10 @@ setupfile_c * setup;
 controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
-dropdownlist_c * langlist;
+languagebox_c * langlist;
 folderedit_c * installpath;
 fileedit_c * runfile;
+dropdownlist_c * version;
 
 char * getPfad() {
   return installpath->getText();
@@ -34,9 +35,9 @@ int init(HWND hwnd) {
   pages->addControl(
     controls->addControl(
        new staticlabel_c(hwnd, "Language:", 1, 10, 10, 200, 24)));
-  langlist = (dropdownlist_c*)pages->addControl(
+  langlist = (languagebox_c*)pages->addControl(
     controls->addControl(
-       new dropdownlist_c(hwnd, 10, 35, 370, 12)));
+       new languagebox_c(hwnd, 10, 35, 370, 12)));
 ////////////
   pages->newPage();
   pages->addControl(
@@ -50,8 +51,18 @@ int init(HWND hwnd) {
        new staticlabel_c(hwnd, "App:", 7, 10, 75, 200, 24)));
   runfile = (fileedit_c*)pages->addControl(
     controls->addControl(
-      new fileedit_c(hwnd, ICON_FILE, 5, 10, 100, 370, 24)));
+      new fileedit_c(hwnd, ICON_FILE, 8, 10, 100, 370, 24)));
   runfile->SetGetPfad(&getPfad);
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "App:", 9, 10, 140, 200, 24)));
+  version = (dropdownlist_c*)pages->addControl(
+    controls->addControl(
+      new dropdownlist_c(hwnd, false, 10, 165, 370, 24)));
+  version->addEntry("");
+  version->addEntry("Windows XP");
+  version->addEntry("Windows Vista");
+  version->addEntry("Windows 7");
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(

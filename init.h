@@ -9,6 +9,7 @@
 #include "..\share\class\buttonIcon.h"
 #include "..\share\class\folderedit.h"
 #include "..\share\class\fileedit.h"
+#include "..\share\class\languagebox.h"
 #include "..\share\class\dropdownlist.h"
 #include "class/setupfile.h"
 #include "resource.h"
@@ -16,7 +17,7 @@
 extern font_c * font;
 extern setupfile_c * setup;
 extern pages_c * pages;
-extern dropdownlist_c * langlist;
+extern languagebox_c * langlist;
 extern controlcollections_c * controls;
 extern language_c * language;
 extern folderedit_c * installpath;

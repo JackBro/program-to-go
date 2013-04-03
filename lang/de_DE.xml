@@ -35,5 +35,13 @@
 	  <Id type="Integer">7</Id>
 	  <Value type="String">Auzuführende Datei:</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">Lauffähig bis:</Value>
+	</Entry>
    </List>
 </LanguageData>

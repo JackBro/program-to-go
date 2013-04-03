@@ -35,5 +35,13 @@
 	  <Id type="Integer">7</Id>
 	  <Value type="String">File to start:</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">program;*.exe;Batchfile;*.bat;all;*.*;;</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">Runs up:</Value>
+	</Entry>
   </List>
 </LanguageData>
