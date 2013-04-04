@@ -25,12 +25,12 @@ class pages_c : public collection_c
         int getPage();
         int disableButtons();
         int enableButtons();
-    protected:
-    private:
-        int curpage;
         button_c * prevButton;
         button_c * nextButton;
         button_c * closeButton;
+    protected:
+    private:
+        int curpage;
 };
 
 #endif // PAGE_H

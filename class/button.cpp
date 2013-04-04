@@ -1,5 +1,7 @@
 #include "button.h"
 
+#include <stdio.h>
+
 button_c::button_c(HWND hWnd, const char * text, int lang, int left, int top, int width, int height)
 {
    Wnd = CreateWindow("BUTTON",
@@ -14,9 +16,17 @@ button_c::button_c(HWND hWnd, const char * text, int lang, int left, int top, in
                       NULL,
                       NULL);    //ctor
   langId = lang;
+  onClick = NULL;
 }
 
 button_c::~button_c()
 {
     //dtor
+}
+
+bool button_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
+  if (Wnd == (HWND)lParam) {
+    if (onClick != NULL) {onClick();}
+  }
+  return false;
 }

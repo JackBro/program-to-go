@@ -14,6 +14,7 @@
 extern bool ControlsInited;
 
 typedef char * (*cb_getText)();
+typedef int * (*cb_event)();
 
 class initcontrols_c
 {
