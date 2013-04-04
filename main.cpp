@@ -79,6 +79,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         return 0;
       } else if (runfile->event(hwnd, wParam, lParam)) {
         return 0;
+      } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
+        return 0;
       } else if ((HWND)lParam == pages->getCloseButtonHwnd()) {
         SendMessage(hwnd,WM_DESTROY,0,0);
       } else if ((DWORD)lParam == (DWORD)langlist->Wnd) {
@@ -86,12 +90,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           delete language->setCurrentByLabel(langlist->getCurText());
           setup->setLang(language->getCurLang());
           controls->setCurLanguage();
-//          controls->setLanguage(language);
         }
-      } else if ((HWND)lParam == pages->getNextButtonHwnd()) {
-        pages->nextPage();
-      } else if ((HWND)lParam == pages->getPrevButtonHwnd()) {
-        pages->prevPage();
       }
     }
     return TRUE;

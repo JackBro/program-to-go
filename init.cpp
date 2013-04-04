@@ -17,6 +17,16 @@ char * getPfad() {
   return installpath->getText();
 }
 
+int * nextButtonClicked() {
+  pages->nextPage();
+  return 0;
+}
+
+int * prevButtonClicked() {
+  pages->prevPage();
+  return 0;
+}
+
 int init(HWND hwnd) {
   SystemDefault = new SystemDefault_c;
   setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
@@ -64,12 +74,16 @@ int init(HWND hwnd) {
   version->addEntry("Windows Vista");
   version->addEntry("Windows 7");
 ////////////
+  pages->newPage();
+////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
       new button_c(hwnd, "Back", 2, 107, 237, 85, 24)));
+  pages->prevButton->onClick = prevButtonClicked;
   pages->setNextButton(
     (button_c*)controls->addControl(
       new button_c(hwnd, "Next", 3, 202, 237, 85, 24)));
+  pages->nextButton->onClick = nextButtonClicked;
   pages->setCloseButton(
     (button_c*)controls->addControl(
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
