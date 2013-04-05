@@ -12,6 +12,8 @@ languagebox_c * langlist;
 folderedit_c * installpath;
 fileedit_c * runfile;
 dropdownlist_c * version;
+staticlabel_c * statuslabel;
+progress_c * progress;
 
 char * getPfad() {
   return installpath->getText();
@@ -75,6 +77,12 @@ int init(HWND hwnd) {
   version->addEntry("Windows 7");
 ////////////
   pages->newPage();
+  statuslabel = (staticlabel_c*)pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Progress", 10, 10, 10, 200, 24)));
+  progress = (progress_c*)pages->addControl(
+    controls->addControl(
+      new progress_c(hwnd, 10, 35, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(

@@ -43,5 +43,9 @@
 	  <Id type="Integer">9</Id>
 	  <Value type="String">Lauffähig bis:</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Fortschritt</Value>
+	</Entry>
    </List>
 </LanguageData>

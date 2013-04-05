@@ -38,10 +38,14 @@
     <Entry>
 	  <Id type="Integer">8</Id>
 	  <Value type="String">program;*.exe;Batchfile;*.bat;all;*.*;;</Value>
-	</Entry>
+	</Entry>Progress
     <Entry>
 	  <Id type="Integer">9</Id>
 	  <Value type="String">Runs up:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Fortschritt</Value>
 	</Entry>
   </List>
 </LanguageData>

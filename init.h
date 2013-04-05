@@ -11,6 +11,7 @@
 #include "..\share\class\fileedit.h"
 #include "..\share\class\languagebox.h"
 #include "..\share\class\dropdownlist.h"
+#include "..\share\class\progress.h"
 #include "class/setupfile.h"
 #include "resource.h"
 
