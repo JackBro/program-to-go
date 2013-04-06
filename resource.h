@@ -9,3 +9,6 @@
 
 // ID of Timers
 #define TIMER_START 1
+#define TIMER_STEP1 2
+#define TIMER_STEP2 3
+#define TIMER_STEP3 4

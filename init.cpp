@@ -12,15 +12,25 @@ languagebox_c * langlist;
 folderedit_c * installpath;
 fileedit_c * runfile;
 dropdownlist_c * version;
-staticlabel_c * statuslabel;
-progress_c * progress;
+staticlabel_c * progresslabel;
+progress_c * progressbar;
+char * prgPfad;
+char * prgExefile;
+HWND Wnd;
 
 char * getPfad() {
-  return installpath->getText();
+  char * temp = installpath->getText();
+  if (temp[strlen(temp)-1] == '\\') {temp[strlen(temp)-1] = 0;}
+  return temp;
 }
 
 int * nextButtonClicked() {
   pages->nextPage();
+  if (pages->getPage() == 2) {
+    prgPfad = installpath->getText();
+    prgExefile = runfile->getText();
+    runIt(Wnd ,0);
+  }
   return 0;
 }
 
@@ -30,6 +40,7 @@ int * prevButtonClicked() {
 }
 
 int init(HWND hwnd) {
+  Wnd = hwnd;
   SystemDefault = new SystemDefault_c;
   setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
   language = new language_c(setup->getLang(), SystemDefault);
@@ -77,12 +88,12 @@ int init(HWND hwnd) {
   version->addEntry("Windows 7");
 ////////////
   pages->newPage();
-  statuslabel = (staticlabel_c*)pages->addControl(
+  progresslabel = (staticlabel_c*)pages->addControl(
     controls->addControl(
-       new staticlabel_c(hwnd, "Progress", 10, 10, 10, 200, 24)));
-  progress = (progress_c*)pages->addControl(
+       new staticlabel_c(hwnd, "Progress", 10, 10, 10, 370, 65)));
+  progressbar = (progress_c*)pages->addControl(
     controls->addControl(
-      new progress_c(hwnd, 10, 35, 370, 24)));
+      new progress_c(hwnd, 10, 80, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(

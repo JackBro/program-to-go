@@ -47,5 +47,29 @@
 	  <Id type="Integer">10</Id>
 	  <Value type="String">Fortschritt</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Prüfe Programm-Starter.exe</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Programm "..\Program-Start\app\Program-Start.exe" nicht gefunden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Prüfe "Auzuführende Datei"</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">14</Id>
+	  <Value type="String">auszuführendes Programm nicht gefunden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">15</Id>
+	  <Value type="String">Kopiere Startprogramm</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">16</Id>
+	  <Value type="String">Kopiere von Startprogramm nicht möglich</Value>
+	</Entry>
    </List>
 </LanguageData>

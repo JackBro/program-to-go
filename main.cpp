@@ -4,6 +4,7 @@
 
 #include "resource.h"
 #include "init.h"
+#include "run.h"
 
 
 HINSTANCE hInst;
@@ -99,7 +100,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       case TIMER_START: {
         KillTimer(hwnd,TIMER_START);
         installpath->setText(SystemDefault->PrgPath);
-//        edit->setText(data->getHttp());
+        return 0;
+      }
+      case TIMER_STEP1: {
+        KillTimer(hwnd,TIMER_STEP1);
+        runIt(hwnd,1);
+        return 0;
+      }
+      case TIMER_STEP2: {
+        KillTimer(hwnd,TIMER_STEP2);
+        runIt(hwnd,2);
+        return 0;
+      }
+      case TIMER_STEP3: {
+        KillTimer(hwnd,TIMER_STEP3);
+        runIt(hwnd,3);
         return 0;
       }
     }

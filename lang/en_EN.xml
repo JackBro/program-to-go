@@ -45,7 +45,31 @@
 	</Entry>
     <Entry>
 	  <Id type="Integer">10</Id>
-	  <Value type="String">Fortschritt</Value>
+	  <Value type="String">Progress</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Check for Program-Starter.exe</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Program "..\Program-Start\app\Program-Start.exe" not found</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Check "File to start"</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">14</Id>
+	  <Value type="String">Program to start not found</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">15</Id>
+	  <Value type="String">Copy start-program</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">16</Id>
+	  <Value type="String">Can not copy start-program</Value>
 	</Entry>
   </List>
 </LanguageData>

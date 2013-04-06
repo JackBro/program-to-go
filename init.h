@@ -15,6 +15,8 @@
 #include "class/setupfile.h"
 #include "resource.h"
 
+#include "run.h"
+
 extern font_c * font;
 extern setupfile_c * setup;
 extern pages_c * pages;
@@ -24,6 +26,10 @@ extern language_c * language;
 extern folderedit_c * installpath;
 extern SystemDefault_c * SystemDefault;
 extern fileedit_c * runfile;
+extern progress_c * progressbar;
+extern staticlabel_c * progresslabel;
+extern char * prgPfad;
+extern char * prgExefile;
 
 int init(HWND hwnd);
 
