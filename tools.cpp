@@ -44,3 +44,14 @@ int DeleteFolder(char * from) {
   return 0;
 }
 
+bool FileExists(char * fName)
+{
+   bool found = false;
+   WIN32_FIND_DATA FindFileData;
+   HANDLE handle = FindFirstFile(fName, &FindFileData) ;
+   found = handle != INVALID_HANDLE_VALUE;
+   if(found){
+       FindClose(handle);
+   }
+   return found;
+}

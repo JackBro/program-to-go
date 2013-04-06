@@ -19,6 +19,7 @@ class fileedit_c : public initcontrols_c
         virtual int setFont(HFONT font);
         virtual int setText(char * aText);
         int SetGetPfad(cb_getText aProc);
+        virtual char * getText();
     protected:
         edit_c * edit;
         buttonicon_c * button;

@@ -74,3 +74,7 @@ int fileedit_c::SetGetPfad(cb_getText aProc) {
   getdefPfad = aProc;
   return 0;
 }
+
+char * fileedit_c::getText() {
+  return edit->getText();
+}

@@ -7,7 +7,7 @@
 collection_c::collection_c(){
   Max = 32;
   Count = 0;
-  daten = new int*[Max];
+  daten = new int*[4*Max];
 }
 
 collection_c::~collection_c() {
@@ -24,7 +24,7 @@ int collection_c::add(zeiger data) {
 int collection_c::CheckSize() {
   if ((Count+1) < Max) {
     int ** temp;
-    temp = new int*[Max*2];
+    temp = new int*[Max*4];
     memcpy(temp,daten,sizeof(zeiger)*Max);
     Max = Max*2;
     daten = temp;
