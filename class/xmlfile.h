@@ -23,6 +23,7 @@ class xmlfile_c : public textfile_c
         int CloseXMLFile();
         int CloseWriteXMLFile();
         int WriteStringXML(char * aLabel,char * text);
+        int WriteIntergerXML(char * aLabel,int value);
     protected:
     private:
         int strrepl(char *s, int len, const char *search, const char *replace);

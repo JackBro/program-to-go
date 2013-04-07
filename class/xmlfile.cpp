@@ -1,8 +1,6 @@
 #include "xmlfile.h"
 
-#if debug
 #include <stdio.h>
-#endif
 
 xmlfile_c::xmlfile_c() {
   //ctor
@@ -208,6 +206,15 @@ int xmlfile_c::WriteStringXML(char * aLabel,char * atext) {
   text[strlen(aLabel)+strlen(string)+strlen(atext)+2] = '/';
   text[2*strlen(aLabel)+strlen(string)+strlen(atext)+3] = '>';
   text[2*strlen(aLabel)+strlen(string)+strlen(atext)+4] = 0;
+  WriteTextLine(text);
+  delete text;
+  return 0;
+}
+
+int xmlfile_c::WriteIntergerXML(char * aLabel,int value) {
+  char string[] = " type=\"Integer\">";
+  char * text = new char[256];
+  sprintf(text,"<%s type=\"Integer\">%d</%s>",aLabel,value,aLabel);
   WriteTextLine(text);
   delete text;
   return 0;
