@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- LanguageFile - Configfile V1.00 -->
+<LanguageData>
+  <Description>
+    <Label type="String">English</Label>
+	<Base type="String">9</Base>
+	<Id type="String">409</Id>
+  </Description>
+  <List>
+    <Entry>
+	  <Id type="Integer">1</Id>
+	  <Value type="String">Language:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">2</Id>
+	  <Value type="String">Back</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">3</Id>
+	  <Value type="String">Next</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">4</Id>
+	  <Value type="String">Finish</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">5</Id>
+	  <Value type="String">Folder with Install-Files:</Value>
+	</Entry>
+  </List>
+</LanguageData>

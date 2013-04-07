@@ -7,6 +7,7 @@
 
 
 ICON_MAIN ICON "images/icon.ico"
+ICON_FOLDER ICON "images/folder.ico"
 
 
 //

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "resource.h"
-//#include "init.h"
+#include "init.h"
 //#include "run.h"
 
 
@@ -53,7 +53,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                         NULL);
   ShowWindow(hwnd, SW_SHOW);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
-//  init(hwnd);
+  init(hwnd);
 //////////////////////////////////////////////////////////////
   while(GetMessage(&msg, NULL, 0, 0)) {
     TranslateMessage(&msg);
@@ -74,6 +74,30 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
      PostQuitMessage(0);
      return 0;}
    case WM_COMMAND: {
+      if ((HWND)lParam == pages->getCloseButtonHwnd()) {
+        SendMessage(hwnd,WM_DESTROY,0,0);
+      } else if ((DWORD)lParam == (DWORD)langlist->Wnd) {
+        if (CBN_SELCHANGE == HIWORD(wParam)) {
+          delete language->setCurrentByLabel(langlist->getCurText());
+          setup->setLang(language->getCurLang());
+          controls->setCurLanguage();
+        }
+      } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (sourcepath->event(hwnd, wParam, lParam)) {
+        return 0;
+      }
+   }
+   case WM_TIMER:{
+     switch (wParam) {
+       case TIMER_START: {
+         KillTimer(hwnd,TIMER_START);
+         init_second(hwnd);
+         return 0;
+       }
+     }
    }
   }
   return DefWindowProc(hwnd, msg, wParam, lParam);
