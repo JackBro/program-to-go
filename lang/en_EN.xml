@@ -71,5 +71,17 @@
 	  <Id type="Integer">16</Id>
 	  <Value type="String">Can not copy start-program</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">17</Id>
+	  <Value type="String">Change Icon</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">18</Id>
+	  <Value type="String">Can not copy icon</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">19</Id>
+	  <Value type="String">Create "run.xml"</Value>
+	</Entry>
   </List>
 </LanguageData>

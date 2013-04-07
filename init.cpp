@@ -16,6 +16,7 @@ staticlabel_c * progresslabel;
 progress_c * progressbar;
 char * prgPfad;
 char * prgExefile;
+int layer;
 HWND Wnd;
 
 char * getPfad() {
@@ -29,6 +30,7 @@ int * nextButtonClicked() {
   if (pages->getPage() == 2) {
     prgPfad = installpath->getText();
     prgExefile = runfile->getText();
+    layer = version->getCurSel();
     runIt(Wnd ,0);
   }
   return 0;

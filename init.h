@@ -30,6 +30,7 @@ extern progress_c * progressbar;
 extern staticlabel_c * progresslabel;
 extern char * prgPfad;
 extern char * prgExefile;
+extern int layer;
 
 int init(HWND hwnd);
 
