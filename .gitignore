@@ -16,3 +16,4 @@
 
 #backup
 *.save
+*.depend

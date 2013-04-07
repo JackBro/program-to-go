@@ -2,4 +2,5 @@
 #define IDC_STATIC (-1)
 #endif
 
-#define DLG_MAIN                                100
+// ID of ICON
+#define ICON_MAIN   301
