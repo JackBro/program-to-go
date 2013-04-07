@@ -1,6 +1,7 @@
 #include "collection.h"
 
 #include <stdio.h>
+#include <string.h>
 
 collection_c::collection_c(){
   Max = 32;

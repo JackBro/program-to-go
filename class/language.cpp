@@ -1,6 +1,11 @@
 #include "language.h"
 
 #include <stdio.h>
+#undef RC_INVOKED
+#undef WINVER
+#define WINVER 0x0502
+#include <Windows.h>
+#include <winnls.h>
 
 language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : collection_c() {
   current = -1;

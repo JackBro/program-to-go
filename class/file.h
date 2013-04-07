@@ -1,9 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#if run
 #include <windows.h>
-#endif
 
 class file_c
 {

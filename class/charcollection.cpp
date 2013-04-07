@@ -1,5 +1,8 @@
 #include "charcollection.h"
 
+#include <windows.h>
+#include <stdio.h>
+
 charcollection_c::charcollection_c()
 {
     //ctor

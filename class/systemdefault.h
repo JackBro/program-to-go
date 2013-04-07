@@ -1,9 +1,7 @@
 #ifndef SYSTEMDEFAULT_H
 #define SYSTEMDEFAULT_H
 
-#if run
 #include <windows.h>
-#endif
 
 class SystemDefault_c
 {

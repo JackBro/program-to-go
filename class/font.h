@@ -1,9 +1,7 @@
 #ifndef FONT_H
 #define FONT_H
 
-#if run
 #include <windows.h>
-#endif
 
 class font_c
 {
