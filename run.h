@@ -9,12 +9,12 @@
 #include "resource.h"
 #include "icon.h"
 */
+#include "class\ziplib.h"
+
 extern pages_c * pages;
 extern progress_c * progressbar;
 extern staticlabel_c * progresslabel;
-/*extern char * prgPfad;
-extern char * prgExefile;
-extern int layer;*/
+extern char * sourcePfad;
 
 int runIt(HWND wnd, int step);
 

@@ -13,13 +13,12 @@ folderedit_c * sourcepath;
 staticlabel_c * progresslabel;
 progress_c * progressbar;
 HWND Wnd;
+char * sourcePfad;
 
 int * nextButtonClicked() {
   pages->nextPage();
   if (pages->getPage() == 2) {
-/*    prgPfad = installpath->getText();
-    prgExefile = runfile->getText();
-    layer = version->getCurSel();*/
+    sourcePfad = sourcepath->getText();
     runIt(Wnd ,0);
   }
   return 0;

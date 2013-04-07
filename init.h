@@ -21,6 +21,7 @@ extern languagebox_c * langlist;
 extern controlcollections_c * controls;
 extern language_c * language;
 extern folderedit_c * sourcepath;
+extern char * sourcePfad;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

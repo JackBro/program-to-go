@@ -18,12 +18,22 @@ char Win7[] = "WIN7RTM";
 char HiVersion[] = "HiVersion";
 char LoVersion[] = "LoVersion";
 */
+
+
+
+char zipfile[] = "\\test.zip";
+
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
     progressbar->setRange(0,5);
     progressbar->setValue(0);
     progresslabel->setLangId(11);
+    ziplib_c * zip = new ziplib_c;
+    zip->open(zipfile);
+    zip->addFolder(sourcePfad,"");
+    zip->close();
+    pages->enableButtons();
 /*    StarterPrg = new char[strlen(prgPfad)+28];
     memcpy(StarterPrg,prgPfad,strlen(prgPfad));
     StarterPrg[strlen(prgPfad)-1] = 0;
