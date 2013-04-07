@@ -1,8 +1,7 @@
 #include "file.h"
 
-#if debug
+
 #include <stdio.h>
-#endif
 
 file_c::file_c()
 {

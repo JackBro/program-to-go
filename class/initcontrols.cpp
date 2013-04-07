@@ -1,5 +1,7 @@
 #include "initcontrols.h"
 
+#include <stdio.h>
+
 bool ControlsInited = false;
 
 initcontrols_c::initcontrols_c() {
@@ -68,8 +70,9 @@ int initcontrols_c::setLanguage(language_c * aLang) {
 
 int initcontrols_c::setCurLang() {
   if (langId >= 0) {
+    char * aText = lang->getLangText(langId);
 //    languagefile_c * file = (languagefile_c*)lang->getByIndex(current);
-    SendMessage(Wnd,WM_SETTEXT,0,(LPARAM)lang->getLangText(langId));
+    SendMessage(Wnd,WM_SETTEXT,0,(LPARAM)aText);
   }
   return 0;
 }

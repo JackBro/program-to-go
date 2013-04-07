@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 xmlfile_c::xmlfile_c() {
+  Tag = NULL;
   //ctor
 }
 
@@ -13,7 +14,7 @@ xmlfile_c::~xmlfile_c() {
 bool xmlfile_c::OpenReadXMLFile(char * aName) {
   bool ok = OpenReadTextFile(aName);
   if (ok) {
-    Tag = new char[4096];
+    Tag =  new char[4096];
     TagName = new char[2];
     memset(TagName,0,2);
     TagAttrib =  new char[2];
@@ -26,15 +27,15 @@ bool xmlfile_c::OpenReadXMLFile(char * aName) {
 
 int xmlfile_c::CloseXMLFile() {
   CloseTextFile();
-  delete Tag;
-  delete TagName;
-  delete TagAttrib;
-  delete TagString;
+//  delete[] Tag;
+  delete[] TagName;
+  delete[] TagAttrib;
+  delete[] TagString;
   return 0;
 }
 
 bool xmlfile_c::getXMLTag() {
-  bool ok;
+  bool ok = true;
   int pos = 0;
   memset(Tag,0,4096);
   while ((ok = getChar()) & (currentChar != '<')) {
@@ -52,13 +53,14 @@ bool xmlfile_c::getXMLTag() {
   }
   int EndPos = 0;
   int StartPos = 0;
+//  Sleep(10);
 // GetTagName
-  if (ok | (strlen(Tag)>0)) {
+  if (ok || (strlen(Tag)>0)) {
     while ((EndPos <= (int)strlen(Tag)) & (Tag[EndPos] != '>') & (Tag[EndPos] != ' ')) {
       EndPos = EndPos+1;
     }
     if (EndPos > 0) {
-      delete TagName;
+      delete[] TagName;
       TagName = new char[EndPos+1];
       memcpy(TagName,Tag,EndPos);
       TagName[EndPos] = 0;
@@ -74,19 +76,19 @@ bool xmlfile_c::getXMLTag() {
       while ((EndPos <= (int)strlen(Tag)) & (Tag[EndPos] != '>')) {
         EndPos = EndPos+1;
       }
-      delete TagAttrib;
+      delete[] TagAttrib;
       TagAttrib = new char[EndPos-StartPos+2];
       memcpy(TagAttrib,Tag+StartPos,EndPos-StartPos);
       TagAttrib[EndPos-StartPos] = 0;
       StartPos = EndPos;
     } else {
-      delete TagAttrib;
+      delete[] TagAttrib;
       TagAttrib =  new char[2];
       memset(TagAttrib,0,2);
     }
 // Hole TagString
     StartPos = StartPos+1;
-    delete TagString;
+    delete[] TagString;
     TagString = new char[strlen(Tag)-StartPos+2];
     memset(TagString,0,strlen(Tag)-StartPos+1);
     memcpy(TagString,Tag+StartPos,strlen(Tag)-StartPos);
@@ -176,7 +178,7 @@ int xmlfile_c::OpenXMLGroup(char * aText) {
   text[strlen(aText)+1] = '>';
   text[strlen(aText)+2] = 0;
   WriteTextLine(text);
-  delete text;
+  delete[] text;
   return 0;
 }
 
@@ -189,7 +191,7 @@ int xmlfile_c::CloseXMLGroup() {
   text[strlen(aLabel)+2] = '>';
   text[strlen(aLabel)+3] = 0;
   WriteTextLine(text);
-  delete text;
+  delete[] text;
   xmlgroup->deletByIndexChar(xmlgroup->Count-1);
   return 0;
 }
@@ -207,16 +209,15 @@ int xmlfile_c::WriteStringXML(char * aLabel,char * atext) {
   text[2*strlen(aLabel)+strlen(string)+strlen(atext)+3] = '>';
   text[2*strlen(aLabel)+strlen(string)+strlen(atext)+4] = 0;
   WriteTextLine(text);
-  delete text;
+  delete[] text;
   return 0;
 }
 
 int xmlfile_c::WriteIntergerXML(char * aLabel,int value) {
-  char string[] = " type=\"Integer\">";
   char * text = new char[256];
   sprintf(text,"<%s type=\"Integer\">%d</%s>",aLabel,value,aLabel);
   WriteTextLine(text);
-  delete text;
+  delete[] text;
   return 0;
 }
 

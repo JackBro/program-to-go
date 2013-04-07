@@ -1,8 +1,6 @@
 #include "collection.h"
 
-#if debug
 #include <stdio.h>
-#endif
 
 collection_c::collection_c(){
   Max = 32;
@@ -22,7 +20,7 @@ int collection_c::add(zeiger data) {
 }
 
 int collection_c::CheckSize() {
-  if ((Count+1) < Max) {
+  if ((Count+1) > Max) {
     int ** temp;
     temp = new int*[Max*4];
     memcpy(temp,daten,sizeof(zeiger)*Max);

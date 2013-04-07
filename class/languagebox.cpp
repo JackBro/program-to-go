@@ -1,8 +1,6 @@
 #include "languagebox.h"
 
-#if run
 #include <stdio.h>
-#endif
 
 languagebox_c::languagebox_c(HWND hWnd, int left, int top, int width, int height):dropdownlist_c(hWnd, true, left,top,width,height)
 {
@@ -18,13 +16,14 @@ int languagebox_c::setLangList() {
     for (int i=0; i<lang->Count; i++) {
       addEntry(lang->getLangName(i));
     }
+    if (lang->current >= 0) {selectByText(lang->getLangName(lang->current));}
   }
-  selectByText(lang->getLangName(lang->current));
   return 0;
 }
 
-int languagebox_c::selectByText(const char * text) {
-  SendMessage(Wnd,CB_SETCURSEL,SendMessage(Wnd,CB_FINDSTRINGEXACT,(WPARAM)-1,(LPARAM)text),0);
+int languagebox_c::selectByText(char * text) {
+  int id = SendMessage(Wnd,CB_FINDSTRINGEXACT,(WPARAM)-1,(LPARAM)text);
+  SendMessage(Wnd,CB_SETCURSEL,id,0);
   return 0;
 }
 

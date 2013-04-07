@@ -20,7 +20,7 @@ language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : coll
     }
     FindClose(hFind);
   }
-  delete SerPath;
+  delete[] SerPath;
 //////////////////////////////
 // Detect Systemdefault
 //////////////////////////////
@@ -28,7 +28,7 @@ language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : coll
   int ConfigLang = hexToInt(setupLang);
   current = getLangID(ConfigLang);
   if (current == -1) {
-    int UserLang = /*PRIMARYLANGID(*/GetUserDefaultUILanguage()/*)*/;
+    int UserLang = GetUserDefaultUILanguage();
     if (current == -1) {current = getLangID(UserLang);}
     if (current == -1) {current = getLangIDMain(PRIMARYLANGID(UserLang));}
     int SysLang = GetSystemDefaultUILanguage();
@@ -44,7 +44,7 @@ int language_c::LoadLanguageFile(char * aName) {
   languagefile_c * file = new languagefile_c;
   add((zeiger)file);
   file->loadlanguage(fName,aName);
-  delete fName;
+  delete[] fName;
   return 0;
 }
 
@@ -137,7 +137,7 @@ char * language_c::getCurLang() {
 }
 
 char * language_c::getLangName(int id) {
-  if (id < Count) {
+  if ((id < Count) && (id >= 0)) {
     languagefile_c * file = (languagefile_c*)getByIndex(id);
     return file->label;
   } else {

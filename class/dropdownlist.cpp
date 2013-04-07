@@ -2,7 +2,7 @@
 
 dropdownlist_c::dropdownlist_c(HWND hWnd, bool sort, int left, int top, int width, int height)
 {
-   DWORD Style = WS_VISIBLE | WS_CHILD | WS_BORDER | CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_TABSTOP;
+   DWORD Style = WS_VISIBLE | WS_CHILD | WS_BORDER | CBS_HASSTRINGS | CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_TABSTOP;
    if (sort) {
      Style = Style | CBS_SORT;
    }

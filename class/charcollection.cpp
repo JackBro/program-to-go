@@ -17,10 +17,10 @@ charcollection_c::~charcollection_c()
 int charcollection_c::addByIndexChar(int i, char * text) {
   char * temp;
   while (Count <= i) {
-    temp = new char[1];
+    temp = new char[16];
     temp[0] = 0;
     addChar(temp);
-    delete temp;
+    delete[] temp;
   }
   temp = getByIndexChar(i);
   if (strlen(temp)>3) {
@@ -37,7 +37,7 @@ int charcollection_c::addChar(char*text) {
   char * temp = new char[strlen(text)+1];
   memcpy(temp,text,strlen(text));
   temp[strlen(text)] = 0;
-  return add(text);
+  return add(temp);
 }
 
 char * charcollection_c::getByIndexChar(int i) {

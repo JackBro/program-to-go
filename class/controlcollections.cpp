@@ -1,5 +1,7 @@
 #include "controlcollections.h"
 
+#include <stdio.h>
+
 controlcollections_c::controlcollections_c()
 {
   hFont = NULL;
@@ -37,8 +39,6 @@ int controlcollections_c::setCurLanguage() {
   for (int i=0; i<Count; i++) {
     control = (initcontrols_c *)getByIndex(i);
     control->setCurLang();
-//      SendMessage(control->Wnd, WM_SETTEXT, 0, (LPARAM)lang->getLang(control->langId));
-//    }
   }
   return 0;
 }

@@ -17,16 +17,16 @@ languagefile_c::languagefile_c() {
 }
 
 languagefile_c::~languagefile_c(){
-  delete Name;
-  delete label;
-  delete base;
-  delete id;
-  delete data;
+  delete[] Name;
+  delete[] label;
+  delete[] base;
+  delete[] id;
+  delete[] data;
 }
 
 int languagefile_c::loadlanguage(char * aFile, char * aName) {
   if (strlen(aName)>0) {
-    delete Name;
+    delete[] Name;
     Name = new char[strlen(aName)+1];
     memcpy(Name,aName,strlen(aName)+1);
   }
@@ -59,19 +59,19 @@ int languagefile_c::loaddescription() {
     if (strcmp(TagName,"/Description") == 0) {
       return 0;
     } else if (strcmp(TagName,"Label") == 0) {
-      delete label;
+      delete[] label;
       label = new char[strlen(TagString)+1];
       memcpy(label,TagString,strlen(TagString));
       label[strlen(TagString)] = 0;
       getXMLTag();
     } else if (strcmp(TagName,"Base") == 0) {
-      delete base;
+      delete[] base;
       base = new char[strlen(TagString)+1];
       memcpy(base,TagString,strlen(TagString));
       base[strlen(TagString)] = 0;
       getXMLTag();
     } else if (strcmp(TagName,"Id") == 0) {
-      delete id;
+      delete[] id;
       id = new char[strlen(TagString)+1];
       memcpy(id,TagString,strlen(TagString));
       id[strlen(TagString)] = 0;
@@ -99,23 +99,23 @@ int languagefile_c::loadentry() {
   while (getXMLTag()) {
     if (strcmp(TagName,"/Entry") == 0) {
       data->addByIndexChar(id,text);
-      delete text;
+      delete[] text;
       return 0;
     } else if (strcmp(TagName,"Id") == 0) {
       id = TagIntger;
       getXMLTag();
     } else if (strcmp(TagName,"Value") == 0) {
-      delete text;
+      delete[] text;
       text = new char[strlen(TagString)+1];
       memcpy(text,TagString,strlen(TagString));
       text[strlen(TagString)] = 0;
       getXMLTag();
     }
   }
-  delete text;
+  delete[] text;
   return 0;
 }
 
 char * languagefile_c::getText(int id) {
-  return (char*)data->getByIndex(id);
+  return data->getByIndexChar(id);
 }
