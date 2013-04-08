@@ -38,8 +38,8 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="../lib/zip-unzip/zip.cpp" />
-		<Unit filename="../lib/zip-unzip/zip.h" />
+		<Unit filename="../program-to-go/libs/zip-unzip/zip.cpp" />
+		<Unit filename="../program-to-go/libs/zip-unzip/zip.h" />
 		<Unit filename="../share/class/button.cpp" />
 		<Unit filename="../share/class/button.h" />
 		<Unit filename="../share/class/buttonicon.cpp" />
@@ -82,20 +82,20 @@
 		<Unit filename="../share/class/textfile.h" />
 		<Unit filename="../share/class/xmlfile.cpp" />
 		<Unit filename="../share/class/xmlfile.h" />
-		<Unit filename="class/setupfile.cpp" />
-		<Unit filename="class/setupfile.h" />
-		<Unit filename="class/ziplib.cpp" />
-		<Unit filename="class/ziplib.h" />
-		<Unit filename="init.cpp" />
-		<Unit filename="init.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="manifest.xml" />
-		<Unit filename="resource.h" />
-		<Unit filename="resource.rc">
+		<Unit filename="Install-Build/class/setupfile.cpp" />
+		<Unit filename="Install-Build/class/setupfile.h" />
+		<Unit filename="Install-Build/class/ziplib.cpp" />
+		<Unit filename="Install-Build/class/ziplib.h" />
+		<Unit filename="Install-Build/init.cpp" />
+		<Unit filename="Install-Build/init.h" />
+		<Unit filename="Install-Build/main.cpp" />
+		<Unit filename="Install-Build/manifest.xml" />
+		<Unit filename="Install-Build/resource.h" />
+		<Unit filename="Install-Build/resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="run.cpp" />
-		<Unit filename="run.h" />
+		<Unit filename="Install-Build/run.cpp" />
+		<Unit filename="Install-Build/run.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

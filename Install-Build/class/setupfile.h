@@ -1,7 +1,7 @@
 #ifndef SETUPFILE_H
 #define SETUPFILE_H
 
-#include "..\..\share\class\xmlfile.h"
+#include "..\..\..\share\class\xmlfile.h"
 
 
 class setupfile_c : public xmlfile_c

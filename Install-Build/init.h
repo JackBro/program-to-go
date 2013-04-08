@@ -10,7 +10,7 @@
 #include "..\..\share\class\folderedit.h"
 #include "..\..\share\class\languagebox.h"
 #include "..\..\share\class\progress.h"
-#include "..\class/setupfile.h"
+#include "class/setupfile.h"
 #include "resource.h"
 
 #include "run.h"

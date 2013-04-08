@@ -1,7 +1,7 @@
 #ifndef ZIPLIB_H
 #define ZIPLIB_H
 
-#include "../../program-to-go/libs/zip-unzip/zip.h"
+#include "..\../../program-to-go/libs/zip-unzip/zip.h"
 
 class ziplib_c
 {

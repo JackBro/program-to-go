@@ -4,7 +4,7 @@
 #include "..\..\share\class\pages.h"
 #include "..\..\share\class\progress.h"
 #include "..\..\share\class\staticlabel.h"
-#include "..\class\ziplib.h"
+#include "class\ziplib.h"
 
 extern pages_c * pages;
 extern progress_c * progressbar;
