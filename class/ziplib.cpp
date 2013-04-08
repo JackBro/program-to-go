@@ -27,15 +27,12 @@ int ziplib_c::close() {
 int ziplib_c::addFolder(char * fName, char * base) {
   WIN32_FIND_DATA FindFileData;
   HANDLE hFind = INVALID_HANDLE_VALUE;
-
-  printf("In %s\n",fName);
   char * serString = new char [MAX_PATH];
   char * aFile = new char[MAX_PATH];
   char * saveName = new char[MAX_PATH];
   memcpy(serString,fName,strlen(fName)+1);
   if (serString[strlen(serString)-1] == '\\') {serString[strlen(serString)-1] = 0;};
   memcpy(serString+strlen(serString),Patter,strlen(Patter)+1);
-  printf("SerString %s\n",serString);
   hFind = FindFirstFile(serString, &FindFileData);
   serString[strlen(serString)-3] = 0;
   if (hFind != INVALID_HANDLE_VALUE) {

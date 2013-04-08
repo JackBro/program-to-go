@@ -11,7 +11,7 @@
 #include "..\share\class\languagebox.h"
 #include "..\share\class\progress.h"
 #include "class/setupfile.h"
-#include "resource.h"
+#include "install-build/resource.h"
 
 #include "run.h"
 
