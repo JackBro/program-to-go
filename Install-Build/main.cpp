@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "resource.h"
-#include "..\init.h"
+#include "init.h"
 //#include "run.h"
 
 
