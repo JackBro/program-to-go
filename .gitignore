@@ -11,3 +11,11 @@
 *.lai
 *.la
 *.a
+
+#backup
+*.save
+
+#zip-unzip example
+libs/zip-unzip/examples/*
+libs/zip-unzip/*.txt
+libs/zip-unzip/zip_*.*
