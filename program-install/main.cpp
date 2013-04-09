@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "resource.h"
-//#include "init.h"
+#include "init.h"
 //#include "run.h"
 
 
@@ -33,7 +33,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //////////////////////////////////////////////////////////////
     hInst=hInstance;
 //////////////////////////////////////////////////////////////
-//  hInstance = hInst;
     MSG msg;
     HWND hwnd;
 
@@ -54,7 +53,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                           NULL);
     ShowWindow(hwnd, SW_SHOW);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
-//  init(hwnd);
+//    if(init(hwnd) == -1)
+//    {
+//        MessageBox(NULL, "Can not find language files! File is corrupt.", "Error", MB_OK);
+//    }
+//
 //////////////////////////////////////////////////////////////
     while(GetMessage(&msg, NULL, 0, 0))
     {
@@ -71,6 +74,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
     {
         SendMessage(hwnd, (UINT)WM_SETICON, (WPARAM)ICON_BIG, (LPARAM)LoadIcon(hInst, MAKEINTRESOURCE(ICON_MAIN)));
+        init(hwnd);
         return 0;
     }
     case WM_INITDIALOG:
@@ -83,6 +87,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_COMMAND:
     {
+      if (lParam == (LPARAM)CButton->Wnd) {
+        SendMessage(hwnd, WM_DESTROY, 0, 0);
+      }
+
     }
     }
     return DefWindowProc(hwnd, msg, wParam, lParam);
