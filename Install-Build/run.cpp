@@ -4,26 +4,8 @@
 
 extern SystemDefault_c * SystemDefault;
 
-/*char * StarterPrg;
-char * ProjectStarter;
-char * runPrg;
-
-char StarterPfad[] = "Program-Start\\app\\Program-Start.exe";
-char setupPfad[] = "setup\\run.xml";
-char AppData[] = "AppData";
-char ExeFile[] = "ExeFile";
-char Layer[] = "Layer";
-char ExeLayer[] = "ExeLayer";
-char WinXP[] = "WINXPSP3";
-char WinVista[] = "VISTASP2";
-char Win7[] = "WIN7RTM";
-char HiVersion[] = "HiVersion";
-char LoVersion[] = "LoVersion";
-*/
-
-
-
 char zipfile[] = "\\test.zip";
+char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
 char exe[] = ".exe\0";
 char * packPfad;
 
@@ -33,6 +15,9 @@ int runIt(HWND wnd, int step) {
     pages->disableButtons();
     progressbar->setRange(0,5);
     progressbar->setValue(0);
+//////////
+// get Programpacket
+//////////
     packPfad = new char[MAX_PATH];
     memcpy(packPfad, destPfad, strlen(destPfad));
     packPfad[strlen(destPfad)] = 0;
@@ -42,8 +27,29 @@ int runIt(HWND wnd, int step) {
     }
     memcpy(packPfad+strlen(packPfad), packName, strlen(packName)+1);
     memcpy(packPfad+strlen(packPfad), exe, strlen(exe)+1);
-
+//////////
+// get Quell Exe
+//////////
+    char * SourceExe = new char[MAX_PATH];
+    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath));
+    SourceExe[strlen(SystemDefault->PrgPath)] = 0;
+    SourceExe[strlen(SourceExe)-1] = 0;
+    while ((strlen(SourceExe)>0) && (SourceExe[strlen(SourceExe)-1] != '\\')) {SourceExe[strlen(SourceExe)-1] = 0;}
+    memcpy(SourceExe+strlen(SourceExe), sourceFile, strlen(sourceFile)+1);
+//////////
+// Copy File
+//////////
+    if (FileExists(SourceExe)) {
+      if (CopyFile(SourceExe, packPfad, false) != 0) {
+// Copy Ok
+      } else {
+      }
+      printf("CanCopy\n");
+    } else {
+      printf("CanNotCopy\n");
+    }
     printf("%s\n",packPfad);
+    printf("%s\n",SourceExe);
     printf("%s\n",SystemDefault->PrgPath);
 
     progresslabel->setLangId(11);
