@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+extern SystemDefault_c * SystemDefault;
+
 /*char * StarterPrg;
 char * ProjectStarter;
 char * runPrg;
@@ -22,12 +24,28 @@ char LoVersion[] = "LoVersion";
 
 
 char zipfile[] = "\\test.zip";
+char exe[] = ".exe\0";
+char * packPfad;
+
 
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
     progressbar->setRange(0,5);
     progressbar->setValue(0);
+    packPfad = new char[MAX_PATH];
+    memcpy(packPfad, destPfad, strlen(destPfad));
+    packPfad[strlen(destPfad)] = 0;
+    if (packPfad[strlen(packPfad)-1] != '\\') {
+      packPfad[strlen(packPfad)+1] = 0;
+      packPfad[strlen(packPfad)] = '\\';
+    }
+    memcpy(packPfad+strlen(packPfad), packName, strlen(packName)+1);
+    memcpy(packPfad+strlen(packPfad), exe, strlen(exe)+1);
+
+    printf("%s\n",packPfad);
+    printf("%s\n",SystemDefault->PrgPath);
+
     progresslabel->setLangId(11);
     ziplib_c * zip = new ziplib_c;
     zip->open(zipfile);

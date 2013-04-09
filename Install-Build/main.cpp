@@ -88,6 +88,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         return 0;
       } else if (sourcepath->event(hwnd, wParam, lParam)) {
         return 0;
+      } else if (destpath->event(hwnd, wParam, lParam)) {
+        return 0;
       }
    }
    case WM_TIMER:{

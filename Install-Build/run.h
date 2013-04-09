@@ -10,6 +10,8 @@ extern pages_c * pages;
 extern progress_c * progressbar;
 extern staticlabel_c * progresslabel;
 extern char * sourcePfad;
+extern char * destPfad;
+extern char * packName;
 
 int runIt(HWND wnd, int step);
 

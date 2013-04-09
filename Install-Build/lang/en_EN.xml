@@ -27,5 +27,17 @@
 	  <Id type="Integer">5</Id>
 	  <Value type="String">Folder with Install-Files:</Value>
 	</Entry>
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">Folder to put the package in:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">Select a folder</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Paket name:</Value>
+	</Entry>
   </List>
 </LanguageData>

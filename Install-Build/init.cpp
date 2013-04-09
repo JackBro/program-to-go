@@ -10,15 +10,21 @@ font_c * font;
 pages_c * pages;
 languagebox_c * langlist;
 folderedit_c * sourcepath;
+folderedit_c * destpath;
 staticlabel_c * progresslabel;
 progress_c * progressbar;
 HWND Wnd;
+edit_c * packname;
 char * sourcePfad;
+char * destPfad;
+char * packName;
 
 int * nextButtonClicked() {
   pages->nextPage();
   if (pages->getPage() == 2) {
     sourcePfad = sourcepath->getText();
+    destPfad = destpath->getText();
+    packName = packname->getText();
     runIt(Wnd ,0);
   }
   return 0;
@@ -54,10 +60,22 @@ int init(HWND hwnd) {
   pages->newPage();
   pages->addControl(
     controls->addControl(
-       new staticlabel_c(hwnd, "Folder:", 5, 10, 10, 200, 24)));
+       new staticlabel_c(hwnd, "Folder:", 8, 10, 10, 370, 24)));
+  packname = (edit_c*)pages->addControl(
+    controls->addControl(
+      new edit_c(hwnd, 10, 35, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Folder:", 6, 10, 65, 370, 24)));
+  destpath = (folderedit_c*)pages->addControl(
+    controls->addControl(
+      new folderedit_c(hwnd, ICON_FOLDER, 7, 10, 90, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Folder:", 5, 10, 120, 370, 24)));
   sourcepath = (folderedit_c*)pages->addControl(
     controls->addControl(
-      new folderedit_c(hwnd, ICON_FOLDER, 5, 10, 35, 370, 24)));
+      new folderedit_c(hwnd, ICON_FOLDER, 7, 10, 145, 370, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(
@@ -94,6 +112,7 @@ int init_second(HWND hwnd) {
   }
 ////////////
   sourcepath->setText(SystemDefault->PrgPath);
+  destpath->setText(SystemDefault->PrgPath);
   return 0;
 }
 

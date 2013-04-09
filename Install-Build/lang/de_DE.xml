@@ -27,6 +27,17 @@
 	  <Id type="Integer">5</Id>
 	  <Value type="String">Ordner mit Installationsdateien:</Value>
 	</Entry>
-
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">Ordner in dem das Paket abgelegt wird:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">Ordner auswählen</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Name des Paketes</Value>
+	</Entry>
    </List>
 </LanguageData>
