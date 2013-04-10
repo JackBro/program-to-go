@@ -7,37 +7,16 @@
 	<Id type="String">407</Id>
   </Description>
   <List>
-    <Entry>
-	  <Id type="Integer">1</Id>
-	  <Value type="String">Sprache:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">2</Id>
-	  <Value type="String">Zur&uuml;ck</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">3</Id>
-	  <Value type="String">Weiter</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">4</Id>
-	  <Value type="String">Beenden</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">5</Id>
-	  <Value type="String">Ordner mit Installationsdateien:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">6</Id>
-	  <Value type="String">Ordner in dem das Paket abgelegt wird:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">7</Id>
-	  <Value type="String">Ordner auswählen</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">8</Id>
-	  <Value type="String">Name des Paketes</Value>
-	</Entry>
+    <L1>Sprache:</L1>
+    <L2>Zur&uuml;ck</L2>
+    <L3>Weiter</L3>
+    <L4>Beenden</L4>
+    <L5>Ordner mit Installationsdateien:</L5>
+    <L6>Ordner in dem das Paket abgelegt wird:</L6>
+    <L7>Ordner auswählen</L7>
+    <L8>Name des Paketes:</L8>
+    <L9>Kopieren Run-Time-Modul</L9>
+    <L10>Kopieren von Run-Time-Modul gescheitert</L10>
+    <L11>Run-Time-Modul nicht gefunden</L11>
    </List>
 </LanguageData>

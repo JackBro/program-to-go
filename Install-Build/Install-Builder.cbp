@@ -38,14 +38,11 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="../../program-to-go/libs/zip-unzip/zip.cpp" />
-		<Unit filename="../../program-to-go/libs/zip-unzip/zip.h" />
 		<Unit filename="../../share/class/button.cpp" />
 		<Unit filename="../../share/class/button.h" />
 		<Unit filename="../../share/class/buttonicon.cpp" />
 		<Unit filename="../../share/class/buttonicon.h" />
 		<Unit filename="../../share/class/charcollection.cpp" />
-		<Unit filename="../../share/class/charcollection.h" />
 		<Unit filename="../../share/class/collection.cpp" />
 		<Unit filename="../../share/class/collection.h" />
 		<Unit filename="../../share/class/controlcollections.cpp" />
@@ -82,12 +79,20 @@
 		<Unit filename="../../share/class/textfile.h" />
 		<Unit filename="../../share/class/xmlfile.cpp" />
 		<Unit filename="../../share/class/xmlfile.h" />
+		<Unit filename="../../share/tools.cpp" />
+		<Unit filename="../../share/tools.h" />
+		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
+		<Unit filename="../libs/libxml2/tinyxml2.h" />
+		<Unit filename="../libs/zip-unzip/zip.cpp" />
+		<Unit filename="../libs/zip-unzip/zip.h" />
 		<Unit filename="class/setupfile.cpp" />
 		<Unit filename="class/setupfile.h" />
 		<Unit filename="class/ziplib.cpp" />
 		<Unit filename="class/ziplib.h" />
 		<Unit filename="init.cpp" />
 		<Unit filename="init.h" />
+		<Unit filename="lang/de_DE.xml" />
+		<Unit filename="lang/en_EN.xml" />
 		<Unit filename="main.cpp" />
 		<Unit filename="manifest.xml" />
 		<Unit filename="resource.h" />

@@ -15,6 +15,7 @@ int runIt(HWND wnd, int step) {
     pages->disableButtons();
     progressbar->setRange(0,5);
     progressbar->setValue(0);
+    progresslabel->setLangId(9);
 //////////
 // get Programpacket
 //////////
@@ -43,16 +44,17 @@ int runIt(HWND wnd, int step) {
       if (CopyFile(SourceExe, packPfad, false) != 0) {
 // Copy Ok
       } else {
+        progresslabel->setLangId(10);
+        pages->enableButtons();
       }
-      printf("CanCopy\n");
     } else {
-      printf("CanNotCopy\n");
+      progresslabel->setLangId(11);
+      pages->enableButtons();
     }
     printf("%s\n",packPfad);
     printf("%s\n",SourceExe);
     printf("%s\n",SystemDefault->PrgPath);
 
-    progresslabel->setLangId(11);
     ziplib_c * zip = new ziplib_c;
     zip->open(zipfile);
     zip->addFolder(sourcePfad,"");

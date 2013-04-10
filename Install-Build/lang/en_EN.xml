@@ -7,37 +7,16 @@
 	<Id type="String">409</Id>
   </Description>
   <List>
-    <Entry>
-	  <Id type="Integer">1</Id>
-	  <Value type="String">Language:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">2</Id>
-	  <Value type="String">Back</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">3</Id>
-	  <Value type="String">Next</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">4</Id>
-	  <Value type="String">Finish</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">5</Id>
-	  <Value type="String">Folder with Install-Files:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">6</Id>
-	  <Value type="String">Folder to put the package in:</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">7</Id>
-	  <Value type="String">Select a folder</Value>
-	</Entry>
-    <Entry>
-	  <Id type="Integer">8</Id>
-	  <Value type="String">Paket name:</Value>
-	</Entry>
-  </List>
+    <L1>Language:</L1>
+    <L2>Back</L2>
+    <L3>Next</L3>
+    <L4>Finish</L4>
+    <L5>Folder with Install-Files:</L5>
+    <L6>Folder to put the package in:</L6>
+    <L7>Select a folder</L7>
+    <L8>Paket name:</L8>
+    <L9>Copy Run-Time-Modul</L9>
+    <L10>Can not copy Run-Time-Modul</L10>
+    <L11>Run-Time-Modul not found</L11>
+   </List>
 </LanguageData>
