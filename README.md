@@ -1,7 +1,7 @@
 program-to-go
 =============
 
-Meine Program-To-Go nutzt (Die Module befinden sich im lib-Verzeichnis):
+Meine Program-To-Go nutzt (Die Module befinden sich im libs-Verzeichnis):
 
 * zip und unzip:  
   Zip Utils von Lucian Wischik, www.wischik.com/lu  
