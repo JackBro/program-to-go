@@ -5,3 +5,4 @@
 #define ICON_FOLDER 302
 
 #define TIMER_START 1
+#define TIMER_STEP1 2

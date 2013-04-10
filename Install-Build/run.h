@@ -6,6 +6,7 @@
 #include "..\..\share\class\staticlabel.h"
 #include "..\..\share\tools.h"
 #include "class\ziplib.h"
+#include "resource.h"
 
 extern pages_c * pages;
 extern progress_c * progressbar;

@@ -100,6 +100,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
          init_second(hwnd);
          return 0;
        }
+       case TIMER_STEP1: {
+         KillTimer(hwnd,TIMER_STEP1);
+         runIt(hwnd,1);
+         return 0;
+       }
      }
    }
   }

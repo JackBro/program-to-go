@@ -13,7 +13,7 @@ char * packPfad;
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
-    progressbar->setRange(0,5);
+    progressbar->setRange(0,1);
     progressbar->setValue(0);
     progresslabel->setLangId(9);
 //////////
@@ -42,7 +42,8 @@ int runIt(HWND wnd, int step) {
 //////////
     if (FileExists(SourceExe)) {
       if (CopyFile(SourceExe, packPfad, false) != 0) {
-// Copy Ok
+        progressbar->setValue(1);
+        SetTimer(wnd,TIMER_STEP1,100,NULL);
       } else {
         progresslabel->setLangId(10);
         pages->enableButtons();
@@ -51,8 +52,10 @@ int runIt(HWND wnd, int step) {
       progresslabel->setLangId(11);
       pages->enableButtons();
     }
+    delete[] SourceExe;
+  } else if (step == 1) {
+    progresslabel->setLangId(12);
     printf("%s\n",packPfad);
-    printf("%s\n",SourceExe);
     printf("%s\n",SystemDefault->PrgPath);
 
     ziplib_c * zip = new ziplib_c;
