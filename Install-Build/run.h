@@ -8,6 +8,7 @@
 #include "..\..\share\tools.h"
 #include "class\ziplib.h"
 #include "resource.h"
+#include "install.h"
 
 extern pages_c * pages;
 extern progress_c * progressbar;

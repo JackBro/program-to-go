@@ -92,16 +92,19 @@ int runIt(HWND wnd, int step) {
     int sum = 0;
     do {
       read = l->readFile(buf,1024);
-      aum = sum + read;
+      sum = sum + read;
       f->WriteBuffer(buf,read);
     } while (read>0);
     l->CloseFile();
     delete l;
-
-
-
+    install_rec data;
+    data.id = install_lang;
+    data.aSize = sum + sizeof(data);
+    f->WriteBuffer((char*)&data,sizeof(data));
     f->CloseFile();
     delete f;
+
+
     printf("%s\n",tmpFolder);
 //    printf("%s\n",SourceExe);
     printf("%s\n",packPfad);
