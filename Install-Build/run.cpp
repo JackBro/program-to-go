@@ -6,6 +6,7 @@ extern SystemDefault_c * SystemDefault;
 
 char zipfile[] = "\\test.zip";
 char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
+char sourceLang[] = "Program-Install\\lang\\\0";
 char exe[] = ".exe\0";
 char * packPfad;
 
@@ -54,14 +55,24 @@ int runIt(HWND wnd, int step) {
     }
     delete[] SourceExe;
   } else if (step == 1) {
+//////////
+// get Quell Exe
+//////////
     progresslabel->setLangId(12);
-    printf("%s\n",packPfad);
-    printf("%s\n",SystemDefault->PrgPath);
-
+    char * SourceExe = new char[MAX_PATH];
+    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath));
+    SourceExe[strlen(SystemDefault->PrgPath)] = 0;
+    SourceExe[strlen(SourceExe)-1] = 0;
+    while ((strlen(SourceExe)>0) && (SourceExe[strlen(SourceExe)-1] != '\\')) {SourceExe[strlen(SourceExe)-1] = 0;}
+    memcpy(SourceExe+strlen(SourceExe), sourceLang, strlen(sourceLang)+1);
     ziplib_c * zip = new ziplib_c;
     zip->open(zipfile);
-    zip->addFolder(sourcePfad,"");
+    zip->addFolder(SourceExe,"");
     zip->close();
+
+    printf("%s\n",SourceExe);
+    printf("%s\n",packPfad);
+    printf("%s\n",SystemDefault->PrgPath);
     pages->enableButtons();
 /*    StarterPrg = new char[strlen(prgPfad)+28];
     memcpy(StarterPrg,prgPfad,strlen(prgPfad));
