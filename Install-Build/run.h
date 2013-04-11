@@ -3,6 +3,7 @@
 
 #include "..\..\share\class\pages.h"
 #include "..\..\share\class\progress.h"
+#include "..\..\share\class\file.h"
 #include "..\..\share\class\staticlabel.h"
 #include "..\..\share\tools.h"
 #include "class\ziplib.h"

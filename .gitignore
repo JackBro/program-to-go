@@ -6,6 +6,7 @@
 *.res
 
 *.depend
+*.layout
 
 
 # Compiled Dynamic libraries
@@ -24,3 +25,6 @@
 libs/zip-unzip/examples/*
 libs/zip-unzip/*.txt
 libs/zip-unzip/zip_*.*
+
+#prgData
+*/config/*

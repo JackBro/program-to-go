@@ -4,17 +4,18 @@
 
 extern SystemDefault_c * SystemDefault;
 
-char zipfile[] = "\\test.zip";
+char zipfile[] = "lang.zip";
 char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
 char sourceLang[] = "Program-Install\\lang\\\0";
 char exe[] = ".exe\0";
 char * packPfad;
+char * tmpFolder;
 
 
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
-    progressbar->setRange(0,1);
+    progressbar->setRange(0,2);
     progressbar->setValue(0);
     progresslabel->setLangId(9);
 //////////
@@ -65,12 +66,44 @@ int runIt(HWND wnd, int step) {
     SourceExe[strlen(SourceExe)-1] = 0;
     while ((strlen(SourceExe)>0) && (SourceExe[strlen(SourceExe)-1] != '\\')) {SourceExe[strlen(SourceExe)-1] = 0;}
     memcpy(SourceExe+strlen(SourceExe), sourceLang, strlen(sourceLang)+1);
+//////////
+// TmpFolder
+//////////
+    tmpFolder = new char[MAX_PATH];
+    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
+    GetTempFolderName(tmpFolder,"IB",0,tmpFolder);
+    int len = strlen(tmpFolder);
+    memcpy(tmpFolder+len,zipfile,strlen(zipfile)+1);
     ziplib_c * zip = new ziplib_c;
-    zip->open(zipfile);
+    zip->open(tmpFolder);
     zip->addFolder(SourceExe,"");
     zip->close();
+    progressbar->setValue(1);
+    SetTimer(wnd,TIMER_STEP2,100,NULL);
+  } else if (step == 2) {
+    progresslabel->setLangId(13);
+    file_c * f = new file_c;
+    if (!f->OpenReadWriteFile(packPfad)) {printf("Can not open %d\n", GetLastError());};
+    f->seek(0,FILE_END);
+    file_c * l = new file_c;
+    l->OpenReadFile(tmpFolder);
+    char buf[1024];
+    int read = 1;
+    int sum = 0;
+    do {
+      read = l->readFile(buf,1024);
+      aum = sum + read;
+      f->WriteBuffer(buf,read);
+    } while (read>0);
+    l->CloseFile();
+    delete l;
 
-    printf("%s\n",SourceExe);
+
+
+    f->CloseFile();
+    delete f;
+    printf("%s\n",tmpFolder);
+//    printf("%s\n",SourceExe);
     printf("%s\n",packPfad);
     printf("%s\n",SystemDefault->PrgPath);
     pages->enableButtons();
