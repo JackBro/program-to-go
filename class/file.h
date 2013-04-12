@@ -10,9 +10,11 @@ class file_c
         virtual ~file_c();
         bool OpenReadFile(char * aName);
         bool OpenWriteFile(char * aName);
+        bool OpenReadWriteFile(char * aName);
         int CloseFile();
         int readFile(char * buffer,int bufferSize);
         int WriteBuffer(char * buffer, int size);
+        int seek(DWORD aSize, DWORD aPos);
     protected:
     private:
       HANDLE _file;

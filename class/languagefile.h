@@ -1,29 +1,23 @@
 #ifndef LANGUAGEFILE_H
 #define LANGUAGEFILE_H
 
-#include "..\..\share\class\xmlfile.h"
-#include "..\..\share\class\charcollection.h"
+#include "..\..\program-to-go\libs\libxml2\tinyxml2.h"
 
-
-class languagefile_c : public xmlfile_c
+class languagefile_c
 {
     public:
         languagefile_c();
         virtual ~languagefile_c();
         int loadlanguage(char * aFile, char * aName);
-        int loaddata();
-        int loaddescription();
-        int loadlist();
-        int loadentry();
-        char * label;
-        char * base;
-        char * id;
+        char * getLabel();
+        char * getBase();
+        char * getId();
         char * getText(int id);
 
     protected:
     private:
        char * Name;
-       charcollection_c * data;
+       tinyxml2::XMLDocument * doc;
 };
 
 #endif // LANGUAGEFILE_H

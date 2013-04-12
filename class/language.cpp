@@ -73,7 +73,7 @@ int language_c::getLangIDMain(int lang) {
   int i=0;
   while ((i<Count) & (id == -1)) {
     file = (languagefile_c*)getByIndex(i);
-    if (lang == hexToInt(file->base)) {id = i;}
+    if (lang == hexToInt(file->getBase())) {id = i;}
     i = i + 1;
   }
   return id;
@@ -85,7 +85,7 @@ int language_c::getLangID(int lang) {
   int i=0;
   while ((i<Count) & (id == -1)) {
     file = (languagefile_c*)getByIndex(i);
-    if (lang == hexToInt(file->id)) {id = i;}
+    if (lang == hexToInt(file->getId())) {id = i;}
     i = i + 1;
   }
   return id;
@@ -115,7 +115,7 @@ char * language_c::setCurrentByLabel(char * aLabel) {
   languagefile_c * file;
   for (int i=0; i<Count;i++) {
     file = (languagefile_c*)getByIndex(i);
-    if (strcmp(file->label,aLabel) == 0) {
+    if (strcmp(file->getLabel(),aLabel) == 0) {
       current = i;
 //      setup->setLang(file->id);
     }
@@ -132,7 +132,7 @@ char * language_c::setCurrentByLabel(char * aLabel) {
 char * language_c::getCurLang() {
   if (current != -1) {
     languagefile_c * file = (languagefile_c *)getByIndex(current);
-    return file->id;
+    return file->getId();
   } else {
     char * temp = new char[2];
     temp[0] = 0;
@@ -144,7 +144,7 @@ char * language_c::getCurLang() {
 char * language_c::getLangName(int id) {
   if ((id < Count) && (id >= 0)) {
     languagefile_c * file = (languagefile_c*)getByIndex(id);
-    return file->label;
+    return file->getLabel();
   } else {
     return NULL;
   }

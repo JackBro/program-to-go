@@ -40,6 +40,14 @@ bool file_c::OpenWriteFile(char * aName) {
   return false;
 }
 
+bool file_c::OpenReadWriteFile(char * aName) {
+  if (CheckDir(aName)) {
+    _file = CreateFile(aName,GENERIC_WRITE | GENERIC_READ,0,NULL, OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL ,NULL);
+    return ((DWORD)_file != (DWORD)-1);
+  };
+  return false;
+}
+
 bool file_c::CheckDir(char * aName) {
   int p = strlen(aName)-1;
   while ((p > 0) & (int(aName[p]) != 92)) {
@@ -81,5 +89,10 @@ bool file_c::DirectoryExists(const char * aDir)
 int file_c::WriteBuffer(char * buffer, int size) {
   DWORD Written;
   WriteFile(_file,buffer,size,&Written,NULL);
+  return 0;
+}
+
+int file_c::seek(DWORD aSize, DWORD aPos) {
+   SetFilePointer(_file,aSize,NULL,aPos);
   return 0;
 }
