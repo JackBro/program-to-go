@@ -2,10 +2,12 @@
 
 #include <stdio.h>
 
+//#define run
+
 SystemDefault_c * SysDef;
 button_c * CButton;
-
-char x[] = "f:\\lang.zip";
+char * tempFile;
+char langzip[] = "lang.zip";
 
 int init(HWND hwnd) {
   SysDef = new SystemDefault_c;
@@ -13,8 +15,21 @@ int init(HWND hwnd) {
   intsall_rec * lang = new intsall_rec;
   staticlabel_c * Msg = new staticlabel_c(hwnd,"",-1,10,10,320,20);
   CButton = new button_c(hwnd, "OK", 4, 297, 237, 85, 24);
-//  if (app->OpenReadFile(SysDef->ExeFile)) {
+  tempFile = new char[MAX_PATH];
+#ifdef run
+  memcpy(tempFile,SysDef->TempPath,strlen(SysDef->TempPath)+1);
+#else
+  tempFile[0] = '\\';
+  tempFile[1] = 0;
+#endif
+  GetTempFolderName(tempFile,"INT",0,tempFile);
+  memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
+  printf("%s\n",tempFile);
+#ifdef run
+  if (app->OpenReadFile(SysDef->ExeFile)) {
+#else
   if (app->OpenReadFile("\\testme.exe\0")) {
+#endif
     app->seek(-sizeof(intsall_rec),FILE_END);
     app->readFile((char*)lang, sizeof(intsall_rec));
     if (lang->id == install_lang) {
@@ -22,7 +37,7 @@ int init(HWND hwnd) {
       file_c * f = new file_c;
       int sum = lang->aSize - sizeof(intsall_rec);
       int read;
-      if (!f->OpenWriteFile(x)) {printf("open zip %d\n",GetLastError());};
+      if (!f->OpenWriteFile(tempFile)) {printf("open zip %d\n",GetLastError());};
       char buf[1024];
       while (sum > 0) {
         if (sum > 1024) {

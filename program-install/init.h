@@ -7,6 +7,7 @@
 #include "../../share/class/file.h"
 #include "../../share/class/staticlabel.h"
 #include "../../share/class/button.h"
+#include "../../share/tools.h"
 #include "install.h"
 
 button_c * CButton;
