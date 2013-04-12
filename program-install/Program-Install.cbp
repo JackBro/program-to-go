@@ -63,6 +63,8 @@
 		<Unit filename="../../share/class/textfile.h" />
 		<Unit filename="../../share/class/xmlfile.cpp" />
 		<Unit filename="../../share/class/xmlfile.h" />
+		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
+		<Unit filename="../libs/libxml2/tinyxml2.h" />
 		<Unit filename="init.cpp" />
 		<Unit filename="init.h" />
 		<Unit filename="install.h" />
