@@ -27,6 +27,7 @@ int * nextButtonClicked() {
     sourcePfad = sourcepath->getText();
     destPfad = destpath->getText();
     packName = packname->getText();
+    lizensFile = lizensfile->getText();
     runIt(Wnd ,0);
   }
   return 0;

@@ -14,7 +14,7 @@
     <L5>Folder with Install-Files:</L5>
     <L6>Folder to put the package in:</L6>
     <L7>Select a folder</L7>
-    <L8>Paket name:</L8>
+    <L8>Package name:</L8>
     <L9>Copy Run-Time-Modul</L9>
     <L10>Can not copy Run-Time-Modul</L10>
     <L11>Run-Time-Modul not found</L11>
@@ -22,5 +22,7 @@
     <L13>Insert languages</L13>
     <L14>license file:</L14>
     <L15>Text files;*.txt;All files;*.*;;</L15>
+    <L16>Check lizense file</L16>
+    <L17>Lizense file not found or not in the package folder</L17>
    </List>
 </LanguageData>

@@ -114,6 +114,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
          runIt(hwnd,2);
          return 0;
        }
+       case TIMER_STEP3: {
+         KillTimer(hwnd,TIMER_STEP3);
+         runIt(hwnd,3);
+         return 0;
+       }
+       case TIMER_STEP4: {
+         KillTimer(hwnd,TIMER_STEP4);
+         runIt(hwnd,4);
+         return 0;
+       }
      }
    }
   }

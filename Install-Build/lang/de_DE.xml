@@ -22,5 +22,7 @@
     <L13>Einfügen der Sprachdaten</L13>
     <L14>Lizenzdatei:</L14>
     <L15>Textdateien;*.txt;Alle Dateien;*.*;;</L15>
+    <L16>Prüfe Lizensdatei</L16>
+    <L17>Lizensdatei nicht gefunden, oder nicht im Paketverzeichnis</L17>
    </List>
 </LanguageData>

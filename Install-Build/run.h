@@ -5,6 +5,7 @@
 #include "..\share\class\progress.h"
 #include "..\share\class\file.h"
 #include "..\share\class\staticlabel.h"
+#include "..\share\class\checkbox.h"
 #include "..\share\tools.h"
 #include "class\ziplib.h"
 #include "resource.h"
@@ -16,6 +17,8 @@ extern staticlabel_c * progresslabel;
 extern char * sourcePfad;
 extern char * destPfad;
 extern char * packName;
+extern char * lizensFile;
+extern checkbox_c * lizensbox;
 
 int runIt(HWND wnd, int step);
 

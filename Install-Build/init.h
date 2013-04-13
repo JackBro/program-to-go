@@ -30,6 +30,7 @@ extern char * destPfad;
 extern char * packName;
 extern SystemDefault_c * SystemDefault;
 extern fileedit_c * lizensfile;
+extern char * lizensFile;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);
