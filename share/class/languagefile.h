@@ -1,7 +1,7 @@
 #ifndef LANGUAGEFILE_H
 #define LANGUAGEFILE_H
 
-#include "..\..\program-to-go\libs\libxml2\tinyxml2.h"
+#include "..\..\libs\libxml2\tinyxml2.h"
 
 class languagefile_c
 {
