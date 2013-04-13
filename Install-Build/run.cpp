@@ -7,6 +7,7 @@ extern SystemDefault_c * SystemDefault;
 char zipfile[] = "lang.zip";
 char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
 char sourceLang[] = "Program-Install\\lang\\\0";
+char installxml[] = "\\setup\\install.xml\0";
 char exe[] = ".exe\0";
 char * LizensFile;
 char * packPfad;
@@ -16,7 +17,7 @@ char * lizensFile;
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
-    progressbar->setRange(0,2);
+    progressbar->setRange(0,3);
     progressbar->setValue(0);
     progresslabel->setLangId(9);
 //////////
@@ -84,9 +85,31 @@ int runIt(HWND wnd, int step) {
       SetTimer(wnd,TIMER_STEP2,100,NULL);
     }
   } else if (step == 2) {
-    printf("lizens %s\nsource %s\nfile %s\n",lizensFile,sourcePfad,LizensFile);
-    printf("Check Data for Lizensfile\n");
+    progresslabel->setLangId(18);
+    tinyxml2::XMLDocument * doc = new tinyxml2::XMLDocument;
+    tinyxml2::XMLElement* Node = doc->NewElement("Install");
+    tinyxml2::XMLElement* Node2 = doc->NewElement("Title");
+    Node2->InsertEndChild(doc->NewText(packName));
+    Node->InsertEndChild(Node2);
+    Node2 = doc->NewElement("Lizense");
+    Node2->InsertEndChild(doc->NewText(LizensFile));
+    Node->InsertEndChild(Node2);
+    doc->InsertEndChild(Node);
+    char * instxml = new char[MAX_PATH];
+    memcpy(instxml,sourcePfad,strlen(sourcePfad)+1);
+    if (instxml[strlen(instxml)-1] == '\\') {instxml[strlen(instxml)-1] = 0;}
+    memcpy(instxml+strlen(instxml),installxml,strlen(installxml)+1);
+    doc->SaveFile(instxml);
+    delete doc;
+    delete[] instxml;
+    delete[] LizensFile;
+    progressbar->setValue(3);
+    SetTimer(wnd,TIMER_STEP3,100,NULL);
   } else if (step == 3) {
+
+    printf("lizens %s\nsource %s\nfile %s\n",lizensFile,sourcePfad,sourcePfad);
+    printf("Check Data for Lizensfile\n");
+  } else if (step == 4) {
 //////////
 // get Quell Exe
 //////////
@@ -111,8 +134,8 @@ int runIt(HWND wnd, int step) {
     zip->close();
 
     progressbar->setValue(1);
-    SetTimer(wnd,TIMER_STEP4,100,NULL);
-  } else if (step == 4) {
+    SetTimer(wnd,TIMER_STEP5,100,NULL);
+  } else if (step == 5) {
     progresslabel->setLangId(13);
     file_c * f = new file_c;
     if (!f->OpenReadWriteFile(packPfad)) {printf("Can not open %d\n", GetLastError());};

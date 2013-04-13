@@ -10,6 +10,7 @@
 #include "class\ziplib.h"
 #include "resource.h"
 #include "install.h"
+#include "..\libs\libxml2\tinyxml2.h"
 
 extern pages_c * pages;
 extern progress_c * progressbar;

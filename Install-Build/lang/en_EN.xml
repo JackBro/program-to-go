@@ -24,5 +24,6 @@
     <L15>Text files;*.txt;All files;*.*;;</L15>
     <L16>Check lizense file</L16>
     <L17>Lizense file not found or not in the package folder</L17>
+    <L18>Create "install.xml"</L18>
    </List>
 </LanguageData>

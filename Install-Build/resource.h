@@ -10,3 +10,4 @@
 #define TIMER_STEP2 3
 #define TIMER_STEP3 4
 #define TIMER_STEP4 5
+#define TIMER_STEP5 6
