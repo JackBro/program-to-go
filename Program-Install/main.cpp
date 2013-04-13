@@ -24,7 +24,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     wnd.hCursor = LoadCursor(NULL, IDC_ARROW);   //default arrow mouse cursor
     wnd.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
     wnd.lpszMenuName = NULL;                     //no menu
-    wnd.lpszClassName = TEXT("InstallBuilder");
+    wnd.lpszClassName = TEXT("ProgramInstall");
     if(!RegisterClass(&wnd))
     {
         MessageBox(NULL, "This Program Requires Windows NT", "Error", MB_OK);
@@ -40,8 +40,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     GetWindowRect(GetDesktopWindow(), &rc);
 
     hwnd = CreateWindowEx(WS_EX_DLGMODALFRAME ,
-                          TEXT("InstallBuilder"),
-                          TEXT("Install Builder"),
+                          TEXT("ProgramInstall"),
+                          TEXT("Program Install"),
                           WS_VISIBLE | WS_SYSMENU | WS_CAPTION ,
                           (rc.right-400)/2,
                           (rc.bottom-300)/2,
@@ -92,6 +92,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       }
 
     }
+   case WM_TIMER:{
+     switch (wParam) {
+       case TIMER_START: {
+         KillTimer(hwnd,TIMER_START);
+         init_second(hwnd);
+         return 0;
+       }
+     }
+   }
     }
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }

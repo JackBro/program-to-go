@@ -8,11 +8,16 @@
 #include "../share/class/staticlabel.h"
 #include "../share/class/button.h"
 #include "../share/tools.h"
+#include "../share/class/controlcollections.h"
+#include "../share/class/pages.h"
 #include "../share/class/unziplib.h"
+#include "../share/class/languagebox.h"
 #include "install.h"
+#include "resource.h"
 
 button_c * CButton;
 
 int init(HWND hwnd);
+int init_second(HWND hwnd);
 
 #endif // INIT_H_INCLUDED

@@ -5,9 +5,14 @@
 //#define run
 
 SystemDefault_c * SysDef;
+language_c * language;
 button_c * CButton;
 char * tempFile;
 char langzip[] = "lang.zip";
+controlcollections_c * controls;
+font_c * font;
+pages_c * pages;
+languagebox_c * langlist;
 
 int init(HWND hwnd) {
   SysDef = new SystemDefault_c;
@@ -58,19 +63,37 @@ int init(HWND hwnd) {
       zip->close();
       memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
       DeleteFile(tempFile);
-      printf("%d\n",lang->aSize);
-      Msg->setText("Language Data found !");
-      printf("Lang open File\n");
+      tempFile[strlen(tempFile)-strlen(langzip)] = 0;
+      language = new language_c(tempFile);
+      controls = new controlcollections_c;
+      controls->setLanguage(language);
+      font = new font_c;
+      font->setSizeName(10,"Tahoma");
+      font->create();
+      controls->setFont(font);
+      pages = new pages_c;
+////////////
+      pages->newPage();
+      pages->addControl(
+        controls->addControl(
+          new staticlabel_c(hwnd, "Language:", 1, 10, 10, 200, 24)));
+      langlist = (languagebox_c*)pages->addControl(
+        controls->addControl(
+          new languagebox_c(hwnd, 10, 35, 370, 12)));
+////////////
+      SetTimer(hwnd,TIMER_START,10,NULL);
     } else {
       Msg->setText("No Language Data found !");
-      printf("No Lang open File\n");
     }
-    printf("Can open File\n");
     app->CloseFile();
-  } else {
-    printf("Can NOT open File\n");
   }
   printf("%s\n",SysDef->ExeFile);
 
+  return 0;
+}
+
+int init_second(HWND hwnd) {
+  langlist->setLangList();
+  controls->setCurLanguage();
   return 0;
 }

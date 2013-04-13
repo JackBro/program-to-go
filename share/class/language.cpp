@@ -42,6 +42,38 @@ language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : coll
   }
 }
 
+language_c::language_c(char * tempPath) : collection_c() {
+  current = -1;
+  langDir = new char[MAX_PATH];
+  strcpy(langDir,tempPath);
+  char * SerPath = new char[MAX_PATH];
+  strcpy(SerPath,langDir);
+  strcat(SerPath,"*.xml");
+  WIN32_FIND_DATA FindFileData;
+  HANDLE hFind;
+  hFind = FindFirstFile(SerPath, &FindFileData);
+  if (hFind != INVALID_HANDLE_VALUE) {
+    LoadLanguageFile(FindFileData.cFileName);
+    while (FindNextFile(hFind,&FindFileData )) {
+      LoadLanguageFile(FindFileData.cFileName);
+    }
+    FindClose(hFind);
+  }
+  delete[] SerPath;
+//////////////////////////////
+// Detect Systemdefault
+//////////////////////////////
+//  setup = aSetup;
+  if (current == -1) {
+    int UserLang = GetUserDefaultUILanguage();
+    if (current == -1) {current = getLangID(UserLang);}
+    if (current == -1) {current = getLangIDMain(PRIMARYLANGID(UserLang));}
+    int SysLang = GetSystemDefaultUILanguage();
+    if (current == -1) {current = getLangID(SysLang);}
+    if (current == -1) {current = getLangIDMain(PRIMARYLANGID(SysLang));}
+  }
+}
+
 int language_c::LoadLanguageFile(char * aName) {
   char * fName = new char[MAX_PATH];
   memcpy(fName,langDir,strlen(langDir)+1);
