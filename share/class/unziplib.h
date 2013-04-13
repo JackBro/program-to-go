@@ -10,6 +10,7 @@ class unziplib_c
         virtual ~unziplib_c();
         int open(char * fName);
         int close();
+        int unzipall(char * aFolder);
     protected:
     private:
       HZIP hz;

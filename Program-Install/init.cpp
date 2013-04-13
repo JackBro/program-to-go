@@ -37,7 +37,7 @@ int init(HWND hwnd) {
       file_c * f = new file_c;
       int sum = lang->aSize - sizeof(intsall_rec);
       int read;
-      if (!f->OpenWriteFile(tempFile)) {printf("open zip %d\n",GetLastError());};
+      f->OpenWriteFile(tempFile);
       char buf[1024];
       while (sum > 0) {
         if (sum > 1024) {
@@ -51,7 +51,13 @@ int init(HWND hwnd) {
       f->CloseFile();
       delete f;
 // Entpacken der Sprachdateien
-
+      unziplib_c * zip = new unziplib_c;
+      zip->open(tempFile);
+      tempFile[strlen(tempFile)-strlen(langzip)] = 0;
+      zip->unzipall(tempFile);
+      zip->close();
+      memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
+      DeleteFile(tempFile);
       printf("%d\n",lang->aSize);
       Msg->setText("Language Data found !");
       printf("Lang open File\n");
