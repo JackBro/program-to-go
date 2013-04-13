@@ -16,6 +16,9 @@
 #include "resource.h"
 
 button_c * CButton;
+extern languagebox_c * langlist;
+extern language_c * language;
+extern controlcollections_c * controls;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

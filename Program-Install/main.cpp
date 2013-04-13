@@ -87,7 +87,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_COMMAND:
     {
-      if (lParam == (LPARAM)CButton->Wnd) {
+      if ((DWORD)lParam == (DWORD)langlist->Wnd) {
+        if (CBN_SELCHANGE == HIWORD(wParam)) {
+          delete language->setCurrentByLabel(langlist->getCurText());
+          controls->setCurLanguage();
+        }
+      } else if (lParam == (LPARAM)CButton->Wnd) {
         SendMessage(hwnd, WM_DESTROY, 0, 0);
       }
 

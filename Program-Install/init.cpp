@@ -14,6 +14,23 @@ font_c * font;
 pages_c * pages;
 languagebox_c * langlist;
 
+int * nextButtonClicked() {
+  pages->nextPage();
+/*  if (pages->getPage() == 2) {
+    sourcePfad = sourcepath->getText();
+    destPfad = destpath->getText();
+    packName = packname->getText();
+    runIt(Wnd ,0);
+  }*/
+  return 0;
+}
+
+int * prevButtonClicked() {
+  pages->prevPage();
+  return 0;
+}
+
+
 int init(HWND hwnd) {
   SysDef = new SystemDefault_c;
   file_c * app = new file_c();
@@ -80,6 +97,17 @@ int init(HWND hwnd) {
       langlist = (languagebox_c*)pages->addControl(
         controls->addControl(
           new languagebox_c(hwnd, 10, 35, 370, 12)));
+////////////
+      pages->setPrevButton(
+        (button_c*)controls->addControl(
+          new button_c(hwnd, "Back", 2, 107, 237, 85, 24)));
+      pages->prevButton->onClick = prevButtonClicked;
+      pages->setNextButton(
+        (button_c*)controls->addControl(
+          new button_c(hwnd, "Next", 3, 202, 237, 85, 24)));
+      pages->nextButton->onClick = nextButtonClicked;
+      pages->setCloseButton(
+        (button_c*)controls->addControl(CButton));
 ////////////
       SetTimer(hwnd,TIMER_START,10,NULL);
     } else {
