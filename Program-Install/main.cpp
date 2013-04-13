@@ -94,6 +94,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
       } else if (lParam == (LPARAM)CButton->Wnd) {
         SendMessage(hwnd, WM_DESTROY, 0, 0);
+      } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
+        return 0;
       }
 
     }

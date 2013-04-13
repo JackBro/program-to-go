@@ -13,6 +13,7 @@ controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
 languagebox_c * langlist;
+folderedit_c * destpath;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -98,6 +99,14 @@ int init(HWND hwnd) {
         controls->addControl(
           new languagebox_c(hwnd, 10, 35, 370, 12)));
 ////////////
+      pages->newPage();
+      pages->addControl(
+        controls->addControl(
+          new staticlabel_c(hwnd, "Install folder:", 5, 10, 10, 200, 24)));
+      destpath = (folderedit_c*)pages->addControl(
+        controls->addControl(
+          new folderedit_c(hwnd, ICON_FOLDER, 6, 10, 35, 370, 24)));
+////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
           new button_c(hwnd, "Back", 2, 107, 237, 85, 24)));
@@ -123,5 +132,7 @@ int init(HWND hwnd) {
 int init_second(HWND hwnd) {
   langlist->setLangList();
   controls->setCurLanguage();
+////////////
+  pages->setPage(0);
   return 0;
 }

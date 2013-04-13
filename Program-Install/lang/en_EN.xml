@@ -11,13 +11,7 @@
     <L2>Back</L2>
     <L3>Next</L3>
     <L4>Finish</L4>
-    <L5>Folder with Install-Files:</L5>
-    <L6>Folder to put the package in:</L6>
-    <L7>Select a folder</L7>
-    <L8>Paket name:</L8>
-    <L9>Copy Run-Time-Modul</L9>
-    <L10>Can not copy Run-Time-Modul</L10>
-    <L11>Run-Time-Modul not found</L11>
-    <L12>Pack languages</L12>
+    <L5>Folder to install the program:</L5>
+    <L6>select folder</L6>
    </List>
 </LanguageData>
