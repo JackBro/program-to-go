@@ -38,7 +38,6 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="../../share/class/pages.h" />
 		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
 		<Unit filename="../libs/libxml2/tinyxml2.h" />
 		<Unit filename="../libs/zip-unzip/zip.cpp" />

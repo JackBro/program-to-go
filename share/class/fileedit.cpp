@@ -78,3 +78,15 @@ int fileedit_c::SetGetPfad(cb_getText aProc) {
 char * fileedit_c::getText() {
   return edit->getText();
 }
+
+int fileedit_c::disable() {
+  edit->disable();
+  button->disable();
+  return 0;
+}
+
+int fileedit_c::enable() {
+  edit->enable();
+  button->enable();
+  return 0;
+}

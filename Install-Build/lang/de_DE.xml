@@ -8,7 +8,7 @@
   </Description>
   <List>
     <L1>Sprache:</L1>
-    <L2>Zur&uuml;ck</L2>
+    <L2>Zurück</L2>
     <L3>Weiter</L3>
     <L4>Beenden</L4>
     <L5>Ordner mit Installationsdateien:</L5>
@@ -20,5 +20,6 @@
     <L11>Run-Time-Modul nicht gefunden</L11>
     <L12>Packe Sprachdaten</L12>
     <L13>Einfügen der Sprachdaten</L13>
+    <L14>Lizenzdatei:</L14>
    </List>
 </LanguageData>

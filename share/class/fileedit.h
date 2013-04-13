@@ -18,6 +18,8 @@ class fileedit_c : public initcontrols_c
         virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
         virtual int setFont(HFONT font);
         virtual int setText(char * aText);
+        virtual int disable();
+        virtual int enable();
         int SetGetPfad(cb_getText aProc);
         virtual char * getText();
     protected:

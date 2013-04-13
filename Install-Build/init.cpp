@@ -13,6 +13,8 @@ folderedit_c * sourcepath;
 folderedit_c * destpath;
 staticlabel_c * progresslabel;
 progress_c * progressbar;
+checkbox_c * lizensbox;
+fileedit_c * lizensfile;
 HWND Wnd;
 edit_c * packname;
 char * sourcePfad;
@@ -32,6 +34,15 @@ int * nextButtonClicked() {
 
 int * prevButtonClicked() {
   pages->prevPage();
+  return 0;
+}
+
+int * lizensBoxClicked() {
+  if (lizensbox->isChecked()) {
+    lizensfile->enable();
+  } else {
+    lizensfile->disable();
+  }
   return 0;
 }
 
@@ -78,6 +89,17 @@ int init(HWND hwnd) {
       new folderedit_c(hwnd, ICON_FOLDER, 7, 10, 145, 370, 24)));
 ////////////
   pages->newPage();
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "license file:", 14, 10, 10, 370, 24)));
+  lizensbox = (checkbox_c*)pages->addControl(
+    controls->addControl(
+      new checkbox_c(hwnd, 10, 35, 24, 24)));
+  lizensbox->onClick = lizensBoxClicked;
+  lizensfile = (fileedit_c*)pages->addControl(
+    controls->addControl(
+      new fileedit_c(hwnd, ICON_FILE, 7, 34, 35, 346, 24)));
+  lizensfile->disable();
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(
@@ -85,7 +107,7 @@ int init(HWND hwnd) {
        new staticlabel_c(hwnd, "Progress", 10, 10, 10, 370, 65)));
   progressbar = (progress_c*)pages->addControl(
     controls->addControl(
-      new progress_c(hwnd, 10, 80, 370, 24)));
+      new progress_c(hwnd,  10, 80, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(
