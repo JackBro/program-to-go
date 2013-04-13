@@ -50,6 +50,8 @@ int init(HWND hwnd) {
       }
       f->CloseFile();
       delete f;
+// Entpacken der Sprachdateien
+
       printf("%d\n",lang->aSize);
       Msg->setText("Language Data found !");
       printf("Lang open File\n");

@@ -8,6 +8,7 @@
 #include "../share/class/staticlabel.h"
 #include "../share/class/button.h"
 #include "../share/tools.h"
+#include "../share/class/unziplib.h"
 #include "install.h"
 
 button_c * CButton;
