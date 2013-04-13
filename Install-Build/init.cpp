@@ -21,7 +21,7 @@ char * packName;
 
 int * nextButtonClicked() {
   pages->nextPage();
-  if (pages->getPage() == 2) {
+  if (pages->getPage() == 3) {
     sourcePfad = sourcepath->getText();
     destPfad = destpath->getText();
     packName = packname->getText();
@@ -76,6 +76,8 @@ int init(HWND hwnd) {
   sourcepath = (folderedit_c*)pages->addControl(
     controls->addControl(
       new folderedit_c(hwnd, ICON_FOLDER, 7, 10, 145, 370, 24)));
+////////////
+  pages->newPage();
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(

@@ -42,6 +42,7 @@ int runIt(HWND wnd, int step) {
 //////////
 // Copy File
 //////////
+    printf("%s\n",SourceExe);
     if (FileExists(SourceExe)) {
       if (CopyFile(SourceExe, packPfad, false) != 0) {
         progressbar->setValue(1);
