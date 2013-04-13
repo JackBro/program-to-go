@@ -1,11 +1,11 @@
 #ifndef RUN_H
 #define RUN_H
 
-#include "..\..\share\class\pages.h"
-#include "..\..\share\class\progress.h"
-#include "..\..\share\class\file.h"
-#include "..\..\share\class\staticlabel.h"
-#include "..\..\share\tools.h"
+#include "..\share\class\pages.h"
+#include "..\share\class\progress.h"
+#include "..\share\class\file.h"
+#include "..\share\class\staticlabel.h"
+#include "..\share\tools.h"
 #include "class\ziplib.h"
 #include "resource.h"
 #include "install.h"
