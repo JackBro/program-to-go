@@ -4,7 +4,7 @@
 
 extern SystemDefault_c * SystemDefault;
 
-char zipfile[] = "lang.zip";
+char zipfile[] = "temp.zip";
 char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
 char sourceLang[] = "Program-Install\\lang\\\0";
 char installxml[] = "\\setup\\install.xml\0";
@@ -17,7 +17,7 @@ char * lizensFile;
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
-    progressbar->setRange(0,3);
+    progressbar->setRange(0,5);
     progressbar->setValue(0);
     progresslabel->setLangId(9);
 //////////
@@ -106,10 +106,27 @@ int runIt(HWND wnd, int step) {
     progressbar->setValue(3);
     SetTimer(wnd,TIMER_STEP3,100,NULL);
   } else if (step == 3) {
-
-    printf("lizens %s\nsource %s\nfile %s\n",lizensFile,sourcePfad,sourcePfad);
-    printf("Check Data for Lizensfile\n");
+    progresslabel->setLangId(19);
+//////////
+// TmpFolder
+//////////
+    tmpFolder = new char[MAX_PATH];
+//    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
+    tmpFolder[0] = '\\'; tmpFolder[1] = 0;
+    GetTempFolderName(tmpFolder,"IB",0,tmpFolder);
+    int len = strlen(tmpFolder);
+    memcpy(tmpFolder+len,zipfile,strlen(zipfile)+1);
+    ziplib_c * zip = new ziplib_c;
+    zip->open(tmpFolder);
+    zip->addFolder(sourcePfad,"");
+    zip->close();
+    progressbar->setValue(4);
+    SetTimer(wnd,TIMER_STEP4,100,NULL);
   } else if (step == 4) {
+
+    printf("lizens %s\nsource %s\nfile %s\n",packPfad,sourcePfad,tmpFolder);
+    printf("Check Data for Lizensfile\n");
+  } else if (step == 5) {
 //////////
 // get Quell Exe
 //////////
@@ -134,8 +151,8 @@ int runIt(HWND wnd, int step) {
     zip->close();
 
     progressbar->setValue(1);
-    SetTimer(wnd,TIMER_STEP5,100,NULL);
-  } else if (step == 5) {
+    SetTimer(wnd,TIMER_STEP6,100,NULL);
+  } else if (step == 6) {
     progresslabel->setLangId(13);
     file_c * f = new file_c;
     if (!f->OpenReadWriteFile(packPfad)) {printf("Can not open %d\n", GetLastError());};
