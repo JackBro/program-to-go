@@ -83,6 +83,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           setup->setLang(language->getCurLang());
           controls->setCurLanguage();
         }
+      } else if (lizensfile->event(hwnd, wParam, lParam)) {
+        return 0;
       } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (pages->prevButton->event(hwnd, wParam, lParam)) {

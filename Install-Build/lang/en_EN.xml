@@ -21,5 +21,6 @@
     <L12>Pack languages</L12>
     <L13>Insert languages</L13>
     <L14>license file:</L14>
+    <L15>Text files;*.txt;All files;*.*;;</L15>
    </List>
 </LanguageData>

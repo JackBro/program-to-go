@@ -98,7 +98,7 @@ int init(HWND hwnd) {
   lizensbox->onClick = lizensBoxClicked;
   lizensfile = (fileedit_c*)pages->addControl(
     controls->addControl(
-      new fileedit_c(hwnd, ICON_FILE, 7, 34, 35, 346, 24)));
+      new fileedit_c(hwnd, ICON_FILE, 15, 34, 35, 346, 24)));
   lizensfile->disable();
 ////////////
   pages->newPage();
