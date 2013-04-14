@@ -17,6 +17,7 @@
 class language_c : public collection_c {
     public:
       language_c(char * setupLang, SystemDefault_c * SystemDefault);
+      language_c(char * langPath);
       virtual ~language_c();
       int LoadLanguageFile(char * aFile);
 //      int allLangToCombo(dropdownlist_c * list);
