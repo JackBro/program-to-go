@@ -15,6 +15,7 @@ class file_c
         int readFile(char * buffer,int bufferSize);
         int WriteBuffer(char * buffer, int size);
         int seek(DWORD aSize, DWORD aPos);
+        DWORD getSize();
     protected:
     private:
       HANDLE _file;

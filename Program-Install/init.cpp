@@ -13,6 +13,7 @@ char packzip[] = "pack.zip";
 char install[] = "install";
 char lizensetxt[] = "lizense.txt";
 char mainpfad[] = "Programs-To-Go\\";
+char lfile[MAX_PATH];
 
 controlcollections_c * controls;
 font_c * font;
@@ -20,6 +21,8 @@ pages_c * pages;
 languagebox_c * langlist;
 folderedit_c * destpath;
 char * defPfad;
+editbox_c * licensebox;
+char * lizens;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -115,12 +118,13 @@ int init(HWND hwnd) {
         tinyxml2::XMLDocument * script = new tinyxml2::XMLDocument;
         script->LoadFile(tempFile);
         char * title = (char*)script->FirstChildElement("Install")->FirstChildElement("Title")->GetText();
-        char * lizens = (char*)script->FirstChildElement("Install")->FirstChildElement("Lizense")->GetText();
+        lizens = (char*)script->FirstChildElement("Install")->FirstChildElement("Lizense")->GetText();
         SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)title);
         tempFile[strlen(tempFile)-strlen(install)] = 0;
         if (strlen(lizens) > 0) {
           memcpy(tempFile+strlen(tempFile),lizensetxt,strlen(lizensetxt)+1);
           zip->extractFile(lizens, tempFile);
+          memcpy(lfile,tempFile,strlen(tempFile)+1);
           tempFile[strlen(tempFile)-strlen(lizensetxt)] = 0;
         }
         zip->close();
@@ -160,6 +164,14 @@ int init(HWND hwnd) {
         controls->addControl(
           new folderedit_c(hwnd, ICON_FOLDER, 6, 10, 35, 470, 24)));
 ////////////
+      pages->newPage();
+      pages->addControl(
+        controls->addControl(
+          new staticlabel_c(hwnd, "License:", 6, 10, 10, 470, 24))); // Sprache Nummer 7
+      licensebox = (editbox_c*)pages->addControl(
+        controls->addControl(
+          new editbox_c(hwnd, 10, 35, 470, 340)));
+////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
           new button_c(hwnd, "Back", 2, 207, 387, 85, 24)));
@@ -185,6 +197,18 @@ int init_second(HWND hwnd) {
   langlist->setLangList();
   controls->setCurLanguage();
 ////////////
+  if (strlen(lizens) > 0) {
+    licensebox->setText(lfile);
+    file_c * f = new file_c;
+    f->OpenReadFile(lfile);
+    DWORD aSize = f->getSize();
+    char * text = new char[aSize+1];
+    aSize = f->readFile(text, aSize);
+    text[aSize] = 0;
+    delete f;
+    licensebox->setText(text);
+    delete[] text;
+  }
   pages->setPage(0);
 ///////////
   destpath->setText(defPfad);

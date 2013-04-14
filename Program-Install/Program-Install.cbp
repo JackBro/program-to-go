@@ -58,6 +58,8 @@
 		<Unit filename="../share/class/dropdownlist.h" />
 		<Unit filename="../share/class/edit.cpp" />
 		<Unit filename="../share/class/edit.h" />
+		<Unit filename="../share/class/editbox.cpp" />
+		<Unit filename="../share/class/editbox.h" />
 		<Unit filename="../share/class/file.cpp" />
 		<Unit filename="../share/class/file.h" />
 		<Unit filename="../share/class/folderedit.cpp" />

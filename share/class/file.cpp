@@ -96,3 +96,7 @@ int file_c::seek(DWORD aSize, DWORD aPos) {
    SetFilePointer(_file,aSize,NULL,aPos);
   return 0;
 }
+
+DWORD file_c::getSize() {
+  return GetFileSize(_file,NULL);
+}
