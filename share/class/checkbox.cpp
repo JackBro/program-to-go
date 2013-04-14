@@ -34,3 +34,4 @@ bool checkbox_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
 bool checkbox_c::isChecked() {
   return BST_CHECKED == SendMessage(Wnd,BM_GETCHECK,0,0);
 }
+

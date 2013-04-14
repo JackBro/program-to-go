@@ -14,6 +14,7 @@
 #include "../share/class/languagebox.h"
 #include "../share/class/folderedit.h"
 #include "../share/class/editbox.h"
+#include "../share/class/radiobutton.h"
 #include "../libs/libxml2/tinyxml2.h"
 #include "install.h"
 #include "resource.h"

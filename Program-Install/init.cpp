@@ -23,6 +23,7 @@ folderedit_c * destpath;
 char * defPfad;
 editbox_c * licensebox;
 char * lizens;
+radiobutton_c * NoAccept;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -167,10 +168,19 @@ int init(HWND hwnd) {
       pages->newPage();
       pages->addControl(
         controls->addControl(
-          new staticlabel_c(hwnd, "License:", 6, 10, 10, 470, 24))); // Sprache Nummer 7
+          new staticlabel_c(hwnd, "License:", 6, 10, 10, 470, 24)));
+           // Sprache Nummer 7
       licensebox = (editbox_c*)pages->addControl(
         controls->addControl(
-          new editbox_c(hwnd, 10, 35, 470, 340)));
+          new editbox_c(hwnd, 10, 35, 470, 292)));
+      NoAccept = (radiobutton_c*)pages->addControl(
+        controls->addControl(
+          new radiobutton_c(hwnd, "Do not accept", 6, 15, 330, 465, 24)));
+          // Sprache Nummer 8
+      pages->addControl(
+        controls->addControl(
+          new radiobutton_c(hwnd, "Accept", 6,  15, 354, 465, 24)));
+          // Sprache Nummer 9
 ////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
@@ -210,6 +220,7 @@ int init_second(HWND hwnd) {
     delete[] text;
   }
   pages->setPage(0);
+  NoAccept->check(true);
 ///////////
   destpath->setText(defPfad);
   delete[] defPfad;
