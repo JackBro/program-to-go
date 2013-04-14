@@ -8,5 +8,6 @@ typedef struct {
 extern
 
 #define install_lang 0x1234
+#define install_pack 0x1235
 
 #endif

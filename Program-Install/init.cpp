@@ -9,6 +9,7 @@ language_c * language;
 button_c * CButton;
 char * tempFile;
 char langzip[] = "lang.zip";
+char packzip[] = "pack.zip";
 controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
@@ -47,7 +48,6 @@ int init(HWND hwnd) {
 #endif
   GetTempFolderName(tempFile,"INT",0,tempFile);
   memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
-  printf("%s\n",tempFile);
 #ifdef run
   if (app->OpenReadFile(SysDef->ExeFile)) {
 #else
@@ -81,7 +81,37 @@ int init(HWND hwnd) {
       zip->close();
       memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
       DeleteFile(tempFile);
+// Lokaliesieren der Paketdaten
       tempFile[strlen(tempFile)-strlen(langzip)] = 0;
+      memcpy(tempFile+strlen(tempFile),packzip,strlen(packzip)+1);
+      intsall_rec * pack = new intsall_rec;
+      app->seek(-sizeof(intsall_rec)-lang->aSize,FILE_END);
+      app->readFile((char*)pack, sizeof(intsall_rec));
+      if (pack->id == install_pack) {
+        app->seek(-lang->aSize-pack->aSize,FILE_END);
+        f = new file_c;
+        sum = pack->aSize - sizeof(intsall_rec);
+        f->OpenWriteFile(tempFile);
+        while (sum > 0) {
+          if (sum > 1024) {
+            read = app->readFile(buf,1024);
+          } else {
+            read = app->readFile(buf,sum);
+          }
+          sum = sum - read;
+          f->WriteBuffer(buf,read);
+        }
+        f->CloseFile();
+        delete f;
+
+
+        printf("size %d\n",pack->aSize);
+        printf("temp %s\n",tempFile);
+
+      }
+
+      tempFile[strlen(tempFile)-strlen(packzip)] = 0;
+      app->CloseFile();
       language = new language_c(tempFile);
       controls = new controlcollections_c;
       controls->setLanguage(language);
@@ -122,7 +152,6 @@ int init(HWND hwnd) {
     } else {
       Msg->setText("No Language Data found !");
     }
-    app->CloseFile();
   }
   printf("%s\n",SysDef->ExeFile);
 
