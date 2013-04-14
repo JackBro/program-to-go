@@ -46,7 +46,7 @@ int unziplib_c::extractFile(char * fName, char * fFile) {
   for (int i=0; i<itemCount; i++) {
     GetZipItem(hz,i,&ze);
     if (strcmp(ze.name, fName) == 0) {
-      printf("File: %s\n",ze.name);
+//      printf("File: %s\n",ze.name);
       UnzipItem(hz,i,fFile);
       i = itemCount;
     }

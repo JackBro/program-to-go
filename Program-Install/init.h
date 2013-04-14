@@ -24,6 +24,8 @@ extern languagebox_c * langlist;
 extern language_c * language;
 extern controlcollections_c * controls;
 extern pages_c * pages;
+extern radiobutton_c * NoAccept;
+extern radiobutton_c * Accept;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

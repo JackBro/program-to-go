@@ -24,15 +24,16 @@ char * defPfad;
 editbox_c * licensebox;
 char * lizens;
 radiobutton_c * NoAccept;
+radiobutton_c * Accept;
 
 int * nextButtonClicked() {
   pages->nextPage();
-/*  if (pages->getPage() == 2) {
-    sourcePfad = sourcepath->getText();
-    destPfad = destpath->getText();
-    packName = packname->getText();
-    runIt(Wnd ,0);
-  }*/
+  if (pages->getPage() == 2) {
+    pages->nextButton->disable();
+  } else if (pages->getPage() == 3) {
+    printf("Start Install\n");
+    printf("temp %s\n",tempFile);
+  }
   return 0;
 }
 
@@ -41,6 +42,14 @@ int * prevButtonClicked() {
   return 0;
 }
 
+int * licenseButtonClicked() {
+  if (Accept->isChecked()) {
+    pages->nextButton->enable();
+  } else {
+    pages->nextButton->disable();
+  }
+  return 0;
+}
 
 int init(HWND hwnd) {
   SysDef = new SystemDefault_c;
@@ -133,12 +142,7 @@ int init(HWND hwnd) {
         memcpy(defPfad, SysDef->ExePath, 3);
         memcpy(defPfad+3, mainpfad, strlen(mainpfad)+1);
         memcpy(defPfad+strlen(defPfad), title, strlen(title)+1);
-
-        printf("size %d\n",pack->aSize);
-        printf("temp %s\n",tempFile);
-
       }
-
       app->CloseFile();
       language = new language_c(tempFile);
       controls = new controlcollections_c;
@@ -168,19 +172,22 @@ int init(HWND hwnd) {
       pages->newPage();
       pages->addControl(
         controls->addControl(
-          new staticlabel_c(hwnd, "License:", 6, 10, 10, 470, 24)));
+          new staticlabel_c(hwnd, "License:", 7, 10, 10, 470, 24)));
            // Sprache Nummer 7
       licensebox = (editbox_c*)pages->addControl(
         controls->addControl(
           new editbox_c(hwnd, 10, 35, 470, 292)));
       NoAccept = (radiobutton_c*)pages->addControl(
         controls->addControl(
-          new radiobutton_c(hwnd, "Do not accept", 6, 15, 330, 465, 24)));
+          new radiobutton_c(hwnd, "Do not accept", 8, 15, 330, 465, 24)));
+      NoAccept->onClick = licenseButtonClicked;
           // Sprache Nummer 8
-      pages->addControl(
+      Accept = (radiobutton_c*)pages->addControl(
         controls->addControl(
-          new radiobutton_c(hwnd, "Accept", 6,  15, 354, 465, 24)));
-          // Sprache Nummer 9
+          new radiobutton_c(hwnd, "Accept", 9,  15, 354, 465, 24)));
+      Accept->onClick = licenseButtonClicked;
+////////////
+      pages->newPage();
 ////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
@@ -198,7 +205,7 @@ int init(HWND hwnd) {
       Msg->setText("No Language Data found !");
     }
   }
-  printf("%s\n",SysDef->ExeFile);
+//  printf("%s\n",SysDef->ExeFile);
 
   return 0;
 }
