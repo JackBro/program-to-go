@@ -87,6 +87,8 @@
 		<Unit filename="init.cpp" />
 		<Unit filename="init.h" />
 		<Unit filename="install.h" />
+		<Unit filename="lang/de_DE.xml" />
+		<Unit filename="lang/en_EN.xml" />
 		<Unit filename="main.cpp" />
 		<Unit filename="manifest.xml" />
 		<Unit filename="resource.h" />
