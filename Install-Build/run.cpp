@@ -193,7 +193,7 @@ int runIt(HWND wnd, int step) {
     delete f;
     DeleteFile(tmpFolder);
     progressbar->setValue(7);
-//    SetTimer(wnd,TIMER_STEP6,250,NULL);
+    progresslabel->setLangId(21);
     pages->enableButtons();
   }
   return 0;
