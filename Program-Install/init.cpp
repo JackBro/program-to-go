@@ -25,14 +25,15 @@ editbox_c * licensebox;
 char * lizens;
 radiobutton_c * NoAccept;
 radiobutton_c * Accept;
+char * DestFolder;
 
 int * nextButtonClicked() {
   pages->nextPage();
   if (pages->getPage() == 2) {
     pages->nextButton->disable();
   } else if (pages->getPage() == 3) {
-    printf("Start Install\n");
-    printf("temp %s\n",tempFile);
+    DestFolder = destpath->getText();
+    runIt(0);
   }
   return 0;
 }

@@ -18,14 +18,17 @@
 #include "../libs/libxml2/tinyxml2.h"
 #include "install.h"
 #include "resource.h"
+#include "run.h"
 
-button_c * CButton;
+extern button_c * CButton;
 extern languagebox_c * langlist;
 extern language_c * language;
 extern controlcollections_c * controls;
 extern pages_c * pages;
 extern radiobutton_c * NoAccept;
 extern radiobutton_c * Accept;
+extern char * DestFolder;
+extern char * tempFile;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

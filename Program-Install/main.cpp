@@ -4,7 +4,7 @@
 
 #include "resource.h"
 #include "init.h"
-//#include "run.h"
+#include "run.h"
 
 
 HINSTANCE hInst;
