@@ -107,11 +107,12 @@ int init(HWND hwnd) {
         zip->open(tempFile);
         tempFile[strlen(tempFile)-strlen(packzip)] = 0;
         memcpy(tempFile+strlen(tempFile),install,strlen(install)+1);
-
         zip->extractFile("setup/install.xml", tempFile);
-
-
         zip->close();
+        tinyxml2::XMLDocument * script = new tinyxml2::XMLDocument;
+        script->LoadFile(tempFile);
+        char * title = (char*)script->FirstChildElement("Install")->FirstChildElement("Title")->GetText();
+        SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)title);
         tempFile[strlen(tempFile)-strlen(install)] = 0;
 
 
