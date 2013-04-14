@@ -7,7 +7,7 @@
 #include "..\share\class\staticlabel.h"
 #include "..\share\class\checkbox.h"
 #include "..\share\tools.h"
-#include "class\ziplib.h"
+#include "..\share\class\ziplib.h"
 #include "resource.h"
 #include "install.h"
 #include "..\libs\libxml2\tinyxml2.h"
