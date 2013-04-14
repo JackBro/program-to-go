@@ -192,6 +192,9 @@ int runIt(HWND wnd, int step) {
     f->CloseFile();
     delete f;
     DeleteFile(tmpFolder);
+    while ((strlen(tmpFolder)>0) && (tmpFolder[strlen(tmpFolder)-1] != '\\')) {tmpFolder[strlen(tmpFolder)-1] = 0;}
+    if (strlen(tmpFolder)>0) {tmpFolder[strlen(tmpFolder)-1] = 0;}
+    RemoveDirectory(tmpFolder);
     progressbar->setValue(7);
     progresslabel->setLangId(21);
     pages->enableButtons();
