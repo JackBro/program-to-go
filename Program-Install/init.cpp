@@ -10,6 +10,7 @@ button_c * CButton;
 char * tempFile;
 char langzip[] = "lang.zip";
 char packzip[] = "pack.zip";
+char install[] = "install";
 controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
@@ -103,6 +104,16 @@ int init(HWND hwnd) {
         }
         f->CloseFile();
         delete f;
+        zip->open(tempFile);
+        tempFile[strlen(tempFile)-strlen(packzip)] = 0;
+        memcpy(tempFile+strlen(tempFile),install,strlen(install)+1);
+
+        zip->extractFile("setup/install.xml", tempFile);
+
+
+        zip->close();
+        tempFile[strlen(tempFile)-strlen(install)] = 0;
+
 
 
         printf("size %d\n",pack->aSize);
@@ -110,7 +121,6 @@ int init(HWND hwnd) {
 
       }
 
-      tempFile[strlen(tempFile)-strlen(packzip)] = 0;
       app->CloseFile();
       language = new language_c(tempFile);
       controls = new controlcollections_c;

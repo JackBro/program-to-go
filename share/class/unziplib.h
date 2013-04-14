@@ -11,6 +11,7 @@ class unziplib_c
         int open(char * fName);
         int close();
         int unzipall(char * aFolder);
+        int extractFile(char * fName, char * fFile);
     protected:
     private:
       HZIP hz;
