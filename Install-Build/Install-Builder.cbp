@@ -33,6 +33,7 @@
 			<Add option="-DWINVER=0x0600" />
 		</Compiler>
 		<Linker>
+			<Add option="-lcomdlg32" />
 			<Add library="gdi32" />
 			<Add library="user32" />
 			<Add library="kernel32" />
@@ -46,6 +47,8 @@
 		<Unit filename="../share/class/button.h" />
 		<Unit filename="../share/class/buttonicon.cpp" />
 		<Unit filename="../share/class/buttonicon.h" />
+		<Unit filename="../share/class/checkbox.cpp" />
+		<Unit filename="../share/class/checkbox.h" />
 		<Unit filename="../share/class/collection.cpp" />
 		<Unit filename="../share/class/collection.h" />
 		<Unit filename="../share/class/controlcollections.cpp" />
@@ -56,6 +59,8 @@
 		<Unit filename="../share/class/edit.h" />
 		<Unit filename="../share/class/file.cpp" />
 		<Unit filename="../share/class/file.h" />
+		<Unit filename="../share/class/fileedit.cpp" />
+		<Unit filename="../share/class/fileedit.h" />
 		<Unit filename="../share/class/folderedit.cpp" />
 		<Unit filename="../share/class/folderedit.h" />
 		<Unit filename="../share/class/font.cpp" />

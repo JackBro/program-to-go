@@ -6,6 +6,7 @@ typedef struct {
   DWORD aSize;
 } install_rec;
 
-#define install_lang 0x1234
+#define install_lang    0x1234
+#define install_program 0x1235
 
 #endif
