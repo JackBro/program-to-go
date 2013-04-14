@@ -12,11 +12,14 @@ char langzip[] = "lang.zip";
 char packzip[] = "pack.zip";
 char install[] = "install";
 char lizensetxt[] = "lizense.txt";
+char mainpfad[] = "Programs-To-Go\\";
+
 controlcollections_c * controls;
 font_c * font;
 pages_c * pages;
 languagebox_c * langlist;
 folderedit_c * destpath;
+char * defPfad;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -39,8 +42,8 @@ int init(HWND hwnd) {
   SysDef = new SystemDefault_c;
   file_c * app = new file_c();
   intsall_rec * lang = new intsall_rec;
-  staticlabel_c * Msg = new staticlabel_c(hwnd,"",-1,10,10,320,20);
-  CButton = new button_c(hwnd, "OK", 4, 297, 237, 85, 24);
+  staticlabel_c * Msg = new staticlabel_c(hwnd,"",-1,10,10,420,20);
+  CButton = new button_c(hwnd, "OK", 4, 397, 387, 85, 24);
   tempFile = new char[MAX_PATH];
 #ifdef run
   memcpy(tempFile,SysDef->TempPath,strlen(SysDef->TempPath)+1);
@@ -121,8 +124,10 @@ int init(HWND hwnd) {
           tempFile[strlen(tempFile)-strlen(lizensetxt)] = 0;
         }
         zip->close();
-
-
+        defPfad = new char[MAX_PATH];
+        memcpy(defPfad, SysDef->ExePath, 3);
+        memcpy(defPfad+3, mainpfad, strlen(mainpfad)+1);
+        memcpy(defPfad+strlen(defPfad), title, strlen(title)+1);
 
         printf("size %d\n",pack->aSize);
         printf("temp %s\n",tempFile);
@@ -142,26 +147,26 @@ int init(HWND hwnd) {
       pages->newPage();
       pages->addControl(
         controls->addControl(
-          new staticlabel_c(hwnd, "Language:", 1, 10, 10, 200, 24)));
+          new staticlabel_c(hwnd, "Language:", 1, 10, 10, 470, 24)));
       langlist = (languagebox_c*)pages->addControl(
         controls->addControl(
-          new languagebox_c(hwnd, 10, 35, 370, 12)));
+          new languagebox_c(hwnd, 10, 35, 470, 12)));
 ////////////
       pages->newPage();
       pages->addControl(
         controls->addControl(
-          new staticlabel_c(hwnd, "Install folder:", 5, 10, 10, 200, 24)));
+          new staticlabel_c(hwnd, "Install folder:", 5, 10, 10, 470, 24)));
       destpath = (folderedit_c*)pages->addControl(
         controls->addControl(
-          new folderedit_c(hwnd, ICON_FOLDER, 6, 10, 35, 370, 24)));
+          new folderedit_c(hwnd, ICON_FOLDER, 6, 10, 35, 470, 24)));
 ////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
-          new button_c(hwnd, "Back", 2, 107, 237, 85, 24)));
+          new button_c(hwnd, "Back", 2, 207, 387, 85, 24)));
       pages->prevButton->onClick = prevButtonClicked;
       pages->setNextButton(
         (button_c*)controls->addControl(
-          new button_c(hwnd, "Next", 3, 202, 237, 85, 24)));
+          new button_c(hwnd, "Next", 3, 302, 387, 85, 24)));
       pages->nextButton->onClick = nextButtonClicked;
       pages->setCloseButton(
         (button_c*)controls->addControl(CButton));
@@ -181,5 +186,9 @@ int init_second(HWND hwnd) {
   controls->setCurLanguage();
 ////////////
   pages->setPage(0);
+///////////
+  destpath->setText(defPfad);
+  delete[] defPfad;
+
   return 0;
 }
