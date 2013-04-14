@@ -4,18 +4,20 @@
 
 extern SystemDefault_c * SystemDefault;
 
-char zipfile[] = "lang.zip";
+char zipfile[] = "temp.zip";
 char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
 char sourceLang[] = "Program-Install\\lang\\\0";
+char installxml[] = "\\setup\\install.xml\0";
 char exe[] = ".exe\0";
+char * LizensFile;
 char * packPfad;
 char * tmpFolder;
-
+char * lizensFile;
 
 int runIt(HWND wnd, int step) {
   if (step == 0) {
     pages->disableButtons();
-    progressbar->setRange(0,2);
+    progressbar->setRange(0, 7);
     progressbar->setValue(0);
     progresslabel->setLangId(9);
 //////////
@@ -42,10 +44,11 @@ int runIt(HWND wnd, int step) {
 //////////
 // Copy File
 //////////
+    printf("%s\n",SourceExe);
     if (FileExists(SourceExe)) {
       if (CopyFile(SourceExe, packPfad, false) != 0) {
         progressbar->setValue(1);
-        SetTimer(wnd,TIMER_STEP1,100,NULL);
+        SetTimer(wnd,TIMER_STEP1,250,NULL);
       } else {
         progresslabel->setLangId(10);
         pages->enableButtons();
@@ -56,6 +59,96 @@ int runIt(HWND wnd, int step) {
     }
     delete[] SourceExe;
   } else if (step == 1) {
+    progresslabel->setLangId(16);
+    LizensFile = new char[MAX_PATH];
+    LizensFile[0] = 0;
+    if (lizensbox->isChecked()) {
+      if (strlen(lizensFile) > strlen(sourcePfad)) {
+        memcpy(LizensFile, sourcePfad, strlen(sourcePfad)+1);
+        if (LizensFile[strlen(LizensFile)-1] == '\\') {LizensFile[strlen(LizensFile)-1] = 0;}
+        memcpy(LizensFile+strlen(LizensFile),lizensFile+strlen(LizensFile),strlen(lizensFile)-strlen(LizensFile)+1);
+        if (FileExists(LizensFile)) {
+          memcpy(LizensFile,LizensFile+strlen(sourcePfad),strlen(LizensFile)-strlen(sourceFile)+2);
+          if (LizensFile[0] == '\\') {memcpy(LizensFile,LizensFile+1,strlen(LizensFile)+1);}
+          progressbar->setValue(2);
+          SetTimer(wnd,TIMER_STEP2,250,NULL);
+        } else {
+          progresslabel->setLangId(17);
+          pages->enableButtons();
+        }
+      } else {
+        progresslabel->setLangId(17);
+        pages->enableButtons();
+      }
+    } else {
+      progressbar->setValue(2);
+      SetTimer(wnd,TIMER_STEP2,250,NULL);
+    }
+  } else if (step == 2) {
+    progresslabel->setLangId(18);
+    tinyxml2::XMLDocument * doc = new tinyxml2::XMLDocument;
+    tinyxml2::XMLElement* Node = doc->NewElement("Install");
+    tinyxml2::XMLElement* Node2 = doc->NewElement("Title");
+    Node2->InsertEndChild(doc->NewText(packName));
+    Node->InsertEndChild(Node2);
+    Node2 = doc->NewElement("Lizense");
+    Node2->InsertEndChild(doc->NewText(LizensFile));
+    Node->InsertEndChild(Node2);
+    doc->InsertEndChild(Node);
+    char * instxml = new char[MAX_PATH];
+    memcpy(instxml,sourcePfad,strlen(sourcePfad)+1);
+    if (instxml[strlen(instxml)-1] == '\\') {instxml[strlen(instxml)-1] = 0;}
+    memcpy(instxml+strlen(instxml),installxml,strlen(installxml)+1);
+    doc->SaveFile(instxml);
+    delete doc;
+    delete[] instxml;
+    delete[] LizensFile;
+    progressbar->setValue(3);
+    SetTimer(wnd,TIMER_STEP3,250,NULL);
+  } else if (step == 3) {
+    progresslabel->setLangId(19);
+//////////
+// TmpFolder
+//////////
+    tmpFolder = new char[MAX_PATH];
+//    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
+    tmpFolder[0] = '\\'; tmpFolder[1] = 0;
+    GetTempFolderName(tmpFolder,"IB",0,tmpFolder);
+    int len = strlen(tmpFolder);
+    memcpy(tmpFolder+len,zipfile,strlen(zipfile)+1);
+    ziplib_c * zip = new ziplib_c;
+    zip->open(tmpFolder);
+    zip->addFolder(sourcePfad,"");
+    zip->close();
+    progressbar->setValue(4);
+    SetTimer(wnd,TIMER_STEP4,250,NULL);
+  } else if (step == 4) {
+    progresslabel->setLangId(20);
+    file_c * f = new file_c;
+    f->OpenReadWriteFile(packPfad);
+    f->seek(0,FILE_END);
+    file_c * l = new file_c;
+    l->OpenReadFile(tmpFolder);
+    char buf[1024];
+    int read = 1;
+    int sum = 0;
+    do {
+      read = l->readFile(buf,1024);
+      sum = sum + read;
+      f->WriteBuffer(buf,read);
+    } while (read>0);
+    l->CloseFile();
+    delete l;
+    install_rec data;
+    data.id = install_program;
+    data.aSize = sum + sizeof(data);
+    f->WriteBuffer((char*)&data,sizeof(data));
+    f->CloseFile();
+    delete f;
+    DeleteFile(tmpFolder);
+    progressbar->setValue(5);
+    SetTimer(wnd,TIMER_STEP5,250,NULL);
+  } else if (step == 5) {
 //////////
 // get Quell Exe
 //////////
@@ -69,21 +162,16 @@ int runIt(HWND wnd, int step) {
 //////////
 // TmpFolder
 //////////
-    tmpFolder = new char[MAX_PATH];
-    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
-    GetTempFolderName(tmpFolder,"IB",0,tmpFolder);
-    int len = strlen(tmpFolder);
-    memcpy(tmpFolder+len,zipfile,strlen(zipfile)+1);
     ziplib_c * zip = new ziplib_c;
     zip->open(tmpFolder);
     zip->addFolder(SourceExe,"");
     zip->close();
-    progressbar->setValue(1);
-    SetTimer(wnd,TIMER_STEP2,100,NULL);
-  } else if (step == 2) {
+    progressbar->setValue(6);
+    SetTimer(wnd,TIMER_STEP6,250,NULL);
+  } else if (step == 6) {
     progresslabel->setLangId(13);
     file_c * f = new file_c;
-    if (!f->OpenReadWriteFile(packPfad)) {printf("Can not open %d\n", GetLastError());};
+    f->OpenReadWriteFile(packPfad);
     f->seek(0,FILE_END);
     file_c * l = new file_c;
     l->OpenReadFile(tmpFolder);
@@ -103,115 +191,13 @@ int runIt(HWND wnd, int step) {
     f->WriteBuffer((char*)&data,sizeof(data));
     f->CloseFile();
     delete f;
-
-
-    printf("%s\n",tmpFolder);
-//    printf("%s\n",SourceExe);
-    printf("%s\n",packPfad);
-    printf("%s\n",SystemDefault->PrgPath);
+    DeleteFile(tmpFolder);
+    while ((strlen(tmpFolder)>0) && (tmpFolder[strlen(tmpFolder)-1] != '\\')) {tmpFolder[strlen(tmpFolder)-1] = 0;}
+    if (strlen(tmpFolder)>0) {tmpFolder[strlen(tmpFolder)-1] = 0;}
+    RemoveDirectory(tmpFolder);
+    progressbar->setValue(7);
+    progresslabel->setLangId(21);
     pages->enableButtons();
-/*    StarterPrg = new char[strlen(prgPfad)+28];
-    memcpy(StarterPrg,prgPfad,strlen(prgPfad));
-    StarterPrg[strlen(prgPfad)-1] = 0;
-    while ((strlen(StarterPrg)>0) & (StarterPrg[strlen(StarterPrg)-1] != '\\')) {StarterPrg[strlen(StarterPrg)-1] = 0;}
-    int len = strlen(StarterPrg);
-    memcpy(StarterPrg+len,StarterPfad,strlen(StarterPfad));
-    StarterPrg[len+strlen(StarterPfad)] = 0;
-    if (FileExists(StarterPrg)) {
-      progressbar->setValue(1);
-      SetTimer(wnd,TIMER_STEP1,100,NULL);
-    } else {
-      progresslabel->setLangId(12);
-      pages->enableButtons();
-    }
-  } else if (step == 1){
-    progresslabel->setLangId(13);
-    if (FileExists(prgExefile)) {
-      progressbar->setValue(2);
-      SetTimer(wnd,TIMER_STEP2,100,NULL);
-    } else {
-      progresslabel->setLangId(14);
-      pages->enableButtons();
-    }
-  } else if (step == 2){
-    progresslabel->setLangId(15);
-    runPrg = new char[2*strlen(prgExefile)+5];
-    memcpy(runPrg,prgExefile,strlen(prgExefile));
-    runPrg[strlen(prgExefile)] = 0;
-    while ((strlen(runPrg)>0) & (runPrg[strlen(runPrg)-1] != '\\')) {runPrg[strlen(runPrg)-1] = 0;}
-    int len = strlen(runPrg);
-    if (strlen(runPrg)>0) {runPrg[strlen(runPrg)-1] = 0;}
-    while ((strlen(runPrg)>0) & (runPrg[strlen(runPrg)-1] != '\\')) {runPrg[strlen(runPrg)-1] = 0;}
-    memcpy(runPrg+strlen(runPrg),prgExefile+len,strlen(prgExefile));
-    runPrg[len+strlen(prgExefile)] = 0;
-    StarterPrg[strlen(StarterPrg)+1] = 0;
-    runPrg[strlen(runPrg)+1] = 0;
-    if (strcmp(StarterPrg,runPrg) != 0) {
-      if (CopyFileEx(StarterPrg,runPrg,NULL,NULL,NULL,0)) {
-        progressbar->setValue(3);
-        SetTimer(wnd,TIMER_STEP3,100,NULL);
-      } else {
-        progresslabel->setLangId(16);
-        pages->enableButtons();
-      }
-    } else {
-      progresslabel->setLangId(16);
-      pages->enableButtons();
-    }
-    delete StarterPrg;
-  } else if (step == 3){
-    progresslabel->setLangId(17);
-    if (setIcon(prgExefile, runPrg) == 0 ) {
-      progressbar->setValue(4);
-      SetTimer(wnd,TIMER_STEP4,100,NULL);
-    } else {
-      progresslabel->setLangId(18);
-      pages->enableButtons();
-    }
-    delete runPrg;
-  } else if (step == 4){
-    progresslabel->setLangId(19);
-    char * setupFile = new char [strlen(prgExefile)+25];
-    memcpy(setupFile, prgExefile, strlen(prgExefile));
-    setupFile[strlen(prgExefile)] = 0;
-    while ((strlen(setupFile)>0) && (setupFile[strlen(setupFile)-1] != '\\')) {setupFile[strlen(setupFile)-1] = 0;}
-    setupFile[strlen(setupFile)-1] = 0;
-    while ((strlen(setupFile)>0) && (setupFile[strlen(setupFile)-1] != '\\')) {setupFile[strlen(setupFile)-1] = 0;}
-    memcpy(setupFile+strlen(setupFile),setupPfad,strlen(setupPfad)+1);
-    int len = strlen(prgExefile);
-    while ((len>0) && (prgExefile[len-1] != '\\')) {len = len-1;}
-    len = len - 1;
-    while ((len>0) && (prgExefile[len-1] != '\\')) {len = len-1;}
-    xmlfile_c * runxml = new xmlfile_c;
-    if (runxml->OpenWriteXMLFile(setupFile)) {
-      runxml->OpenXMLGroup(AppData);
-      runxml->WriteStringXML(ExeFile,prgExefile+len);
-      if (layer > 0) {
-        runxml->OpenXMLGroup(Layer);
-        if (layer == 1) {
-          runxml->WriteStringXML(ExeLayer,WinXP);
-          runxml->WriteIntergerXML(HiVersion,5);
-          runxml->WriteIntergerXML(LoVersion,1);
-        }
-        if (layer == 2) {
-          runxml->WriteStringXML(ExeLayer,WinVista);
-          runxml->WriteIntergerXML(HiVersion,6);
-          runxml->WriteIntergerXML(LoVersion,0);
-        }
-        if (layer == 3) {
-          runxml->WriteStringXML(ExeLayer,Win7);
-          runxml->WriteIntergerXML(HiVersion,6);
-          runxml->WriteIntergerXML(LoVersion,1);
-        }
-      }
-      runxml->CloseWriteXMLFile();
-      progressbar->setValue(5);
-      progresslabel->setLangId(20);
-    } else {
-      progresslabel->setLangId(21);
-    }
-    delete setupFile;
-    pages->enableButtons();*/
   }
   return 0;
 }

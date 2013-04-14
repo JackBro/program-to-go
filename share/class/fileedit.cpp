@@ -50,7 +50,7 @@ bool fileedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
       ofn.lpstrInitialDir = pfad;
       ofn.nMaxFile = MAX_PATH;
       ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY|OFN_ALLOWMULTISELECT;
-      ofn.lpstrDefExt = "txt";
+      ofn.lpstrDefExt = "";
       if(GetOpenFileName(&ofn)) {
         edit->setText(szFileName);
 	  }
@@ -77,4 +77,16 @@ int fileedit_c::SetGetPfad(cb_getText aProc) {
 
 char * fileedit_c::getText() {
   return edit->getText();
+}
+
+int fileedit_c::disable() {
+  edit->disable();
+  button->disable();
+  return 0;
+}
+
+int fileedit_c::enable() {
+  edit->enable();
+  button->enable();
+  return 0;
 }

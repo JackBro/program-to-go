@@ -83,6 +83,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           setup->setLang(language->getCurLang());
           controls->setCurLanguage();
         }
+      } else if (lizensfile->event(hwnd, wParam, lParam)) {
+        return 0;
       } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
@@ -90,6 +92,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       } else if (sourcepath->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (destpath->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (lizensbox->event(hwnd, wParam, lParam)) {
         return 0;
       }
    }
@@ -108,6 +112,26 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
        case TIMER_STEP2: {
          KillTimer(hwnd,TIMER_STEP2);
          runIt(hwnd,2);
+         return 0;
+       }
+       case TIMER_STEP3: {
+         KillTimer(hwnd,TIMER_STEP3);
+         runIt(hwnd,3);
+         return 0;
+       }
+       case TIMER_STEP4: {
+         KillTimer(hwnd,TIMER_STEP4);
+         runIt(hwnd,4);
+         return 0;
+       }
+       case TIMER_STEP5: {
+         KillTimer(hwnd,TIMER_STEP5);
+         runIt(hwnd,5);
+         return 0;
+       }
+       case TIMER_STEP6: {
+         KillTimer(hwnd,TIMER_STEP6);
+         runIt(hwnd,6);
          return 0;
        }
      }

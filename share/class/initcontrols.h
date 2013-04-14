@@ -24,8 +24,8 @@ class initcontrols_c
         int setLanguage(language_c * aLang);
         int setLangId(int id);
         int langId;
-        int enable();
-        int disable();
+        virtual int enable();
+        virtual int disable();
         virtual int hide();
         virtual int show();
         virtual int setText(char * aText);

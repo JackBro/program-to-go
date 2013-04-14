@@ -9,7 +9,7 @@ edit_c::edit_c(HWND hWnd,int left, int top, int width, int height):initcontrols_
    Wnd = CreateWindowEx(WS_EX_CLIENTEDGE,
                       "edit",
                       NULL,
-                      WS_VISIBLE | WS_CHILD | ES_LEFT,
+                      WS_VISIBLE | WS_CHILD | ES_LEFT | ES_AUTOHSCROLL,
                       left,
                       top,
                       width,

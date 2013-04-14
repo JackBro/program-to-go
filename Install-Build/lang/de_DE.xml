@@ -8,7 +8,7 @@
   </Description>
   <List>
     <L1>Sprache:</L1>
-    <L2>Zur&uuml;ck</L2>
+    <L2>Zurück</L2>
     <L3>Weiter</L3>
     <L4>Beenden</L4>
     <L5>Ordner mit Installationsdateien:</L5>
@@ -20,5 +20,13 @@
     <L11>Run-Time-Modul nicht gefunden</L11>
     <L12>Packe Sprachdaten</L12>
     <L13>Einfügen der Sprachdaten</L13>
+    <L14>Lizenzdatei:</L14>
+    <L15>Textdateien;*.txt;Alle Dateien;*.*;;</L15>
+    <L16>Prüfe Lizensdatei</L16>
+    <L17>Lizensdatei nicht gefunden, oder nicht im Paketverzeichnis</L17>
+    <L18>Erstelle "install.xml"</L18>
+    <L19>Packe Programmdaten</L19>
+    <L20>Einfügen der Programmdaten</L20>
+    <L21>Paket fertig gestellt</L21>
    </List>
 </LanguageData>
