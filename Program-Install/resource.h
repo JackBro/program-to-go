@@ -8,3 +8,4 @@
 
 // Timer
 #define TIMER_START 1
+#define TIMER_STEP1 2

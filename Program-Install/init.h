@@ -16,6 +16,7 @@
 #include "../share/class/editbox.h"
 #include "../share/class/radiobutton.h"
 #include "../libs/libxml2/tinyxml2.h"
+#include "..\share\class\progress.h"
 #include "install.h"
 #include "resource.h"
 #include "run.h"
@@ -29,6 +30,8 @@ extern radiobutton_c * NoAccept;
 extern radiobutton_c * Accept;
 extern char * DestFolder;
 extern char * tempFile;
+extern staticlabel_c * progresslabel;
+extern progress_c * progressbar;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

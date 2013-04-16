@@ -80,6 +80,8 @@
 		<Unit filename="../share/class/page.h" />
 		<Unit filename="../share/class/pages.cpp" />
 		<Unit filename="../share/class/pages.h" />
+		<Unit filename="../share/class/progress.cpp" />
+		<Unit filename="../share/class/progress.h" />
 		<Unit filename="../share/class/radiobutton.cpp" />
 		<Unit filename="../share/class/radiobutton.h" />
 		<Unit filename="../share/class/staticlabel.cpp" />
@@ -101,6 +103,8 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="run.cpp" />
+		<Unit filename="run.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

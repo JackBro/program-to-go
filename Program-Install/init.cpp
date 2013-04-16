@@ -26,6 +26,9 @@ char * lizens;
 radiobutton_c * NoAccept;
 radiobutton_c * Accept;
 char * DestFolder;
+staticlabel_c * progresslabel;
+progress_c * progressbar;
+HWND aWnd;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -33,7 +36,7 @@ int * nextButtonClicked() {
     pages->nextButton->disable();
   } else if (pages->getPage() == 3) {
     DestFolder = destpath->getText();
-    runIt(0);
+    runIt(aWnd,0);
   }
   return 0;
 }
@@ -53,6 +56,7 @@ int * licenseButtonClicked() {
 }
 
 int init(HWND hwnd) {
+  aWnd = hwnd;
   SysDef = new SystemDefault_c;
   file_c * app = new file_c();
   intsall_rec * lang = new intsall_rec;
@@ -174,7 +178,6 @@ int init(HWND hwnd) {
       pages->addControl(
         controls->addControl(
           new staticlabel_c(hwnd, "License:", 7, 10, 10, 470, 24)));
-           // Sprache Nummer 7
       licensebox = (editbox_c*)pages->addControl(
         controls->addControl(
           new editbox_c(hwnd, 10, 35, 470, 292)));
@@ -182,13 +185,18 @@ int init(HWND hwnd) {
         controls->addControl(
           new radiobutton_c(hwnd, "Do not accept", 8, 15, 330, 465, 24)));
       NoAccept->onClick = licenseButtonClicked;
-          // Sprache Nummer 8
       Accept = (radiobutton_c*)pages->addControl(
         controls->addControl(
           new radiobutton_c(hwnd, "Accept", 9,  15, 354, 465, 24)));
       Accept->onClick = licenseButtonClicked;
 ////////////
       pages->newPage();
+      progresslabel = (staticlabel_c*)pages->addControl(
+        controls->addControl(
+          new staticlabel_c(hwnd, "Progress", 9, 10, 10, 470, 65))); // Lang 10
+      progressbar = (progress_c*)pages->addControl(
+        controls->addControl(
+          new progress_c(hwnd,  10, 80, 470, 24)));
 ////////////
       pages->setPrevButton(
         (button_c*)controls->addControl(
