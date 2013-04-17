@@ -82,6 +82,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_DESTROY:
     {
+        DeleteFolder(StripSlash(tempFile));
         PostQuitMessage(0);
         return 0;
     }

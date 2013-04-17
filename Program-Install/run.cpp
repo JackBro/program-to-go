@@ -51,6 +51,11 @@ int runIt(HWND wnd, int step) {
       SetTimer(wnd,TIMER_STEP2,250,NULL);
     }
   } else if (step == 2) {
+    zip->close();
+    delete zip;
+    StripName(tempFile);
+    StripSlash(tempFile);
+    DeleteFolder(tempFile);
     progresslabel->setLangId(13); //13
     pages->enableButtons();
     pages->prevButton->disable();

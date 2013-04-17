@@ -231,6 +231,7 @@ int init_second(HWND hwnd) {
     char * text = new char[aSize+1];
     aSize = f->readFile(text, aSize);
     text[aSize] = 0;
+    f->CloseFile();
     delete f;
     licensebox->setText(text);
     delete[] text;
