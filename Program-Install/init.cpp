@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-//#define run
+#define run
 
 SystemDefault_c * SysDef;
 language_c * language;
