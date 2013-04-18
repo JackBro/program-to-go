@@ -2,12 +2,17 @@
 
 #include <stdio.h>
 
+#define run
+
 extern SystemDefault_c * SystemDefault;
 
 char zipfile[] = "temp.zip";
-char sourceFile[] = "Program-Install\\bin\\Release\\Program-Install.exe\0";
-char sourceLang[] = "Program-Install\\lang\\\0";
+char sourceFile[] = "\\Program-Install\\app\\Program-Install.exe\0";
+char sourceLang[] = "\\Program-Install\\app\\lang\\\0";
 char installxml[] = "\\setup\\install.xml\0";
+#ifndef run
+char Ptg[] = "\\Programs-To-Go";
+#endif // run
 char exe[] = ".exe\0";
 char * LizensFile;
 char * packPfad;
@@ -36,10 +41,18 @@ int runIt(HWND wnd, int step) {
 // get Quell Exe
 //////////
     char * SourceExe = new char[MAX_PATH];
-    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath));
-    SourceExe[strlen(SystemDefault->PrgPath)] = 0;
-    SourceExe[strlen(SourceExe)-1] = 0;
-    while ((strlen(SourceExe)>0) && (SourceExe[strlen(SourceExe)-1] != '\\')) {SourceExe[strlen(SourceExe)-1] = 0;}
+#ifdef run
+    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath)+1);
+    StripSlash(SourceExe);
+// getup app
+    StripName(SourceExe);
+    StripSlash(SourceExe);
+// getup Install-Build
+    StripName(SourceExe);
+    StripSlash(SourceExe);
+#else
+    memcpy(SourceExe,Ptg,strlen(Ptg)+1);
+#endif
     memcpy(SourceExe+strlen(SourceExe), sourceFile, strlen(sourceFile)+1);
 //////////
 // Copy File
@@ -154,10 +167,18 @@ int runIt(HWND wnd, int step) {
 //////////
     progresslabel->setLangId(12);
     char * SourceExe = new char[MAX_PATH];
-    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath));
-    SourceExe[strlen(SystemDefault->PrgPath)] = 0;
-    SourceExe[strlen(SourceExe)-1] = 0;
-    while ((strlen(SourceExe)>0) && (SourceExe[strlen(SourceExe)-1] != '\\')) {SourceExe[strlen(SourceExe)-1] = 0;}
+#ifdef run
+    memcpy(SourceExe, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath)+1);
+    StripSlash(SourceExe);
+// getup app
+    StripName(SourceExe);
+    StripSlash(SourceExe);
+// getup Install-Build
+    StripName(SourceExe);
+    StripSlash(SourceExe);
+#else
+    memcpy(SourceExe,Ptg,strlen(Ptg)+1);
+#endif
     memcpy(SourceExe+strlen(SourceExe), sourceLang, strlen(sourceLang)+1);
 //////////
 // TmpFolder
@@ -166,6 +187,8 @@ int runIt(HWND wnd, int step) {
     zip->open(tmpFolder);
     zip->addFolder(SourceExe,"");
     zip->close();
+    printf("PrgPath: %s\n",SystemDefault->PrgPath);
+    printf("ExePath: %s\n",SourceExe);
     progressbar->setValue(6);
     SetTimer(wnd,TIMER_STEP6,250,NULL);
   } else if (step == 6) {
