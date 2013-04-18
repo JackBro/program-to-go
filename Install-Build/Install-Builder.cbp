@@ -34,6 +34,11 @@
 		</Compiler>
 		<Linker>
 			<Add option="-lcomdlg32" />
+			<Add option="-lcomctl32" />
+			<Add option="-lole32" />
+			<Add option="-lrpcrt4" />
+			<Add option="-static-libgcc" />
+			<Add option="-static-libstdc++" />
 			<Add library="gdi32" />
 			<Add library="user32" />
 			<Add library="kernel32" />
@@ -83,12 +88,12 @@
 		<Unit filename="../share/class/staticlabel.h" />
 		<Unit filename="../share/class/systemdefault.cpp" />
 		<Unit filename="../share/class/systemdefault.h" />
+		<Unit filename="../share/class/ziplib.cpp" />
+		<Unit filename="../share/class/ziplib.h" />
 		<Unit filename="../share/tools.cpp" />
 		<Unit filename="../share/tools.h" />
 		<Unit filename="class/setupfile.cpp" />
 		<Unit filename="class/setupfile.h" />
-		<Unit filename="class/ziplib.cpp" />
-		<Unit filename="class/ziplib.h" />
 		<Unit filename="init.cpp" />
 		<Unit filename="init.h" />
 		<Unit filename="install.h" />

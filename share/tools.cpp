@@ -1,3 +1,4 @@
+
 #include "tools.h"
 
 int WINAPI GetTempFolderName(char * lpPathName, char * lpPrefixString, int uUnique, char * lpTempFileName)
@@ -72,7 +73,7 @@ char * StripSlash(char * sFolder) {
 }
 
 char * StripName(char * sFolder) {
-  while ((strlen(sFolder) >0 )
+  while ((strlen(sFolder) > 0 )
          && (sFolder[strlen(sFolder)-1] != '\\')
          && (sFolder[strlen(sFolder)-1] != '/')) {sFolder[strlen(sFolder)-1] = 0;}
   return sFolder;
@@ -92,3 +93,4 @@ int MkDir(char * sFolder) {
   }
   return 0;
 }
+
