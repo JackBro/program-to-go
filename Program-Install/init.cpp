@@ -7,7 +7,7 @@
 SystemDefault_c * SysDef;
 language_c * language;
 button_c * CButton;
-char * tempFile;
+char * tempFile = NULL;
 char langzip[] = "lang.zip";
 char packzip[] = "pack.zip";
 char install[] = "install";
@@ -17,8 +17,8 @@ char lfile[MAX_PATH];
 
 controlcollections_c * controls;
 font_c * font;
-pages_c * pages;
-languagebox_c * langlist;
+pages_c * pages = NULL;
+languagebox_c * langlist = NULL;
 folderedit_c * destpath;
 char * defPfad;
 editbox_c * licensebox;
@@ -78,6 +78,7 @@ int init(HWND hwnd) {
 #endif
     app->seek(-sizeof(intsall_rec),FILE_END);
     app->readFile((char*)lang, sizeof(intsall_rec));
+    char * x = new char[25];
     if (lang->id == install_lang) {
       app->seek(-lang->aSize,FILE_END);
       file_c * f = new file_c;
@@ -140,6 +141,8 @@ int init(HWND hwnd) {
           memcpy(tempFile+strlen(tempFile),lizensetxt,strlen(lizensetxt)+1);
           zip->extractFile(lizens, tempFile);
           memcpy(lfile,tempFile,strlen(tempFile)+1);
+          lizens = new char[MAX_PATH];
+          memcpy(lizens,tempFile,strlen(tempFile)+1);
           tempFile[strlen(tempFile)-strlen(lizensetxt)] = 0;
         }
         zip->close();
@@ -193,7 +196,7 @@ int init(HWND hwnd) {
       pages->newPage();
       progresslabel = (staticlabel_c*)pages->addControl(
         controls->addControl(
-          new staticlabel_c(hwnd, "Progress", 9, 10, 10, 470, 65))); // Lang 10
+          new staticlabel_c(hwnd, "Progress", 10, 10, 10, 470, 65))); // Lang 10
       progressbar = (progress_c*)pages->addControl(
         controls->addControl(
           new progress_c(hwnd,  10, 80, 470, 24)));
@@ -209,7 +212,7 @@ int init(HWND hwnd) {
       pages->setCloseButton(
         (button_c*)controls->addControl(CButton));
 ////////////
-      SetTimer(hwnd,TIMER_START,10,NULL);
+      SetTimer(hwnd,TIMER_START,100,NULL);
     } else {
       Msg->setText("No Language Data found !");
     }
@@ -224,7 +227,7 @@ int init_second(HWND hwnd) {
   controls->setCurLanguage();
 ////////////
   if (strlen(lizens) > 0) {
-    licensebox->setText(lfile);
+//    licensebox->setText(lfile);
     file_c * f = new file_c;
     f->OpenReadFile(lfile);
     DWORD aSize = f->getSize();

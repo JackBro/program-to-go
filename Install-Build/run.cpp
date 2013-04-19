@@ -9,7 +9,8 @@ extern SystemDefault_c * SystemDefault;
 char zipfile[] = "temp.zip";
 char sourceFile[] = "\\Program-Install\\app\\Program-Install.exe\0";
 char sourceLang[] = "\\Program-Install\\app\\lang\\\0";
-char installxml[] = "\\setup\\install.xml\0";
+char installxmlpath[] = "\\setup\0";
+char installxml[] = "\\install.xml\0";
 #ifndef run
 char Ptg[] = "\\Programs-To-Go";
 #endif // run
@@ -81,7 +82,7 @@ int runIt(HWND wnd, int step) {
         if (LizensFile[strlen(LizensFile)-1] == '\\') {LizensFile[strlen(LizensFile)-1] = 0;}
         memcpy(LizensFile+strlen(LizensFile),lizensFile+strlen(LizensFile),strlen(lizensFile)-strlen(LizensFile)+1);
         if (FileExists(LizensFile)) {
-          memcpy(LizensFile,LizensFile+strlen(sourcePfad),strlen(LizensFile)-strlen(sourceFile)+2);
+          memcpy(LizensFile,LizensFile+strlen(sourcePfad),strlen(LizensFile)-strlen(sourcePfad)+2);
           if (LizensFile[0] == '\\') {memcpy(LizensFile,LizensFile+1,strlen(LizensFile)+1);}
           progressbar->setValue(2);
           SetTimer(wnd,TIMER_STEP2,250,NULL);
@@ -111,6 +112,8 @@ int runIt(HWND wnd, int step) {
     char * instxml = new char[MAX_PATH];
     memcpy(instxml,sourcePfad,strlen(sourcePfad)+1);
     if (instxml[strlen(instxml)-1] == '\\') {instxml[strlen(instxml)-1] = 0;}
+    memcpy(instxml+strlen(instxml),installxmlpath,strlen(installxmlpath)+1);
+    MkDir(instxml);
     memcpy(instxml+strlen(instxml),installxml,strlen(installxml)+1);
     doc->SaveFile(instxml);
     delete doc;
@@ -160,7 +163,7 @@ int runIt(HWND wnd, int step) {
     delete f;
     DeleteFile(tmpFolder);
     progressbar->setValue(5);
-    SetTimer(wnd,TIMER_STEP5,250,NULL);
+    SetTimer(wnd,TIMER_STEP5,1000,NULL);
   } else if (step == 5) {
 //////////
 // get Quell Exe
@@ -183,6 +186,7 @@ int runIt(HWND wnd, int step) {
 //////////
 // TmpFolder
 //////////
+//    MessageBox(0,SourceExe,"lang",0);
     ziplib_c * zip = new ziplib_c;
     zip->open(tmpFolder);
     zip->addFolder(SourceExe,"");
@@ -190,7 +194,7 @@ int runIt(HWND wnd, int step) {
     printf("PrgPath: %s\n",SystemDefault->PrgPath);
     printf("ExePath: %s\n",SourceExe);
     progressbar->setValue(6);
-    SetTimer(wnd,TIMER_STEP6,250,NULL);
+    SetTimer(wnd,TIMER_STEP6,1000,NULL);
   } else if (step == 6) {
     progresslabel->setLangId(13);
     file_c * f = new file_c;

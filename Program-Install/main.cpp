@@ -82,29 +82,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_DESTROY:
     {
-        DeleteFolder(StripSlash(tempFile));
+        if (tempFile != NULL) {
+          StripSlash(tempFile);
+          DeleteFolder(tempFile);
+        }
         PostQuitMessage(0);
         return 0;
     }
     case WM_COMMAND:
     {
-      if ((DWORD)lParam == (DWORD)langlist->Wnd) {
-        if (CBN_SELCHANGE == HIWORD(wParam)) {
-          delete language->setCurrentByLabel(langlist->getCurText());
-          controls->setCurLanguage();
-        }
-      } else if (lParam == (LPARAM)CButton->Wnd) {
+      if (lParam == (LPARAM)CButton->Wnd) {
         SendMessage(hwnd, WM_DESTROY, 0, 0);
-      } else if (Accept->event(hwnd, wParam, lParam)) {
-        return 0;
-      } else if (NoAccept->event(hwnd, wParam, lParam)) {
-        return 0;
-      } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
-        return 0;
-      } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
-        return 0;
+      } else if (pages != NULL) {
+        if ((DWORD)lParam == (DWORD)langlist->Wnd) {
+          if (CBN_SELCHANGE == HIWORD(wParam)) {
+            delete language->setCurrentByLabel(langlist->getCurText());
+            controls->setCurLanguage();
+          }
+//      } else if (lParam == (LPARAM)CButton->Wnd) {
+//        SendMessage(hwnd, WM_DESTROY, 0, 0);
+        } else if (Accept->event(hwnd, wParam, lParam)) {
+          return 0;
+        } else if (NoAccept->event(hwnd, wParam, lParam)) {
+          return 0;
+        } else if (pages->nextButton->event(hwnd, wParam, lParam)) {
+          return 0;
+        } else if (pages->prevButton->event(hwnd, wParam, lParam)) {
+          return 0;
+        }
       }
-
     }
    case WM_TIMER:{
      switch (wParam) {
