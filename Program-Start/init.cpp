@@ -12,14 +12,14 @@ char conf[] = "setup\\run.xml";
 
 int init() {
   systemdefault = new SystemDefault_c;
-  configfile = new char[strlen(systemdefault->ExePath)+strlen(conf)+1];
-  memcpy(configfile,systemdefault->ExePath,strlen(systemdefault->ExePath));
-  memcpy(configfile+strlen(systemdefault->ExePath),conf,strlen(conf));
-  configfile[strlen(systemdefault->ExePath)+strlen(conf)] = 0;
-#if Debug
-//  printf("%s\n%s\n%s\n%s\n",systemdefault->ExePath, configfile, systemdefault->Drive, systemdefault->TempPath);
-#endif
+  configfile = new char[MAX_PATH];
+  memcpy(configfile,systemdefault->PrgPath,strlen(systemdefault->PrgPath)+1);
+  memcpy(configfile+strlen(configfile),conf,strlen(conf)+1);
   runconfig = new runconfig_c(configfile);
+  if (strlen(runconfig->ExeFile) == 0) {
+    MessageBox(0,"Can not read \"setup/run.xml\"","Error",MB_ICONERROR);
+    return 1;
+  }
   exefile = new char[strlen(systemdefault->ExePath)+strlen(runconfig->ExeFile)+1];
   memcpy(exefile,systemdefault->ExePath,strlen(systemdefault->ExePath));
   memcpy(exefile+strlen(systemdefault->ExePath),runconfig->ExeFile,strlen(runconfig->ExeFile));

@@ -20,7 +20,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 {
 //////////////////////////////////////////////////////////////
   WNDCLASS wnd;
-  wnd.style = CS_HREDRAW | CS_VREDRAW; //we will explain this later
+  wnd.style = CS_HREDRAW | CS_VREDRAW;
   wnd.lpfnWndProc = WndProc;
   wnd.cbClsExtra = 0;
   wnd.cbWndExtra = 0;
@@ -57,7 +57,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   ShowWindow(hwnd, SW_HIDE);              //display the window on the SW_SHOW
 //////////////////////////////////////////////////////////////
   hInst=hInstance;
-  init();
+  if (init() == 1) return 1;
 //////////////////////////////////////////////////////////////
 // Prepare Layer if requeste
   bool CanStart = true;

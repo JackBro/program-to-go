@@ -8,10 +8,18 @@ runconfig_c::runconfig_c(char * fname):xmlfile_c()
   ExeFile[0] = 0;
   ExeLayers = new char[10];
   ExeLayers[0] = 0;
-  if (OpenReadXMLFile(fname)) {
-    loadConfig();
-    CloseXMLFile();
-  }  //ctor
+  doc = new tinyxml2::XMLDocument;
+  doc->LoadFile(fname);
+  tinyxml2::XMLNode * Node = doc->FirstChildElement("AppData");
+  if (Node != NULL) {
+    if (NULL != Node->FirstChildElement("ExeFile")) {
+      ExeFile = (char*)Node->FirstChildElement("ExeFile")->GetText();
+    }
+  }
+//  if (OpenReadXMLFile(fname)) {
+//    loadConfig();
+//    CloseXMLFile();
+//  }  //ctor
 }
 
 runconfig_c::~runconfig_c()

@@ -2,7 +2,7 @@
 #define RUNCONFIG_H
 
 #include "..\..\share\class\xmlfile.h"
-
+#include "..\..\libs\libxml2\tinyxml2.h"
 
 class runconfig_c : public xmlfile_c
 {
@@ -18,6 +18,7 @@ class runconfig_c : public xmlfile_c
       int loadAppData();
       int loadLayer();
     private:
+      tinyxml2::XMLDocument * doc;
 };
 
 #endif // RUNCONFIG_H
