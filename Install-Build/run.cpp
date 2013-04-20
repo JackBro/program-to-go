@@ -127,8 +127,11 @@ int runIt(HWND wnd, int step) {
 // TmpFolder
 //////////
     tmpFolder = new char[MAX_PATH];
-//    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
+#ifdef run
+    memcpy(tmpFolder,SystemDefault->TempPath,strlen(SystemDefault->TempPath)+1);
+#else
     tmpFolder[0] = '\\'; tmpFolder[1] = 0;
+#endif
     GetTempFolderName(tmpFolder,"IB",0,tmpFolder);
     int len = strlen(tmpFolder);
     memcpy(tmpFolder+len,zipfile,strlen(zipfile)+1);
