@@ -46,7 +46,12 @@ int setupfile_c::setLang(const char * aLang) {
 
 int setupfile_c::checkSave() {
   if (changed) {
-    if (!FileExists("config")) { CreateDirectory("config",NULL);}
+    char * dir = new char[MAX_PATH];
+    memcpy(dir,fName,strlen(fName)+1);
+    StripName(dir);
+    StripSlash(dir);
+    MkDir(dir);
+    delete[] dir;
     doc->SaveFile(fName);
   }
   return 0;
