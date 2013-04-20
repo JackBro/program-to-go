@@ -48,7 +48,7 @@ int runIt(HWND wnd, int step) {
       progressbar->setValue(cur);
       SetTimer(wnd,TIMER_STEP1,250,NULL);
     } else {
-      SetTimer(wnd,TIMER_STEP2,250,NULL);
+      SetTimer(wnd,TIMER_STEP2,1000,NULL);
     }
   } else if (step == 2) {
     zip->close();

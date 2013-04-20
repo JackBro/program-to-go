@@ -32,6 +32,7 @@ extern char * DestFolder;
 extern char * tempFile;
 extern staticlabel_c * progresslabel;
 extern progress_c * progressbar;
+extern char * tempFolder;
 
 int init(HWND hwnd);
 int init_second(HWND hwnd);

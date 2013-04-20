@@ -8,6 +8,8 @@ SystemDefault_c * SysDef;
 language_c * language;
 button_c * CButton;
 char * tempFile = NULL;
+char * tempFolder = NULL;
+
 char langzip[] = "lang.zip";
 char packzip[] = "pack.zip";
 char install[] = "install";
@@ -70,6 +72,8 @@ int init(HWND hwnd) {
   tempFile[1] = 0;
 #endif
   GetTempFolderName(tempFile,"INT",0,tempFile);
+  tempFolder = new char[MAX_PATH];
+  memcpy(tempFolder,tempFile,strlen(tempFile)+1);
   memcpy(tempFile+strlen(tempFile),langzip,strlen(langzip)+1);
 #ifdef run
   if (app->OpenReadFile(SysDef->ExeFile)) {

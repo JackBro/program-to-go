@@ -64,7 +64,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
-    return msg.wParam;
+    return 0;
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -82,9 +82,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_DESTROY:
     {
-        if (tempFile != NULL) {
-          StripSlash(tempFile);
-          DeleteFolder(tempFile);
+        if (tempFolder != NULL) {
+          StripSlash(tempFolder);
+          DeleteFolder(tempFolder);
         }
         PostQuitMessage(0);
         return 0;
@@ -92,7 +92,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
     {
       if (lParam == (LPARAM)CButton->Wnd) {
-        SendMessage(hwnd, WM_DESTROY, 0, 0);
+        pages = NULL;
+        SendMessage(hwnd, WM_CLOSE, 0, 0);
       } else if (pages != NULL) {
         if ((DWORD)lParam == (DWORD)langlist->Wnd) {
           if (CBN_SELCHANGE == HIWORD(wParam)) {
