@@ -2,12 +2,11 @@
 
 #include <stdio.h>
 
+
 runconfig_c::runconfig_c(char * fname):xmlfile_c()
 {
   ExeFile = new char[10];
   ExeFile[0] = 0;
-  ExeLayers = new char[10];
-  ExeLayers[0] = 0;
   doc = new tinyxml2::XMLDocument;
   doc->LoadFile(fname);
   tinyxml2::XMLNode * Node = doc->FirstChildElement("AppData");
@@ -16,10 +15,6 @@ runconfig_c::runconfig_c(char * fname):xmlfile_c()
       ExeFile = (char*)Node->FirstChildElement("ExeFile")->GetText();
     }
   }
-//  if (OpenReadXMLFile(fname)) {
-//    loadConfig();
-//    CloseXMLFile();
-//  }  //ctor
 }
 
 runconfig_c::~runconfig_c()
@@ -27,55 +22,39 @@ runconfig_c::~runconfig_c()
     //dtor
 }
 
-int runconfig_c::loadConfig() {
-  while (getXMLTag()) {
-    if (strcmp(TagName,"AppData") == 0) {
-      loadAppData();
-    } else {
-      printf("%s\n",TagName);
-    }
+
+char * runconfig_c::GetExeLayers() {
+  tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  char * temp = NULL;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("ExeLayer");
   }
-  return 0;
+  if (Node != NULL) {
+    temp = (char*)Node->GetText();
+  }
+  return temp;
 }
 
-int runconfig_c::loadAppData() {
-  while (getXMLTag()) {
-    if (strcmp(TagName,"/AppData") == 0) {
-      return 0;
-    } else if (strcmp(TagName,"ExeFile") == 0) {
-      delete ExeFile;
-      ExeFile = new char[strlen(TagString)+1];
-      memcpy(ExeFile,TagString,strlen(TagString));
-      ExeFile[strlen(TagString)] = 0;
-      getXMLTag();
-    } else if (strcmp(TagName,"Layer") == 0) {
-      loadLayer();
-    } else {
-      printf("%s\n",TagName);
-    }
+int runconfig_c::GetHiLayer() {
+  tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  int temp = 0;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("ExeLayer");
   }
-  return 0;
+  if (Node != NULL) {
+    temp = Node->IntAttribute("HiVersion");
+  }
+  return temp;
 }
 
-int runconfig_c::loadLayer() {
-  while (getXMLTag()) {
-    if (strcmp(TagName,"/Layer") == 0) {
-      return 0;
-    } else if (strcmp(TagName,"ExeLayer") == 0) {
-      delete ExeLayers;
-      ExeLayers = new char[strlen(TagString)+1];
-      memcpy(ExeLayers,TagString,strlen(TagString));
-      ExeLayers[strlen(TagString)] = 0;
-      getXMLTag();
-    } else if (strcmp(TagName,"HiVersion") == 0) {
-      HiLayer = TagIntger;
-      getXMLTag();
-    } else if (strcmp(TagName,"LoVersion") == 0) {
-      LoLayer = TagIntger;
-      getXMLTag();
-    } else {
-      printf("%s\n",TagName);
-    }
+int runconfig_c::GetLoLayer() {
+  tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  int temp = 0;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("ExeLayer");
   }
-  return 0;
+  if (Node != NULL) {
+    temp = Node->IntAttribute("LoVersion");
+  }
+  return temp;
 }

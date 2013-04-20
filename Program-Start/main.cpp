@@ -61,30 +61,28 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //////////////////////////////////////////////////////////////
 // Prepare Layer if requeste
   bool CanStart = true;
-  if ((strlen(runconfig->ExeLayers) > 0) &
-      ((systemdefault->HiVersion > runconfig->HiLayer) ||
-      ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
+  if ((strlen(runconfig->GetExeLayers()) > 0) &
+      ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
+      ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
     if (systemdefault->DriveRemovable()) {
-//      printf("I Need to Move\n");
       GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
       if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false;};
 // Ändern des Exefiles in das Tempdir
       delete exefile;
-      exefile = new char[strlen(TempFolder)+strlen(runconfig->ExeFile)+2];
-      sprintf(exefile,"%s%s\0",TempFolder,runconfig->ExeFile);
-      exefile[strlen(TempFolder)+strlen(runconfig->ExeFile)] = 0;
+      exefile = new char[MAX_PATH];
+      memcpy(exefile,TempFolder,strlen(TempFolder)+1);
+      memcpy(exefile+strlen(exefile),runconfig->ExeFile,strlen(runconfig->ExeFile)+1);
       for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
     }
-    layer = new layer_c(exefile,runconfig->ExeLayers);
+    layer = new layer_c(exefile,runconfig->GetExeLayers());
   }
 //////////////////////////////////////////////////////////////
-    STARTUPINFO info={sizeof(info)};
-    PROCESS_INFORMATION processInfo;
-printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+  STARTUPINFO info={sizeof(info)};
+  PROCESS_INFORMATION processInfo;
   if (CanStart) {
     CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
   }
-    DWORD lExitCode;
+  DWORD lExitCode;
   while (true) {
   //-- see if the task has terminated
     DWORD dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
@@ -98,9 +96,9 @@ printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
       //-- save the exit code
 //////////////////////////////////////////////////////////////
 // Remove Layer if requested
-  if ((strlen(runconfig->ExeLayers) > 0) &
-      ((systemdefault->HiVersion > runconfig->HiLayer) ||
-      ((systemdefault->HiVersion == runconfig->HiLayer) & (systemdefault->LoVersion > runconfig->LoLayer)))) {
+  if ((strlen(runconfig->GetExeLayers()) > 0) &
+      ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
+      ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
     if (systemdefault->DriveRemovable()) {
 //      printf("I Need to Move\n");
       DeleteFolder(TempFolder);

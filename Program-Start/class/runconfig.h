@@ -10,13 +10,10 @@ class runconfig_c : public xmlfile_c
         runconfig_c(char *);
         virtual ~runconfig_c();
         char * ExeFile;
-        char * ExeLayers;
-        int HiLayer;
-        int LoLayer;
+        char * GetExeLayers();
+        int GetHiLayer();
+        int GetLoLayer();
     protected:
-      int loadConfig();
-      int loadAppData();
-      int loadLayer();
     private:
       tinyxml2::XMLDocument * doc;
 };

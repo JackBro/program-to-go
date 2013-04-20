@@ -40,6 +40,8 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
+		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
+		<Unit filename="../libs/libxml2/tinyxml2.h" />
 		<Unit filename="../share/class/charcollection.cpp" />
 		<Unit filename="../share/class/charcollection.h" />
 		<Unit filename="../share/class/collection.cpp" />
