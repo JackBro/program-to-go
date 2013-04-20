@@ -15,6 +15,9 @@ layer_c * layer;
 char TempFolder[MAX_PATH];
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+bool TimerClose = false;
+bool AppClose = false;
+int mintime = 5000;
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int iCmdShow)
 {
@@ -45,7 +48,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   hwnd = CreateWindowEx(WS_EX_DLGMODALFRAME ,
                         TEXT("ProgrammStarter"),
                         TEXT("Programm Starter"),
-                        WS_VISIBLE | WS_SYSMENU | WS_CAPTION ,
+                        WS_SYSMENU | WS_CAPTION ,
                         (rc.right-400)/2,
                         (rc.bottom-300)/2,
                         400,
@@ -79,36 +82,46 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //////////////////////////////////////////////////////////////
   STARTUPINFO info={sizeof(info)};
   PROCESS_INFORMATION processInfo;
+  if (!FileExists(exefile)) {CanStart = false;}
   if (CanStart) {
     CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
   }
   DWORD lExitCode;
+  SetTimer(hwnd,TIMER_MIN,mintime, NULL);
   while (true) {
   //-- see if the task has terminated
-    DWORD dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
-    if (   (dwExitCode == WAIT_FAILED   ) || (dwExitCode == WAIT_OBJECT_0 ) || (dwExitCode == WAIT_ABANDONED) ) {
-      DWORD dwExitCode;
+    DWORD dwExitCode;
+    if (CanStart) {
+      dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
+    } else {
+      dwExitCode = WAIT_FAILED;
+    }
+    if (((dwExitCode == WAIT_FAILED   ) || (dwExitCode == WAIT_OBJECT_0 ) || (dwExitCode == WAIT_ABANDONED)) && CanStart ) {
       //-- get the process exit code
-      GetExitCodeProcess(processInfo.hProcess, &dwExitCode);
+      if (!CanStart) {
+        GetExitCodeProcess(processInfo.hProcess, &dwExitCode);
       //-- the task has ended so close the handle
-      CloseHandle(processInfo.hThread);
-      CloseHandle(processInfo.hProcess);
+        CloseHandle(processInfo.hThread);
+        CloseHandle(processInfo.hProcess);
+
       //-- save the exit code
 //////////////////////////////////////////////////////////////
 // Remove Layer if requested
-  if ((strlen(runconfig->GetExeLayers()) > 0) &
-      ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
-      ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
-    if (systemdefault->DriveRemovable()) {
+        if ((strlen(runconfig->GetExeLayers()) > 0) &
+          ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
+          ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
+          if (systemdefault->DriveRemovable()) {
 //      printf("I Need to Move\n");
-      DeleteFolder(TempFolder);
-    }
-    delete layer;
-  }
+            DeleteFolder(TempFolder);
+          }
+          delete layer;
+        }
+      }
 //////////////////////////////////////////////////////////////
       lExitCode = dwExitCode;
-      return 0;
+ //     SendMessage(hwnd,WM_CLOSE,0,0);
     } else {
+      if (!CanStart) SendMessage(hwnd,WM_CLOSE,0,0);
     //-- see if there are any message that need to be processed
       while (PeekMessage(&msg, 0, 0, 0, PM_NOREMOVE)) {
         if (msg.message == WM_QUIT) {
@@ -140,6 +153,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
       PostQuitMessage(0);
       return 0;
+    case WM_CLOSE : {
+      if (TimerClose) {
+        SendMessage(hwnd, WM_DESTROY, 0,0);
+      } else {
+        AppClose = true;
+      }
+      return 0;
+    }
+    case WM_TIMER : {
+      if (wParam == TIMER_MIN) {
+        KillTimer(hwnd,TIMER_MIN);
+        if (AppClose) {
+          SendMessage(hwnd, WM_DESTROY, 0,0);
+        } else {
+          TimerClose = true;
+        }
+      }
+      return 0;
+    }
 
     return TRUE;
 

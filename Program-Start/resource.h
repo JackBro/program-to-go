@@ -6,3 +6,5 @@
 
 #define ICON_MAIN 500
 
+#define TIMER_MIN 1
+
