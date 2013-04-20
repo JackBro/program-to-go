@@ -12,12 +12,14 @@
 
 HINSTANCE hInst;
 layer_c * layer;
-char TempFolder[MAX_PATH];
+char * TempFolder = NULL;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 bool TimerClose = false;
 bool AppClose = false;
 int mintime = 5000;
+
+bool hasStarted = false;
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int iCmdShow)
 {
@@ -62,14 +64,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   hInst=hInstance;
   if (init() == 1) return 1;
 //////////////////////////////////////////////////////////////
+  SetTimer(hwnd, TIMER_SPLASH_START, 1000, 0);
+//////////////////////////////////////////////////////////////
 // Prepare Layer if requeste
   bool CanStart = true;
+  STARTUPINFO info={sizeof(info)};
+  PROCESS_INFORMATION processInfo;
+  DWORD dwExitCode;
+  DWORD lExitCode;
+//////////////////////////////////////////////////////////////
   if ((strlen(runconfig->GetExeLayers()) > 0) &
       ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
       ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
     if (systemdefault->DriveRemovable()) {
+      TempFolder = new char[MAX_PATH];
       GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
-      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false;};
+//      GetTempFolderName("\\","PS",0,TempFolder);
+      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false; printf("error");};
 // Ändern des Exefiles in das Tempdir
       delete exefile;
       exefile = new char[MAX_PATH];
@@ -80,17 +91,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     layer = new layer_c(exefile,runconfig->GetExeLayers());
   }
 //////////////////////////////////////////////////////////////
-  STARTUPINFO info={sizeof(info)};
-  PROCESS_INFORMATION processInfo;
-  if (!FileExists(exefile)) {CanStart = false;}
-  if (CanStart) {
-    CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
-  }
-  DWORD lExitCode;
-  SetTimer(hwnd,TIMER_MIN,mintime, NULL);
   while (true) {
   //-- see if the task has terminated
-    DWORD dwExitCode;
+    if (!hasStarted) {
+      hasStarted = true;
+      if (!FileExists(exefile)) {CanStart = false;}
+      if (CanStart) {
+        CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
+      }
+      SetTimer(hwnd,TIMER_MIN,mintime, NULL);
+    }
     if (CanStart) {
       dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
     } else {
@@ -136,10 +146,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       }
     }
   }
-/*  while(GetMessage(&msg, NULL, 0, 0)) {
-    TranslateMessage(&msg);
-    DispatchMessage(&msg);
-  }*/
   return msg.wParam;
 }
 
@@ -151,6 +157,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
     }
     case WM_DESTROY:
+      if (TempFolder != NULL) {DeleteFolder(TempFolder);}
       PostQuitMessage(0);
       return 0;
     case WM_CLOSE : {
@@ -169,6 +176,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         } else {
           TimerClose = true;
         }
+      }
+      if (wParam == TIMER_SPLASH_START) {
+        KillTimer(hwnd,TIMER_SPLASH_START);
+        printf("Splash Start\n");
       }
       return 0;
     }

@@ -7,4 +7,5 @@
 #define ICON_MAIN 500
 
 #define TIMER_MIN 1
+#define TIMER_SPLASH_START 2
 
