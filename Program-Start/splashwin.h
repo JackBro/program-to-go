@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-HANDLE createSplash(HINSTANCE hInst);
+HANDLE createSplash(HINSTANCE hInst,char * fName);
 
 
 #endif // SPLASHWIN_H_INCLUDED

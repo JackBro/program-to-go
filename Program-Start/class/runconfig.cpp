@@ -58,3 +58,39 @@ int runconfig_c::GetLoLayer() {
   }
   return temp;
 }
+
+char * runconfig_c::getSplashName() {
+    tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  char * temp = NULL;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("Splash");
+  }
+  if (Node != NULL) {
+    temp = (char*)Node->GetText();
+  }
+  return temp;
+}
+
+int runconfig_c::getSplashDelay() {
+  tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  int temp = 500;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("Splash");
+  }
+  if (Node != NULL) {
+    temp = Node->IntAttribute("Delay");
+  }
+  return temp;
+}
+
+int runconfig_c::getSplashPost() {
+  tinyxml2::XMLElement * Node = doc->FirstChildElement("AppData");
+  int temp = 500;
+  if (Node != NULL) {
+    Node = Node->FirstChildElement("Splash");
+  }
+  if (Node != NULL) {
+    temp = Node->IntAttribute("Post");
+  }
+  return temp;
+}

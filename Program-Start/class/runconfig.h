@@ -13,6 +13,9 @@ class runconfig_c : public xmlfile_c
         char * GetExeLayers();
         int GetHiLayer();
         int GetLoLayer();
+        char * getSplashName();
+        int getSplashDelay();
+        int getSplashPost();
     protected:
     private:
       tinyxml2::XMLDocument * doc;

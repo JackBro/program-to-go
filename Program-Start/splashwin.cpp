@@ -6,7 +6,7 @@ LRESULT CALLBACK WndProcSplash(HWND, UINT, WPARAM, LPARAM);
 HBITMAP Picture;
 BITMAP qBITMAP;
 
-HANDLE createSplash(HINSTANCE hInst) {
+HANDLE createSplash(HINSTANCE hInst,char * fName) {
   WNDCLASS wnd;
   wnd.style = CS_HREDRAW | CS_VREDRAW;
   wnd.lpfnWndProc = WndProcSplash;
@@ -24,7 +24,7 @@ HANDLE createSplash(HINSTANCE hInst) {
   }
   HWND hwnd;
 
-  Picture = (HBITMAP)LoadImage(NULL,"setup/splash.bmp", IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+  Picture = (HBITMAP)LoadImage(NULL,fName, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   if (Picture == 0) return 0;
 
   int iRet = GetObject(reinterpret_cast<HGDIOBJ>(Picture), sizeof(BITMAP),reinterpret_cast<LPVOID>(&qBITMAP));

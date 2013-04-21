@@ -19,7 +19,7 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 bool TimerClose = false;
 bool AppClose = false;
 bool SplashClose = false;
-int mintime = 5000;
+int mintime = 0;
 HANDLE splashWin;
 
 bool hasStarted = false;
@@ -67,7 +67,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   hInst=hInstance;
   if (init() == 1) return 1;
 //////////////////////////////////////////////////////////////
-  SetTimer(hwnd, TIMER_SPLASH_START, 1000, 0);
+  SetTimer(hwnd, TIMER_SPLASH_START, runconfig->getSplashDelay(), 0);
 //////////////////////////////////////////////////////////////
 // Prepare Layer if requeste
   bool CanStart = true;
@@ -103,7 +103,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
       }
       SetTimer(hwnd,TIMER_MIN,mintime, NULL);
-      SetTimer(hwnd, TIMER_SPLASH_STOP, 3000, 0);
+      SetTimer(hwnd, TIMER_SPLASH_STOP, runconfig->getSplashPost(), 0);
     }
     if (CanStart) {
       dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
@@ -190,7 +190,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       if (wParam == TIMER_SPLASH_START) {
         KillTimer(hwnd,TIMER_SPLASH_START);
         if (!SplashClose) {
-          splashWin = createSplash(hInst);
+          char * fSplash = new char[MAX_PATH];
+          memcpy(fSplash, systemdefault->PrgPath, strlen(systemdefault->PrgPath)+1);
+          StripSlash(fSplash);
+          fSplash[strlen(fSplash)+1] = 0; fSplash[strlen(fSplash)] = '\\';
+          memcpy(fSplash+strlen(fSplash), runconfig->getSplashName(), strlen(runconfig->getSplashName())+1);
+          splashWin = createSplash(hInst, fSplash);
+          delete[] fSplash;
         }
       }
       return 0;
