@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- LanguageFile - Configfile V1.00 -->
+<LanguageData>
+  <Description>
+    <Label type="String">English</Label>
+	<Base type="String">9</Base>
+	<Id type="String">409</Id>
+  </Description>
+  <List>
+    <Entry>
+	  <Id type="Integer">1</Id>
+	  <Value type="String">Language:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">2</Id>
+	  <Value type="String">Back</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">3</Id>
+	  <Value type="String">Next</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">4</Id>
+	  <Value type="String">Finish</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">5</Id>
+	  <Value type="String">Select the Folder to create the package inside</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">Folder for the package:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">File to start:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">program;*.exe;Batchfile;*.bat;all;*.*;;</Value>
+	</Entry>Progress
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">Runs up:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Progress</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Check for Program-Starter.exe</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Program "..\Program-Start\app\Program-Start.exe" not found</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Check "File to start"</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">14</Id>
+	  <Value type="String">Program to start not found</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">15</Id>
+	  <Value type="String">Copy start-program</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">16</Id>
+	  <Value type="String">Can not copy start-program</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">17</Id>
+	  <Value type="String">Change Icon</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">18</Id>
+	  <Value type="String">Can not copy icon</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">19</Id>
+	  <Value type="String">Create "run.xml"</Value>
+	</Entry>
+  </List>
+</LanguageData>

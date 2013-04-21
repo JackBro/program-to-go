@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- LanguageFile - Configfile V1.00 -->
+<LanguageData>
+  <Description>
+    <Label type="String">Deutsch</Label>
+	<Base type="String">7</Base>
+	<Id type="String">407</Id>
+  </Description>
+  <List>
+    <Entry>
+	  <Id type="Integer">1</Id>
+	  <Value type="String">Sprache:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">2</Id>
+	  <Value type="String">Zur&uuml;ck</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">3</Id>
+	  <Value type="String">Weiter</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">4</Id>
+	  <Value type="String">Beenden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">5</Id>
+	  <Value type="String">Auswählen des Hauptverzeichnisses für das zu erstellende Paket</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">6</Id>
+	  <Value type="String">Verzeichnis des Paketes:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">7</Id>
+	  <Value type="String">Auzuführende Datei:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">8</Id>
+	  <Value type="String">Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">9</Id>
+	  <Value type="String">Lauffähig bis:</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">10</Id>
+	  <Value type="String">Fortschritt</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">11</Id>
+	  <Value type="String">Prüfe Programm-Starter.exe</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">12</Id>
+	  <Value type="String">Programm "..\Program-Start\app\Program-Start.exe" nicht gefunden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">13</Id>
+	  <Value type="String">Prüfe "Auzuführende Datei"</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">14</Id>
+	  <Value type="String">auszuführendes Programm nicht gefunden</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">15</Id>
+	  <Value type="String">Kopiere Startprogramm</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">16</Id>
+	  <Value type="String">Kopiere von Startprogramm nicht möglich</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">17</Id>
+	  <Value type="String">Anpassen vom Icon</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">18</Id>
+	  <Value type="String">Kopieren vom Icon fehlgeschlagen</Value>
+	</Entry>
+    <Entry>
+	  <Id type="Integer">19</Id>
+	  <Value type="String">Erzeugen von "run.xml"</Value>
+	</Entry>
+   </List>
+</LanguageData>
