@@ -18,6 +18,7 @@ char * TempFolder = NULL;
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 bool TimerClose = false;
 bool AppClose = false;
+bool SplashClose = false;
 int mintime = 5000;
 HANDLE splashWin;
 
@@ -102,6 +103,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
       }
       SetTimer(hwnd,TIMER_MIN,mintime, NULL);
+      SetTimer(hwnd, TIMER_SPLASH_STOP, 3000, 0);
     }
     if (CanStart) {
       dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
@@ -179,9 +181,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           TimerClose = true;
         }
       }
+      if (wParam == TIMER_SPLASH_STOP) {
+        KillTimer(hwnd,TIMER_SPLASH_STOP);
+        KillTimer(hwnd,TIMER_SPLASH_START);
+        SplashClose = true;
+        if (splashWin != 0) {SendMessage((HWND)splashWin,WM_CLOSE,0,0);}
+      }
       if (wParam == TIMER_SPLASH_START) {
         KillTimer(hwnd,TIMER_SPLASH_START);
-        splashWin = createSplash(hInst);
+        if (!SplashClose) {
+          splashWin = createSplash(hInst);
+        }
       }
       return 0;
     }

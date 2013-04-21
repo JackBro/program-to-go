@@ -70,6 +70,8 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="splashwin.cpp" />
+		<Unit filename="splashwin.h" />
 		<Unit filename="version.h" />
 		<Extensions>
 			<code_completion />
