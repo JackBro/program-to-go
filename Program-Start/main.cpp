@@ -9,6 +9,7 @@
 #include "init.h";
 #include "class\layer.h"
 #include "..\share\tools.h"
+#include "splashwin.h"
 
 HINSTANCE hInst;
 layer_c * layer;
@@ -18,6 +19,7 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 bool TimerClose = false;
 bool AppClose = false;
 int mintime = 5000;
+HANDLE splashWin;
 
 bool hasStarted = false;
 
@@ -179,7 +181,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       }
       if (wParam == TIMER_SPLASH_START) {
         KillTimer(hwnd,TIMER_SPLASH_START);
-        printf("Splash Start\n");
+        splashWin = createSplash(hInst);
       }
       return 0;
     }
