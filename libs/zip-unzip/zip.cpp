@@ -649,7 +649,7 @@ void GetNow(lutime_t *ft, WORD *dosdate, WORD *dostime)
 }
 
 DWORD GetFilePosZ(HANDLE hfout)
-{ struct stat st; fstat(fileno(hfout),&st); 
+{ struct stat st; fstat(fileno(hfout),&st);
   if ((st.st_mode&S_IFREG)==0) return 0xFFFFFFFF;
   return ftell(hfout);
 }
@@ -698,7 +698,7 @@ void filetime2dosdatetime(const FILETIME ft, WORD *dosdate,WORD *dostime)
 }
 
 lutime_t filetime2timet(const FILETIME ft)
-{ LONGLONG i = *(LONGLONG*)&ft; 
+{ LONGLONG i = *(LONGLONG*)&ft;
   return (lutime_t)((i-116444736000000000LL)/10000000LL);
 }
 
@@ -1313,7 +1313,7 @@ void send_all_trees(TState &state,int lcodes, int dcodes, int blcodes)
     for (rank = 0; rank < blcodes; rank++) {
         Trace("\nbl code %2d ", bl_order[rank]);
         send_bits(state,state.ts.bl_tree[bl_order[rank]].dl.len, 3);
-    }    
+    }
     Trace("\nbl tree: sent %ld", state.bs.bits_sent);
 
     send_tree(state,(ct_data *)state.ts.dyn_ltree, lcodes-1); /* send the literal tree */
@@ -1810,7 +1810,7 @@ int longest_match(TState &state,IPos cur_match)
                  scan < strend);
 
         Assert(state,scan <= state.ds.window+(unsigned)(state.ds.window_size-1), "wild scan");
-                          
+
         len = MAX_MATCH - (int)(strend - scan);
         scan = strend - MAX_MATCH;
 
@@ -2505,7 +2505,7 @@ bool TZip::oseek(unsigned int pos)
     return true;
   }
   else if (hfout!=0)
-  { 
+  {
 #ifdef ZIP_STD
     fseek(hfout,pos+ooffset,SEEK_SET);
 #else
@@ -2654,7 +2654,7 @@ unsigned TZip::read(char *buf, unsigned size)
 }
 
 ZRESULT TZip::iclose()
-{ 
+{
 #ifdef ZIP_STD
   if (selfclosehf && hfin!=0) fclose(hfin); hfin=0;
 #else
@@ -2674,7 +2674,7 @@ ZRESULT TZip::ideflate(TZipFileInfo *zfi)
   // stack breaks if we try to put it all on the stack. It will be deleted lazily
   state->err=0;
   state->readfunc=sread; state->flush_outbuf=sflush;
-  state->param=this; state->level=8; state->seekable=iseekable; state->err=NULL;
+  state->param=this; state->level=9; state->seekable=iseekable; state->err=NULL;
   // the following line will make ct_init realise it has to perform the init
   state->ts.static_dtree[0].dl.len = 0;
   // Thanks to Alvin77 for this crucial fix:

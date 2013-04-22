@@ -54,7 +54,7 @@ int init(HWND hwnd) {
   font->create();
   controls->setFont(font);
   pages = new pages_c;
-  printf("%s\n%s\n%s\n",SystemDefault->ExeFile,SystemDefault->ExePath,SystemDefault->PrgPath);
+//  printf("%s\n%s\n%s\n",SystemDefault->ExeFile,SystemDefault->ExePath,SystemDefault->PrgPath);
 ////////////
   pages->newPage();
   pages->addControl(
