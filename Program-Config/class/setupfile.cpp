@@ -1,23 +1,24 @@
 #include "setupfile.h"
 
-#if debug
 #include <stdio.h>
-#endif
 
 setupfile_c::setupfile_c(const char * aPfad, const char * aFile)
 {
   language = new char[24];
   language[0] = 0;
   changed = false;
+//  xml = new tinyxml2::XMLDocument;
+
   fName = new char[strlen(aPfad)+strlen(aFile)+1];
   memcpy(fName,aPfad,strlen(aPfad)+1);
   memcpy(fName+strlen(aPfad),aFile,strlen(aFile)+1);
-  load();
+//  load();
 }
 
 setupfile_c::~setupfile_c()
 {
    delete language;
+//   delete xml;
 }
 
 char * setupfile_c::getLang() {

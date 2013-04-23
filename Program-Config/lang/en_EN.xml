@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- LanguageFile - Configfile V1.00 -->
 <LanguageData>
   <Description>
@@ -26,6 +26,5 @@
 	<L17>Change Icon</L17>
 	<L18>Can not copy icon</L18>
 	<L19>Create "run.xml"</L19>
-	</Entry>
   </List>
 </LanguageData>

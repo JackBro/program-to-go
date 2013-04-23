@@ -3,28 +3,28 @@
 <LanguageData>
   <Description>
     <Label type="String">Deutsch</Label>
-	<Base type="String">7</Base>
-	<Id type="String">407</Id>
+    <Base type="String">7</Base>
+    <Id type="String">407</Id>
   </Description>
   <List>
     <L1>Sprache:</L1>
-	<L2>Zurück</L2>
-	<L3>Weiter</L3>
-	<L4>Beenden</L4>
-	<L5>Auswählen des Hauptverzeichnisses für das zu erstellende Paket</L5>
-	<L6>Verzeichnis des Paketes:</L6>
-	<L7>Auzuführende Datei:</L7>
-	<L8>Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</L8>
-	<L9>Lauffähig bis:</L9>
-	<L10>Fortschritt</L10>
-	<L11>Prüfe Programm-Starter.exe</L11>
-	<L12>Programm "Program-Start\app\Program-Start.exe" nicht gefunden</L12>
-	<L13>Prüfe "Auzuführende Datei"</L13>
-	<L14>auszuführendes Programm nicht gefunden</L14>
-	<L15>Kopiere Startprogramm</L15>
-	<L16>Kopiere von Startprogramm nicht möglich</L16>
-	<L17>Anpassen vom Icon</L17>
-	<L18>Kopieren vom Icon fehlgeschlagen</L18>
-	<L19>Erzeugen von "run.xml"</L19>
-   </List>
+    <L2>Zurück</L2>
+    <L3>Weiter</L3>
+    <L4>Beenden</L4>
+    <L5>Auswählen des Hauptverzeichnisses für das zu erstellende Paket</L5>
+    <L6>Verzeichnis des Paketes:</L6>
+    <L7>Auzuführende Datei:</L7>
+    <L8>Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</L8>
+    <L9>Lauffähig bis:</L9>
+    <L10>Fortschritt</L10>
+    <L11>Prüfe Programm-Starter.exe</L11>
+    <L12>Programm "Program-Start\app\Program-Start.exe" nicht gefunden</L12>
+    <L13>Prüfe "Auzuführende Datei"</L13>
+    <L14>auszuführendes Programm nicht gefunden</L14>
+    <L15>Kopiere Startprogramm</L15>
+    <L16>Kopiere von Startprogramm nicht möglich</L16>
+    <L17>Anpassen vom Icon</L17>
+    <L18>Kopieren vom Icon fehlgeschlagen</L18>
+    <L19>Erzeugen von "run.xml"</L19>
+  </List>
 </LanguageData>

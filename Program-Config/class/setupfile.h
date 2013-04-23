@@ -2,7 +2,7 @@
 #define SETUPFILE_H
 
 #include "..\..\share\class\xmlfile.h"
-
+//#include "..\..\libs\libxml2\tinyxml2.h"
 
 class setupfile_c : public xmlfile_c
 {
@@ -19,6 +19,7 @@ class setupfile_c : public xmlfile_c
     private:
       char * language;
       char * fName;
+//      tinyxml2::XMLDocument * xml;
 };
 
 #endif // SETUPFILE_H

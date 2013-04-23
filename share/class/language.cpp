@@ -7,22 +7,24 @@
 #include <Windows.h>
 #include <winnls.h>
 
+char lang[] = "lang\\";
+char filter[] = "*.xml";
+
 language_c::language_c(char * setupLang, SystemDefault_c * SystemDefault) : collection_c() {
   current = -1;
   langDir = new char[MAX_PATH];
-  strcpy(langDir,SystemDefault->PrgPath);
-  strcat(langDir,"lang\\");
+  memcpy(langDir,SystemDefault->PrgPath,strlen(SystemDefault->PrgPath)+1);
+  memcpy(langDir+strlen(langDir),lang,strlen(lang)+1);
   char * SerPath = new char[MAX_PATH];
-  strcpy(SerPath,langDir);
-  strcat(SerPath,"*.xml");
+  memcpy(SerPath,langDir,strlen(langDir)+1);
+  memcpy(SerPath+strlen(SerPath),filter, strlen(filter)+1);
   WIN32_FIND_DATA FindFileData;
   HANDLE hFind;
   hFind = FindFirstFile(SerPath, &FindFileData);
   if (hFind != INVALID_HANDLE_VALUE) {
-    LoadLanguageFile(FindFileData.cFileName);
-    while (FindNextFile(hFind,&FindFileData )) {
+    do {
       LoadLanguageFile(FindFileData.cFileName);
-    }
+    } while (FindNextFile(hFind,&FindFileData ));
     FindClose(hFind);
   }
   delete[] SerPath;

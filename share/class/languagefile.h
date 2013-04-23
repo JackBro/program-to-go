@@ -13,8 +13,11 @@ class languagefile_c
         char * getBase();
         char * getId();
         char * getText(int id);
-
     protected:
+        tinyxml2::XMLElement * getLanguage();
+        tinyxml2::XMLElement * getList();
+        tinyxml2::XMLElement * getDescription();
+        tinyxml2::XMLElement * getLangItem(int id);
     private:
        char * Name;
        tinyxml2::XMLDocument * doc;
