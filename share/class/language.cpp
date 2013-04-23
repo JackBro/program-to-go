@@ -129,13 +129,15 @@ int language_c::hexToInt(const char * hex) {
   int value = 0;
   int a;
   char HexStr[] = "0123456789ABCDEFabcdef";
-  for (int i=0; i<(int)strlen(hex); i++){
-    a = 0;
-    while ((HexStr[a] != hex[i]) & (a < 26)) {
-      a = a + 1;
+  if (hex != NULL) {
+    for (int i=0; i<(int)strlen(hex); i++){
+      a = 0;
+      while ((HexStr[a] != hex[i]) & (a < 26)) {
+        a = a + 1;
+      }
+      if (a>16) {a=a-6;}
+      value = value * 16+a;
     }
-    if (a>16) {a=a-6;}
-    value = value * 16+a;
   }
   return value;
 }

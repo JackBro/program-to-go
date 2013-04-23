@@ -4,62 +4,45 @@
 
 setupfile_c::setupfile_c(const char * aPfad, const char * aFile)
 {
-  language = new char[24];
-  language[0] = 0;
   changed = false;
-//  xml = new tinyxml2::XMLDocument;
-
-  fName = new char[strlen(aPfad)+strlen(aFile)+1];
+  xml = new tinyxml2::XMLDocument;
+  fName = new char[MAX_PATH];
   memcpy(fName,aPfad,strlen(aPfad)+1);
-  memcpy(fName+strlen(aPfad),aFile,strlen(aFile)+1);
-//  load();
+  memcpy(fName+strlen(fName),aFile,strlen(aFile)+1);
+  xml->LoadFile(fName);
 }
 
 setupfile_c::~setupfile_c()
 {
-   delete language;
-//   delete xml;
+   delete xml;
 }
 
 char * setupfile_c::getLang() {
-  return language;
-}
-
-int setupfile_c::load() {
-  if (OpenReadXMLFile(fName)) {
-    while (getXMLTag()) {
-      if (strcmp(TagName,"Config") == 0) {
-        loadConfig();
-      } else if (strcmp(TagName,"/Config") == 0) {
-        CloseXMLFile();
-        return 0;
-      }
-    }
-    CloseXMLFile();
+  tinyxml2::XMLElement * data = xml->FirstChildElement("Config");
+  char * ret = NULL;
+  if (data != NULL) {
+    data = data->FirstChildElement("Language");
   }
-  return 0;
-}
-
-int setupfile_c::loadConfig() {
-  while (getXMLTag()) {
-    if (strcmp(TagName,"Language") == 0) {
-      int len = strlen(TagString);
-      if (len > 4) {
-        len = 4;
-      }
-      memcpy(language,TagString,len);
-      language[len] = 0;
-      getXMLTag();
-    } else if (strcmp(TagName,"/Config") == 0) {
-      return 0;
-    }
+  if (data != NULL) {
+    ret = (char *)data->GetText();
   }
-  return 0;
+  return ret;
 }
 
 int setupfile_c::setLang(const char * aLang) {
-  if (strcmp(language,aLang) != 0) {
-    memcpy(language,aLang,strlen(aLang)+1);
+  if ((getLang() == NULL) || (strcmp(getLang(),aLang) != 0)) {
+    tinyxml2::XMLElement * data = xml->FirstChildElement("Config");
+    if (data == NULL) {
+      data = xml->NewElement("Config");
+      xml->InsertEndChild(data);
+    }
+    data = data->FirstChildElement("Language");
+    if (data == NULL) {
+      data = xml->FirstChildElement("Config");
+      data->InsertEndChild(xml->NewElement("Language"));
+      data = xml->FirstChildElement("Config")->FirstChildElement("Language");
+    }
+    if (aLang != NULL) data->InsertEndChild(xml->NewText(aLang));
     changed = true;
   }
   return 0;
@@ -67,13 +50,7 @@ int setupfile_c::setLang(const char * aLang) {
 
 int setupfile_c::checkSave() {
   if (changed) {
-    if (OpenWriteXMLFile(fName)) {
-      char OpenConfig[] = "Config";
-      OpenXMLGroup(OpenConfig);
-      char Lang[] = "Language";
-      WriteStringXML(Lang,language);
-      CloseWriteXMLFile();
-    }
+    xml->SaveFile(fName);
   }
   return 0;
 }
