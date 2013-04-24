@@ -8,6 +8,7 @@ char * runPrg;
 
 char StarterPfad[] = "Program-Start\\app\\Program-Start.exe";
 char setupPfad[] = "setup\\run.xml";
+char appPfad[] = "\\app\\";
 
 int runIt(HWND wnd, int step) {
   if (step == 0) {
@@ -76,43 +77,26 @@ int runIt(HWND wnd, int step) {
     delete runPrg;
   } else if (step == 4){
     progresslabel->setLangId(19);
-    char * setupFile = new char [strlen(prgExefile)+25];
-    memcpy(setupFile, prgExefile, strlen(prgExefile));
-    setupFile[strlen(prgExefile)] = 0;
-    while ((strlen(setupFile)>0) && (setupFile[strlen(setupFile)-1] != '\\')) {setupFile[strlen(setupFile)-1] = 0;}
-    setupFile[strlen(setupFile)-1] = 0;
-    while ((strlen(setupFile)>0) && (setupFile[strlen(setupFile)-1] != '\\')) {setupFile[strlen(setupFile)-1] = 0;}
+    char * setupFile = new char[MAX_PATH];
+    memcpy(setupFile,prgExefile, strlen(prgExefile)+1);
+    StripName(setupFile);
+    StripSlash(setupFile);
+    StripName(setupFile);
     memcpy(setupFile+strlen(setupFile),setupPfad,strlen(setupPfad)+1);
+    runxml_c * rxml = new runxml_c(setupFile);
     int len = strlen(prgExefile);
-    while ((len>0) && (prgExefile[len-1] != '\\')) {len = len-1;}
-    len = len - 1;
-    while ((len>0) && (prgExefile[len-1] != '\\')) {len = len-1;}
-    xmlfile_c * runxml = new xmlfile_c;
-    if (runxml->OpenWriteXMLFile(setupFile)) {
-      runxml->OpenXMLGroup("AppData");
-      runxml->WriteStringXML("ExeFile",prgExefile+len);
-      if (layer > 0) {
-        runxml->OpenXMLGroup("Layer");
-        if (layer == 1) {
-          runxml->WriteStringXML("ExeLayer","WINXPSP3");
-          runxml->WriteIntergerXML("HiVersion",5);
-          runxml->WriteIntergerXML("LoVersion",1);
-        }
-        if (layer == 2) {
-          runxml->WriteStringXML("ExeLayer","VISTASP2");
-          runxml->WriteIntergerXML("HiVersion",6);
-          runxml->WriteIntergerXML("LoVersion",0);
-        }
-        if (layer == 3) {
-          runxml->WriteStringXML("ExeLayer","WIN7RTM");
-          runxml->WriteIntergerXML("HiVersion",6);
-          runxml->WriteIntergerXML("LoVersion",1);
-        }
-      }
-      runxml->CloseWriteXMLFile();
-    } else {
-
+    char * xmlexe = new char[MAX_PATH];
+    memcpy(xmlexe, prgExefile+strlen(prgPfad)+strlen(appPfad), strlen(prgExefile)+1);
+    if (strlen(prgExefile)<= (strlen(prgPfad)+strlen(appPfad))) xmlexe[0] = 0;
+    rxml->setExeFile(xmlexe);
+    delete[] xmlexe;
+    if (layer > 0) {
+      if (layer == 1) rxml->setLayer("WINXPSP3", 5, 1);
+      if (layer == 2) rxml->setLayer("VISTASP2", 6, 0);
+      if (layer == 3) rxml->setLayer("WIN7RTM", 6, 1);
     }
+    rxml->save();
+
     printf("Next: %s\n\n",prgExefile+len);
     printf("Next: %s\n\n",prgExefile);
     delete setupFile;

@@ -8,6 +8,7 @@
 #include "..\share\tools.h"
 #include "resource.h"
 #include "icon.h"
+#include "class\runxml.h"
 
 extern pages_c * pages;
 extern progress_c * progressbar;
