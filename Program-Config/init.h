@@ -26,6 +26,7 @@ extern language_c * language;
 extern folderedit_c * installpath;
 extern SystemDefault_c * SystemDefault;
 extern fileedit_c * runfile;
+extern fileedit_c * splashfile;
 extern progress_c * progressbar;
 extern staticlabel_c * progresslabel;
 extern char * prgPfad;

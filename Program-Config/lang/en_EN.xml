@@ -25,6 +25,10 @@
     <L16>Can not copy start-program</L16>
     <L17>Change Icon</L17>
     <L18>Can not copy icon</L18>
-    <L19>Create "run.xml"</L19>
+    <L19>Create "run.xml"</L19
+    <L20>Select Splashscreen:</L20>
+    <L21>picture;*.bmp;all;*.*;;</L21>
+    <L22>Waittime (ms):</L22>
+    <L23>Hold after start (ms):</L23>
   </List>
 </LanguageData>

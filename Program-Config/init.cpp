@@ -11,6 +11,7 @@ pages_c * pages;
 languagebox_c * langlist;
 folderedit_c * installpath;
 fileedit_c * runfile;
+fileedit_c * splashfile;
 dropdownlist_c * version;
 staticlabel_c * progresslabel;
 progress_c * progressbar;
@@ -27,7 +28,7 @@ char * getPfad() {
 
 int * nextButtonClicked() {
   pages->nextPage();
-  if (pages->getPage() == 2) {
+  if (pages->getPage() == 3) {
     prgPfad = installpath->getText();
     prgExefile = runfile->getText();
     layer = version->getCurSel();
@@ -87,6 +88,20 @@ int init(HWND hwnd) {
   version->addEntry("Windows XP");
   version->addEntry("Windows Vista");
   version->addEntry("Windows 7");
+////////////
+  pages->newPage();
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Splashscreenfile:", 20, 10, 10, 200, 24)));
+  splashfile = (fileedit_c*)pages->addControl(
+    controls->addControl(
+      new fileedit_c(hwnd, ICON_FILE, 21, 10, 35, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Wait:", 22, 10, 75, 200, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Hold:", 23, 10, 140, 200, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(

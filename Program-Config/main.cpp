@@ -76,7 +76,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
      PostQuitMessage(0);
      return 0;}
    case WM_COMMAND: {
-      if (installpath->event(hwnd, wParam, lParam)) {
+      if (splashfile->event(hwnd, wParam, lParam)) {
+        return 0;
+      } else if (installpath->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (runfile->event(hwnd, wParam, lParam)) {
         return 0;
