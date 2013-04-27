@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include <windows.h>
+#include "language.h"
 
 class menu_c
 {
@@ -9,10 +10,12 @@ class menu_c
         menu_c();
         virtual ~menu_c();
         int setMenu(HWND wnd);
-        int Append(int ID, char * label);
+        int Append(int ID,int lang, char * label);
+        int setLanguage(language_c * lang);
     protected:
     private:
       HMENU m;
+      HWND wnd;
 };
 
 #endif // MENU_H

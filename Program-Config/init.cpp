@@ -133,7 +133,7 @@ int init(HWND hwnd) {
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
 ////////////
   menu = new menu_c;
-  menu->Append(1,"&File");
+  menu->Append(1, 24,"&File");
   menu->setMenu(hwnd);
 ////////////
   langlist->setLangList();

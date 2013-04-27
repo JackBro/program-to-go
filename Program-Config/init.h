@@ -36,6 +36,7 @@ extern char * prgExefile;
 extern int layer;
 extern numedit_c * delay;
 extern numedit_c * hold;
+extern menu_c * menu;
 
 
 int init(HWND hwnd);

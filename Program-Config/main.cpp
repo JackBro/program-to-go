@@ -93,6 +93,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           delete language->setCurrentByLabel(langlist->getCurText());
           setup->setLang(language->getCurLang());
           controls->setCurLanguage();
+          menu->setLanguage(language);
         }
       }
     }
@@ -104,6 +105,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         installpath->setText(SystemDefault->PrgPath);
         delay->setInteger(2000);
         hold->setInteger(1000);
+        menu->setLanguage(language);
         return 0;
       }
       case TIMER_STEP1: {
