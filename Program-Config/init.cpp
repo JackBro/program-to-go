@@ -133,7 +133,11 @@ int init(HWND hwnd) {
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
 ////////////
   menu = new menu_c;
-  menu->Append(1, 24,"&File");
+  menu_c * submenu = new menu_c;
+  submenu->Append(1, 25, "Load");
+  submenu->Append(2, 26, "Save");
+  submenu->Append(3, 27, "Save as");
+  menu->AppendMenu(4, 24, "File", submenu);
   menu->setMenu(hwnd);
 ////////////
   langlist->setLangList();
