@@ -33,6 +33,9 @@ extern staticlabel_c * progresslabel;
 extern char * prgPfad;
 extern char * prgExefile;
 extern int layer;
+extern numedit_c * delay;
+extern numedit_c * hold;
+
 
 int init(HWND hwnd);
 

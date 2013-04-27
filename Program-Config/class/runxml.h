@@ -9,6 +9,7 @@ class runxml_c
         runxml_c(char * fName);
         virtual ~runxml_c();
         int setExeFile(char * ExeFile);
+        int setSplashFile(char * File, int delay, int hold);
         int setLayer(char * Layer, int hVersion, int lVersion);
         int save();
     protected:

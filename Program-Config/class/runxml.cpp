@@ -48,6 +48,24 @@ int runxml_c::setLayer(char * Layer, int hVersion, int lVersion) {
   return 0;
 }
 
+int runxml_c::setSplashFile(char * File, int delay, int hold) {
+  tinyxml2::XMLElement * data = xml->FirstChildElement("AppData");
+  if (data == NULL) {
+    xml->InsertEndChild(xml->NewElement("AppData"));
+    data = xml->FirstChildElement("AppData");
+  }
+  data = data->FirstChildElement("Splash");
+  if (data == NULL) {
+    data = xml->FirstChildElement("AppData");
+    data->InsertEndChild(xml->NewElement("Splash"));
+    data = data->FirstChildElement("Splash");
+  }
+  data->InsertEndChild(xml->NewText(File));
+  data->SetAttribute("Delay", delay);
+  data->SetAttribute("Post", hold);
+  return 0;
+}
+
 int runxml_c::save() {
   xml->SaveFile(aName);
   return 0;

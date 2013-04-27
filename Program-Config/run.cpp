@@ -95,6 +95,13 @@ int runIt(HWND wnd, int step) {
       if (layer == 2) rxml->setLayer("VISTASP2", 6, 0);
       if (layer == 3) rxml->setLayer("WIN7RTM", 6, 1);
     }
+    printf("Bild %s\n",splashfile->getText());
+    char * splashbmp = new char[MAX_PATH];
+    memcpy(splashbmp, splashfile->getText(), strlen(splashfile->getText())+1);
+    memcpy(splashbmp, splashbmp+strlen(prgPfad), strlen(splashbmp)+1);
+    if (strlen(prgExefile)<= strlen(prgPfad)) splashbmp[0] = 0;
+    rxml->setSplashFile(splashbmp, delay->getInteger(), hold->getInteger());
+    delete[] splashbmp;
     rxml->save();
 
     printf("Next: %s\n\n",prgExefile+len);

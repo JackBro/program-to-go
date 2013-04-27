@@ -9,6 +9,8 @@ class numedit_c : public initcontrols_c
     public:
         numedit_c(HWND hWnd, int left, int top, int width, int height);
         virtual ~numedit_c();
+        int setInteger(int value);
+        int getInteger();
     protected:
     private:
 };

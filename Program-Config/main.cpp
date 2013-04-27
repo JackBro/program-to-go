@@ -102,6 +102,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       case TIMER_START: {
         KillTimer(hwnd,TIMER_START);
         installpath->setText(SystemDefault->PrgPath);
+        delay->setInteger(2000);
+        hold->setInteger(1000);
         return 0;
       }
       case TIMER_STEP1: {
