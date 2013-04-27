@@ -17,6 +17,7 @@ staticlabel_c * progresslabel;
 progress_c * progressbar;
 numedit_c * delay;
 numedit_c * hold;
+menu_c * menu;
 char * prgPfad;
 char * prgExefile;
 int layer;
@@ -130,6 +131,10 @@ int init(HWND hwnd) {
   pages->setCloseButton(
     (button_c*)controls->addControl(
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
+////////////
+  menu = new menu_c;
+  menu->Append(1,"&File");
+  menu->setMenu(hwnd);
 ////////////
   langlist->setLangList();
   controls->setCurLanguage();

@@ -13,6 +13,7 @@
 #include "..\share\class\languagebox.h"
 #include "..\share\class\dropdownlist.h"
 #include "..\share\class\progress.h"
+#include "..\share\class\menu.h"
 #include "class/setupfile.h"
 #include "resource.h"
 

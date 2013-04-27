@@ -75,6 +75,8 @@
 		<Unit filename="../share/class/languagebox.h" />
 		<Unit filename="../share/class/languagefile.cpp" />
 		<Unit filename="../share/class/languagefile.h" />
+		<Unit filename="../share/class/menu.cpp" />
+		<Unit filename="../share/class/menu.h" />
 		<Unit filename="../share/class/numedit.cpp" />
 		<Unit filename="../share/class/numedit.h" />
 		<Unit filename="../share/class/page.cpp" />
