@@ -9,6 +9,7 @@
 #include "..\share\class\buttonIcon.h"
 #include "..\share\class\folderedit.h"
 #include "..\share\class\fileedit.h"
+#include "..\share\class\numedit.h"
 #include "..\share\class\languagebox.h"
 #include "..\share\class\dropdownlist.h"
 #include "..\share\class\progress.h"

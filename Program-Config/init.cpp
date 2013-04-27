@@ -15,6 +15,8 @@ fileedit_c * splashfile;
 dropdownlist_c * version;
 staticlabel_c * progresslabel;
 progress_c * progressbar;
+numedit_c * delay;
+numedit_c * hold;
 char * prgPfad;
 char * prgExefile;
 int layer;
@@ -98,11 +100,17 @@ int init(HWND hwnd) {
       new fileedit_c(hwnd, ICON_FILE, 21, 10, 35, 370, 24)));
   pages->addControl(
     controls->addControl(
-       new staticlabel_c(hwnd, "Wait:", 22, 10, 75, 200, 24)));
+       new staticlabel_c(hwnd, "Wait:", 22, 10, 75, 370, 24)));
+  delay = (numedit_c*)pages->addControl(
+    controls->addControl(
+       new numedit_c(hwnd, 10, 100, 370, 24)));
   pages->addControl(
     controls->addControl(
-       new staticlabel_c(hwnd, "Hold:", 23, 10, 140, 200, 24)));
-////////////
+       new staticlabel_c(hwnd, "Hold:", 23, 10, 140, 370, 24)));
+  hold = (numedit_c*)pages->addControl(
+    controls->addControl(
+       new numedit_c(hwnd, 10, 165, 370, 24)));
+ ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(
     controls->addControl(
