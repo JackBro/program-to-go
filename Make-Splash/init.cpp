@@ -5,21 +5,17 @@ HWND hwnd;
 pages_c * pages;
 controlcollections_c * controls;
 setupfile_c * setup;
+staticlabel_c * progresslabel;
 
 int * nextButtonClicked() {
-  MessageBox(0,"Next","Info",0);
   pages->nextPage();
-/*  if (pages->getPage() == 3) {
-    prgPfad = installpath->getText();
-    prgExefile = runfile->getText();
-    layer = version->getCurSel();
-    runIt(Wnd ,0);
-  }*/
+  if (pages->getPage() == 2) {
+    runIt(hwnd ,0);
+  }
   return 0;
 }
 
 int * prevButtonClicked() {
-  MessageBox(0,"Prev","Info",0);
   pages->prevPage();
   return 0;
 }
@@ -52,6 +48,15 @@ int init(HWND wnd) {
     controls->addControl(
        new languagebox_c(hwnd, 10, 35, 370, 12)));
 ////////////
+  pages->newPage();
+////////////
+  pages->newPage();
+  progresslabel = (staticlabel_c*)pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Progress", 10, 10, 10, 370, 65)));
+  progress_c * progressbar = (progress_c*)pages->addControl(
+    controls->addControl(
+      new progress_c(hwnd, 10, 80, 370, 24)));
 ////////////
   pages->setPrevButton(
     (button_c*)controls->addControl(

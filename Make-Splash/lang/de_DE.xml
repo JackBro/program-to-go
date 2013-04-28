@@ -9,7 +9,8 @@
     <L2>Zurück</L2>
     <L3>Weiter</L3>
     <L4>Beenden</L4>
-    <L5>Auswählen des Hauptverzeichnisses für das zu erstellende Paket</L5>
+    <L5>Laden des leeren Bildes</L5>
+
     <L6>Verzeichnis des Paketes:</L6>
     <L7>Auzuführende Datei:</L7>
     <L8>Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</L8>

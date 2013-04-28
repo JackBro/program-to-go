@@ -9,7 +9,8 @@
     <L2>Back</L2>
     <L3>Next</L3>
     <L4>Finish</L4>
-    <L5>Select the Folder to create the package inside</L5>
+    <L5>Load empty picture</L5>
+
     <L6>Folder for the package:</L6>
     <L7>File to start:</L7>
     <L8>program;*.exe;Batchfile;*.bat;all;*.*;;</L8>
