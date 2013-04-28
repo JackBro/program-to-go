@@ -1,4 +1,3 @@
-<!-- LanguageFile - Configfile V1.00 -->
 <LanguageData>
   <Description>
     <Label type="String">Deutsch</Label>
@@ -34,5 +33,6 @@
     <L26>Speichern</L26>
     <L27>Speichern unter</L27>
     <L28>Konfigdaten (*.conf);*.conf;Alle Dateien (*.*);*.*;;</L28>
+    <L29>Fertig</L29>
   </List>
 </LanguageData>

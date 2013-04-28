@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- LanguageFile - Configfile V1.00 -->
 <LanguageData>
   <Description>
     <Label type="String">English</Label>
-	<Base type="String">9</Base>
-	<Id type="String">409</Id>
+    <Base type="String">9</Base>
+    <Id type="String">409</Id>
   </Description>
   <List>
     <L1>Language:</L1>
@@ -25,7 +23,7 @@
     <L16>Can not copy start-program</L16>
     <L17>Change Icon</L17>
     <L18>Can not copy icon</L18>
-    <L19>Create "run.xml"</L19
+    <L19>Create "run.xml"</L19>
     <L20>Select Splashscreen:</L20>
     <L21>picture;*.bmp;all;*.*;;</L21>
     <L22>Waittime (ms):</L22>
@@ -35,5 +33,6 @@
     <L26>Save</L26>
     <L27>Save As</L27>
     <L28>Config data (*.conf);*.conf;All files (*.*);*.*;;</L28>
+    <L29>Finish</L29>
   </List>
 </LanguageData>

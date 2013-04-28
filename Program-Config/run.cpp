@@ -103,11 +103,10 @@ int runIt(HWND wnd, int step) {
     rxml->setSplashFile(splashbmp, delay->getInteger(), hold->getInteger());
     delete[] splashbmp;
     rxml->save();
-
-    printf("Next: %s\n\n",prgExefile+len);
-    printf("Next: %s\n\n",prgExefile);
     delete setupFile;
-      pages->enableButtons();
+    progresslabel->setLangId(29);
+    progressbar->setValue(5);
+    pages->enableButtons();
   }
   return 0;
 }
