@@ -74,7 +74,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
    case WM_DESTROY: {
      setup->checkSave();
      PostQuitMessage(0);
-     PostQuitMessage(0);
      return 0;}
    case WM_COMMAND: {
       if (wParam == MENU_SAVE) {

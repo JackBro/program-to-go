@@ -4,6 +4,7 @@
 
 #include "resource.h"
 #include "init.h"
+#include "timer.h"
 
 HINSTANCE hInst;
 
@@ -70,6 +71,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_INITDIALOG:{
     }
     case WM_DESTROY: {
+      setup->checkSave();
       PostQuitMessage(0);
       return 0;
     }
@@ -78,6 +80,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       return TRUE;
     }
     case WM_TIMER:{
+      callTimer(hwnd, wParam);
       return 0;
     }
   }

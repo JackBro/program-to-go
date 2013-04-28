@@ -78,6 +78,8 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="timer.cpp" />
+		<Unit filename="timer.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

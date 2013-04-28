@@ -4,6 +4,7 @@ HWND hwnd;
 
 pages_c * pages;
 controlcollections_c * controls;
+setupfile_c * setup;
 
 int * nextButtonClicked() {
   MessageBox(0,"Next","Info",0);
@@ -23,11 +24,16 @@ int * prevButtonClicked() {
   return 0;
 }
 
+int * finishButtonClicked() {
+  SendMessage(hwnd,WM_DESTROY,0,0);
+  return 0;
+}
+
 
 int init(HWND wnd) {
   hwnd = wnd;
   SystemDefault_c * SystemDefault = new SystemDefault_c;
-  setupfile_c * setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
+  setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
   language_c * language = new language_c(setup->getLang(), SystemDefault);
   setup->setLang(language->getCurLang());
   controls = new controlcollections_c;
@@ -58,7 +64,21 @@ int init(HWND wnd) {
   pages->setCloseButton(
     (button_c*)controls->addControl(
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
+  pages->closeButton->onClick = finishButtonClicked;
 ////////////
+  langlist->setLangList();
+  controls->setCurLanguage();
+////////////
+  if (setup->changed) {
+    pages->setPage(0);
+  } else {
+    pages->setPage(1);
+  }
+  SetTimer(hwnd,TIMER_START,10,NULL);
+  return 0;
+}
+
+int init2(HWND wnd) {
 
   return 0;
 }

@@ -86,7 +86,7 @@ tinyxml2::XMLElement * languagefile_c::getLangItem(int id) {
   tinyxml2::XMLElement * data = getList();
   if (data != NULL) {
     char * _id = new char[15];
-    snprintf(_id,15,"L%d\0",id);
+    snprintf(_id,15,"L%d",id);
     ret = data->FirstChildElement(_id);
     delete[] _id;
   }

@@ -1,0 +1,38 @@
+<LanguageData>
+  <Description>
+    <Label type="String">English</Label>
+    <Base type="String">9</Base>
+    <Id type="String">409</Id>
+  </Description>
+  <List>
+    <L1>Language:</L1>
+    <L2>Back</L2>
+    <L3>Next</L3>
+    <L4>Finish</L4>
+    <L5>Select the Folder to create the package inside</L5>
+    <L6>Folder for the package:</L6>
+    <L7>File to start:</L7>
+    <L8>program;*.exe;Batchfile;*.bat;all;*.*;;</L8>
+    <L9>Runs up:</L9>
+    <L10>Progress</L10>
+    <L11>Check for Program-Starter.exe</L11>
+    <L12>Program "Program-Start\app\Program-Start.exe" not found</L12>
+    <L13>Check "File to start"</L13>
+    <L14>Program to start not found</L14>
+    <L15>Copy start-program</L15>
+    <L16>Can not copy start-program</L16>
+    <L17>Change Icon</L17>
+    <L18>Can not copy icon</L18>
+    <L19>Create "run.xml"</L19>
+    <L20>Select Splashscreen:</L20>
+    <L21>picture;*.bmp;all;*.*;;</L21>
+    <L22>Waittime (ms):</L22>
+    <L23>Hold after start (ms):</L23>
+    <L24>File</L24>
+    <L25>Open</L25>
+    <L26>Save</L26>
+    <L27>Save As</L27>
+    <L28>Config data (*.conf);*.conf;All files (*.*);*.*;;</L28>
+    <L29>Finish</L29>
+  </List>
+</LanguageData>

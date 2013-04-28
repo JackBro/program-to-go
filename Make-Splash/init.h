@@ -11,9 +11,12 @@
 #include "../share/class/staticlabel.h"
 #include "../share/class/languagebox.h"
 #include "class/setupfile.h"
+#include "resource.h"
 
 extern controlcollections_c * controls;
+extern setupfile_c * setup;
 
 int init(HWND wnd);
+int init2(HWND wnd);
 
 #endif // INIT_H
