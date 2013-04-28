@@ -31,6 +31,7 @@ extern fileedit_c * runfile;
 extern fileedit_c * splashfile;
 extern progress_c * progressbar;
 extern staticlabel_c * progresslabel;
+extern dropdownlist_c * version;
 extern char * prgPfad;
 extern char * prgExefile;
 extern int layer;

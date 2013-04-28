@@ -33,5 +33,6 @@
     <L25>Öffnen</L25>
     <L26>Speichern</L26>
     <L27>Speichern unter</L27>
+    <L28>Konfigdaten (*.conf);*.conf;Alle Dateien (*.*);*.*;;</L28>
   </List>
 </LanguageData>

@@ -135,9 +135,9 @@ int init(HWND hwnd) {
   menu = new menu_c;
   menu_c * submenu = new menu_c;
   submenu->Append(1, 25, "Load");
-  submenu->Append(2, 26, "Save");
-  submenu->Append(3, 27, "Save as");
-  menu->AppendMenu(4, 24, "File", submenu);
+  submenu->Append(MENU_SAVE, 26, "Save");
+  submenu->Append(MENU_SAVEAS, 27, "Save as");
+  menu->AppendMenu(0, 24, "File", submenu);
   menu->setMenu(hwnd);
 ////////////
   langlist->setLangList();

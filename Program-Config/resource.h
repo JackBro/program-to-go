@@ -13,3 +13,6 @@
 #define TIMER_STEP2 3
 #define TIMER_STEP3 4
 #define TIMER_STEP4 5
+
+#define MENU_SAVE 2001
+#define MENU_SAVEAS 2002

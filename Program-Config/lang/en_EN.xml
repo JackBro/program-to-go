@@ -34,5 +34,6 @@
     <L25>Open</L25>
     <L26>Save</L26>
     <L27>Save As</L27>
+    <L28>Config data (*.conf);*.conf;All files (*.*);*.*;;</L28>
   </List>
 </LanguageData>

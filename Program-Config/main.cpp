@@ -5,6 +5,7 @@
 #include "resource.h"
 #include "init.h"
 #include "run.h"
+#include "LoadSave.h"
 
 
 HINSTANCE hInst;
@@ -76,7 +77,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
      PostQuitMessage(0);
      return 0;}
    case WM_COMMAND: {
-      if (splashfile->event(hwnd, wParam, lParam)) {
+      if (wParam == MENU_SAVE) {
+        SaveData(hwnd, language);
+      } else if (wParam == MENU_SAVEAS) {
+        SaveAsData(hwnd, language);
+      } else if (splashfile->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (installpath->event(hwnd, wParam, lParam)) {
         return 0;
