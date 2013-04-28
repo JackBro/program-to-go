@@ -50,6 +50,12 @@ int setupfile_c::setLang(const char * aLang) {
 
 int setupfile_c::checkSave() {
   if (changed) {
+    char * folder = new char[MAX_PATH];
+    memcpy(folder, fName, strlen(fName)+1);
+    StripName(folder);
+    StripSlash(folder);
+    MkDir(folder);
+    delete[] folder;
     xml->SaveFile(fName);
   }
   return 0;

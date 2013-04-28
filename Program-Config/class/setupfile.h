@@ -2,6 +2,7 @@
 #define SETUPFILE_H
 
 #include "..\..\libs\libxml2\tinyxml2.h"
+#include "..\..\share\tools.h"
 
 class setupfile_c
 {
