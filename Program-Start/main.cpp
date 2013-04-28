@@ -76,22 +76,24 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   DWORD dwExitCode;
   DWORD lExitCode;
 //////////////////////////////////////////////////////////////
-  if ((strlen(runconfig->GetExeLayers()) > 0) &
-      ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
-      ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
-    if (systemdefault->DriveRemovable()) {
-      TempFolder = new char[MAX_PATH];
-      GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
+  if (runconfig->GetExeLayers() != NULL) {
+    if ((strlen(runconfig->GetExeLayers()) > 0) &
+       ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
+       ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
+      if (systemdefault->DriveRemovable()) {
+        TempFolder = new char[MAX_PATH];
+        GetTempFolderName(systemdefault->TempPath,"PS",0,TempFolder);
 //      GetTempFolderName("\\","PS",0,TempFolder);
-      if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false; printf("error");};
+        if (CopyFolder(appdir,TempFolder,hwnd) == 1) {CanStart = false; printf("error");};
 // Ändern des Exefiles in das Tempdir
-      delete exefile;
-      exefile = new char[MAX_PATH];
-      memcpy(exefile,TempFolder,strlen(TempFolder)+1);
-      memcpy(exefile+strlen(exefile),runconfig->ExeFile,strlen(runconfig->ExeFile)+1);
-      for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
+        delete exefile;
+        exefile = new char[MAX_PATH];
+        memcpy(exefile,TempFolder,strlen(TempFolder)+1);
+        memcpy(exefile+strlen(exefile),runconfig->ExeFile,strlen(runconfig->ExeFile)+1);
+        for (int i =0; i< strlen(exefile); i++) {if (exefile[i] == '/') {exefile[i] = '\\';}}
+      }
+      layer = new layer_c(exefile,runconfig->GetExeLayers());
     }
-    layer = new layer_c(exefile,runconfig->GetExeLayers());
   }
 //////////////////////////////////////////////////////////////
   while (true) {
@@ -106,13 +108,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       SetTimer(hwnd, TIMER_SPLASH_STOP, runconfig->getSplashPost(), 0);
     }
     if (CanStart) {
-      dwExitCode = WaitForSingleObject(processInfo.hProcess, 0);
+      dwExitCode = WaitForSingleObject(processInfo.hProcess, 250);
     } else {
       dwExitCode = WAIT_FAILED;
     }
     if (((dwExitCode == WAIT_FAILED   ) || (dwExitCode == WAIT_OBJECT_0 ) || (dwExitCode == WAIT_ABANDONED)) && CanStart ) {
       //-- get the process exit code
-      if (!CanStart) {
+      if (CanStart) {
         GetExitCodeProcess(processInfo.hProcess, &dwExitCode);
       //-- the task has ended so close the handle
         CloseHandle(processInfo.hThread);
@@ -121,19 +123,22 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       //-- save the exit code
 //////////////////////////////////////////////////////////////
 // Remove Layer if requested
-        if ((strlen(runconfig->GetExeLayers()) > 0) &
-          ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
-          ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
-          if (systemdefault->DriveRemovable()) {
+        if (runconfig->GetExeLayers() != NULL) {
+          if ((strlen(runconfig->GetExeLayers()) > 0) &
+            ((systemdefault->HiVersion > runconfig->GetHiLayer()) ||
+            ((systemdefault->HiVersion == runconfig->GetHiLayer()) & (systemdefault->LoVersion > runconfig->GetLoLayer())))) {
+            if (systemdefault->DriveRemovable()) {
 //      printf("I Need to Move\n");
-            DeleteFolder(TempFolder);
+              DeleteFolder(TempFolder);
+            }
+            delete layer;
           }
-          delete layer;
         }
       }
 //////////////////////////////////////////////////////////////
       lExitCode = dwExitCode;
- //     SendMessage(hwnd,WM_CLOSE,0,0);
+      CanStart = false;
+      SendMessage(hwnd,WM_CLOSE,0,0);
     } else {
       if (!CanStart) SendMessage(hwnd,WM_CLOSE,0,0);
     //-- see if there are any message that need to be processed
@@ -195,7 +200,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
           StripSlash(fSplash);
           fSplash[strlen(fSplash)+1] = 0; fSplash[strlen(fSplash)] = '\\';
           memcpy(fSplash+strlen(fSplash), runconfig->getSplashName(), strlen(runconfig->getSplashName())+1);
-          splashWin = createSplash(hInst, fSplash);
+          splashWin = createSplash(hInst, hwnd, fSplash);
           delete[] fSplash;
         }
       }

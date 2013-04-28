@@ -6,7 +6,7 @@ LRESULT CALLBACK WndProcSplash(HWND, UINT, WPARAM, LPARAM);
 HBITMAP Picture;
 BITMAP qBITMAP;
 
-HANDLE createSplash(HINSTANCE hInst,char * fName) {
+HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   WNDCLASS wnd;
   wnd.style = CS_HREDRAW | CS_VREDRAW;
   wnd.lpfnWndProc = WndProcSplash;
@@ -41,7 +41,7 @@ HANDLE createSplash(HINSTANCE hInst,char * fName) {
                         (rc.bottom-qBITMAP.bmHeight)/2,
                         qBITMAP.bmWidth,
                         qBITMAP.bmHeight,
-                        NULL,
+                        pWnd,
                         NULL,
                         hInst,
                         NULL);
