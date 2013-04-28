@@ -18,7 +18,7 @@
 			<Target title="Release">
 				<Option output="bin/Release/Program-Config" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -42,6 +42,7 @@
 			<Add library="gdi32" />
 			<Add library="comctl32" />
 			<Add library="user32" />
+			<Add library="comdlg32" />
 		</Linker>
 		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
 		<Unit filename="../libs/libxml2/tinyxml2.h" />
@@ -91,6 +92,8 @@
 		<Unit filename="../share/class/systemdefault.h" />
 		<Unit filename="../share/tools.cpp" />
 		<Unit filename="../share/tools.h" />
+		<Unit filename="LoadSave.cpp" />
+		<Unit filename="LoadSave.h" />
 		<Unit filename="Program-Config.cbp" />
 		<Unit filename="class/runxml.cpp" />
 		<Unit filename="class/runxml.h" />
