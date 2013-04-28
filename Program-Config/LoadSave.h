@@ -18,5 +18,6 @@ extern numedit_c * hold;
 
 int SaveData(HWND hwnd, language_c * lang);
 int SaveAsData(HWND hwnd, language_c * lang);
+int LoadData(HWND hwnd, language_c * lang);
 
 #endif // LOADSAVE_H

@@ -32,3 +32,7 @@ int dropdownlist_c::getCurSel() {
   return SendMessage(Wnd,CB_GETCURSEL,0,0);
 }
 
+int dropdownlist_c::setCurSel(int sel) {
+  return SendMessage(Wnd,CB_SETCURSEL, sel,0);
+}
+

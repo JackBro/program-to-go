@@ -16,3 +16,4 @@
 
 #define MENU_SAVE 2001
 #define MENU_SAVEAS 2002
+#define MENU_LOAD 2003

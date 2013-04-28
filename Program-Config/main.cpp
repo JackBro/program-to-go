@@ -81,6 +81,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         SaveData(hwnd, language);
       } else if (wParam == MENU_SAVEAS) {
         SaveAsData(hwnd, language);
+      } else if (wParam == MENU_LOAD) {
+        LoadData(hwnd, language);
       } else if (splashfile->event(hwnd, wParam, lParam)) {
         return 0;
       } else if (installpath->event(hwnd, wParam, lParam)) {

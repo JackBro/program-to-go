@@ -11,6 +11,7 @@ class dropdownlist_c : public initcontrols_c
         virtual ~dropdownlist_c();
         int addEntry(char * text);
         int getCurSel();
+        int setCurSel(int sel);
     protected:
     private:
 };
