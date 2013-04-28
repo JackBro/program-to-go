@@ -12,6 +12,8 @@
 #include "../share/class/languagebox.h"
 #include "class/setupfile.h"
 
+extern controlcollections_c * controls;
+
 int init(HWND wnd);
 
 #endif // INIT_H

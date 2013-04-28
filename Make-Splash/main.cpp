@@ -74,7 +74,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       return 0;
     }
     case WM_COMMAND: {
-     return TRUE;
+      controls->event(hwnd, wParam, lParam);
+      return TRUE;
     }
     case WM_TIMER:{
       return 0;

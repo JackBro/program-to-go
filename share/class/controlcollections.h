@@ -15,6 +15,7 @@ class controlcollections_c : public collection_c
         int setLanguage(language_c * aLang);
         initcontrols_c * addControl(initcontrols_c * aControl);
         int setCurLanguage();
+        int event(HWND hwnd, WPARAM wParam, LPARAM lParam);
     protected:
         font_c * hFont;
         language_c * hLang;

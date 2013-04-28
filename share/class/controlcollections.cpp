@@ -42,3 +42,12 @@ int controlcollections_c::setCurLanguage() {
   }
   return 0;
 }
+
+int controlcollections_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
+  initcontrols_c * c;
+  for (int i=0; i<Count; i++) {
+    c = (initcontrols_c*)getByIndex(i);
+    c->event(hwnd, wParam, lParam);
+  }
+  return 0;
+}
