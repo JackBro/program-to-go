@@ -5,8 +5,13 @@
 LRESULT CALLBACK WndProcSplash(HWND, UINT, WPARAM, LPARAM);
 HBITMAP Picture;
 BITMAP qBITMAP;
+HFONT fontbig;
+char * prglabel;
 
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
+  prglabel = new char[MAX_PATH];
+  prglabel[0] = 0;
+
   WNDCLASS wnd;
   wnd.style = CS_HREDRAW | CS_VREDRAW;
   wnd.lpfnWndProc = WndProcSplash;
@@ -49,12 +54,16 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   tmp &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
   SetWindowLongA( hwnd, GWL_STYLE, tmp );
   SetWindowPos( hwnd, 0, 0,0, qBITMAP.bmWidth, qBITMAP.bmHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+  fontbig = CreateFont (-MulDiv(25, GetDeviceCaps(GetDC(0), LOGPIXELSY), 72), 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET,
+	  OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+	  DEFAULT_PITCH | FF_DONTCARE, "Tahoma");
   return hwnd;
 }
 
 LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
   PAINTSTRUCT ps;
   HDC hdc;
+  char text[] =  "rest";
   switch (msg) {
     case WM_PAINT: {
       hdc = BeginPaint(hwnd, &ps);
@@ -63,6 +72,14 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
         HBITMAP hOldBmp = (HBITMAP)SelectObject(hLocalDC, Picture);
         if (hOldBmp != 0) {
           bool qRet = BitBlt(hdc, 0, 0, qBITMAP.bmWidth, qBITMAP.bmHeight, hLocalDC, 0, 0, SRCCOPY);
+          printf("get %s %d\n", prglabel, strlen(prglabel));
+          if (strcmp(prglabel, "") != 0) {
+            HFONT hFont = (HFONT)SelectObject(hLocalDC, fontbig);
+            SetTextColor(hLocalDC, RGB(255,255,0));
+            SetBkMode(hLocalDC, TRANSPARENT);
+            TextOut(hLocalDC, 60, 70, prglabel, strlen(prglabel));
+            SelectObject(hLocalDC, hFont);
+          }
           if (qRet) {
             SelectObject(hLocalDC, hOldBmp);
             DeleteDC(hLocalDC);
@@ -74,4 +91,10 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
     }
   }
   return DefWindowProc(hwnd, msg, wParam, lParam);
+}
+
+int setPrgLabel(char * label) {
+  memcpy(prglabel, label, strlen(label)+1);
+  printf("set %s\n", prglabel);
+  return 0;
 }

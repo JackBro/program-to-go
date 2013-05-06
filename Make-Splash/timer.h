@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "resource.h"
 #include "init.h"
+#include "run.h"
 
 int callTimer(HWND hwnd, DWORD timer);
 

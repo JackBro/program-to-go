@@ -6,6 +6,8 @@ pages_c * pages;
 controlcollections_c * controls;
 setupfile_c * setup;
 staticlabel_c * progresslabel;
+edit_c * progname;
+progress_c * progressbar;
 
 int * nextButtonClicked() {
   pages->nextPage();
@@ -49,12 +51,18 @@ int init(HWND wnd) {
        new languagebox_c(hwnd, 10, 35, 370, 12)));
 ////////////
   pages->newPage();
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Programname:", 6, 10, 10, 200, 24)));
+  progname = (edit_c*)pages->addControl(
+    controls->addControl(
+       new edit_c(hwnd, 10, 35, 370, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(
     controls->addControl(
        new staticlabel_c(hwnd, "Progress", 10, 10, 10, 370, 65)));
-  progress_c * progressbar = (progress_c*)pages->addControl(
+  progressbar = (progress_c*)pages->addControl(
     controls->addControl(
       new progress_c(hwnd, 10, 80, 370, 24)));
 ////////////

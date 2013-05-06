@@ -48,6 +48,8 @@
 		<Unit filename="../share/class/controlcollections.h" />
 		<Unit filename="../share/class/dropdownlist.cpp" />
 		<Unit filename="../share/class/dropdownlist.h" />
+		<Unit filename="../share/class/edit.cpp" />
+		<Unit filename="../share/class/edit.h" />
 		<Unit filename="../share/class/font.cpp" />
 		<Unit filename="../share/class/font.h" />
 		<Unit filename="../share/class/initcontrols.cpp" />
@@ -62,6 +64,8 @@
 		<Unit filename="../share/class/page.h" />
 		<Unit filename="../share/class/pages.cpp" />
 		<Unit filename="../share/class/pages.h" />
+		<Unit filename="../share/class/progress.cpp" />
+		<Unit filename="../share/class/progress.h" />
 		<Unit filename="../share/class/staticlabel.cpp" />
 		<Unit filename="../share/class/staticlabel.h" />
 		<Unit filename="../share/class/systemdefault.cpp" />
@@ -72,12 +76,18 @@
 		<Unit filename="class/setupfile.h" />
 		<Unit filename="init.cpp" />
 		<Unit filename="init.h" />
+		<Unit filename="lang/de_DE.xml" />
+		<Unit filename="lang/en_EN.xml" />
 		<Unit filename="main.cpp" />
 		<Unit filename="manifest.xml" />
 		<Unit filename="resource.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="run.cpp" />
+		<Unit filename="run.h" />
+		<Unit filename="splashwin.cpp" />
+		<Unit filename="splashwin.h" />
 		<Unit filename="timer.cpp" />
 		<Unit filename="timer.h" />
 		<Extensions>

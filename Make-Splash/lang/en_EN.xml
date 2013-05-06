@@ -10,9 +10,9 @@
     <L3>Next</L3>
     <L4>Finish</L4>
     <L5>Load empty picture</L5>
+    <L6>Name of the Program:</L6>
+    <L7>Set program name:</L7>
 
-    <L6>Folder for the package:</L6>
-    <L7>File to start:</L7>
     <L8>program;*.exe;Batchfile;*.bat;all;*.*;;</L8>
     <L9>Runs up:</L9>
     <L10>Progress</L10>
