@@ -12,11 +12,11 @@
     <L5>Load empty picture</L5>
     <L6>Name of the Program:</L6>
     <L7>Set program name:</L7>
+    <L8>Write version</L8>
+    <L9>Program version:</L9>
+    <L10>Messageline:</L10>
+    <L11>Write messageline</L11>
 
-    <L8>program;*.exe;Batchfile;*.bat;all;*.*;;</L8>
-    <L9>Runs up:</L9>
-    <L10>Progress</L10>
-    <L11>Check for Program-Starter.exe</L11>
     <L12>Program "Program-Start\app\Program-Start.exe" not found</L12>
     <L13>Check "File to start"</L13>
     <L14>Program to start not found</L14>

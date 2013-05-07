@@ -11,7 +11,9 @@
 
 extern staticlabel_c * progresslabel;
 extern edit_c * progname;
+extern edit_c * progversion;
 extern progress_c * progressbar;
+extern edit_c * progmessage;
 
 int runIt(HWND wnd ,int step);
 

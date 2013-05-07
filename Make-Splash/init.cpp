@@ -7,6 +7,8 @@ controlcollections_c * controls;
 setupfile_c * setup;
 staticlabel_c * progresslabel;
 edit_c * progname;
+edit_c * progversion;
+edit_c * progmessage;
 progress_c * progressbar;
 
 int * nextButtonClicked() {
@@ -57,6 +59,18 @@ int init(HWND wnd) {
   progname = (edit_c*)pages->addControl(
     controls->addControl(
        new edit_c(hwnd, 10, 35, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Version:", 9, 10, 65, 200, 24)));
+  progversion = (edit_c*)pages->addControl(
+    controls->addControl(
+       new edit_c(hwnd, 10, 90, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Message:", 10, 10, 120, 200, 24)));
+  progmessage = (edit_c*)pages->addControl(
+    controls->addControl(
+       new edit_c(hwnd, 10, 145, 370, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(

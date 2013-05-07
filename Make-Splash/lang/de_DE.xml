@@ -12,11 +12,11 @@
     <L5>Laden des leeren Bildes</L5>
     <L6>Programname:</L6>
     <L7>Schreibe Programnamen</L7>
+    <L8>Schreibe Version</L8>
+    <L9>Programmversion:</L9>
+    <L10>Notizzeile:</L10>
+    <L11>Schreibe Notizzeile</L11>
 
-    <L8>Programm;*.exe;Batchdatei;*.bat;Alle Dateien;*.*;;</L8>
-    <L9>Lauffähig bis:</L9>
-    <L10>Fortschritt</L10>
-    <L11>Prüfe Programm-Starter.exe</L11>
     <L12>Programm "Program-Start\app\Program-Start.exe" nicht gefunden</L12>
     <L13>Prüfe "Auzuführende Datei"</L13>
     <L14>auszuführendes Programm nicht gefunden</L14>

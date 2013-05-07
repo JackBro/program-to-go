@@ -6,12 +6,12 @@ LRESULT CALLBACK WndProcSplash(HWND, UINT, WPARAM, LPARAM);
 HBITMAP Picture;
 BITMAP qBITMAP;
 HFONT fontbig;
-char * prglabel;
+HFONT fontsmall;
+char * prglabel = NULL;
+char * versionlabel = NULL;
+char * messagelabel = NULL;
 
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
-  prglabel = new char[MAX_PATH];
-  prglabel[0] = 0;
-
   WNDCLASS wnd;
   wnd.style = CS_HREDRAW | CS_VREDRAW;
   wnd.lpfnWndProc = WndProcSplash;
@@ -57,6 +57,9 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   fontbig = CreateFont (-MulDiv(25, GetDeviceCaps(GetDC(0), LOGPIXELSY), 72), 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET,
 	  OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
 	  DEFAULT_PITCH | FF_DONTCARE, "Tahoma");
+  fontsmall = CreateFont (-MulDiv(10, GetDeviceCaps(GetDC(0), LOGPIXELSY), 72), 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET,
+	  OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+	  DEFAULT_PITCH | FF_DONTCARE, "Tahoma");
   return hwnd;
 }
 
@@ -72,12 +75,25 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
         HBITMAP hOldBmp = (HBITMAP)SelectObject(hLocalDC, Picture);
         if (hOldBmp != 0) {
           bool qRet = BitBlt(hdc, 0, 0, qBITMAP.bmWidth, qBITMAP.bmHeight, hLocalDC, 0, 0, SRCCOPY);
-          printf("get %s %d\n", prglabel, strlen(prglabel));
-          if (strcmp(prglabel, "") != 0) {
+          if (prglabel != NULL) {
             HFONT hFont = (HFONT)SelectObject(hLocalDC, fontbig);
             SetTextColor(hLocalDC, RGB(255,255,0));
             SetBkMode(hLocalDC, TRANSPARENT);
             TextOut(hLocalDC, 60, 70, prglabel, strlen(prglabel));
+            SelectObject(hLocalDC, hFont);
+          }
+          if (versionlabel != NULL) {
+            HFONT hFont = (HFONT)SelectObject(hLocalDC, fontsmall);
+            SetTextColor(hLocalDC, RGB(255,255,0));
+            SetBkMode(hLocalDC, TRANSPARENT);
+            TextOut(hLocalDC, 65, 105, versionlabel, strlen(versionlabel));
+            SelectObject(hLocalDC, hFont);
+          }
+          if (messagelabel != NULL) {
+            HFONT hFont = (HFONT)SelectObject(hLocalDC, fontsmall);
+            SetTextColor(hLocalDC, RGB(255,255,0));
+            SetBkMode(hLocalDC, TRANSPARENT);
+            TextOut(hLocalDC, 65, 255, messagelabel, strlen(messagelabel));
             SelectObject(hLocalDC, hFont);
           }
           if (qRet) {
@@ -94,7 +110,24 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 }
 
 int setPrgLabel(char * label) {
+  if (prglabel != NULL) delete[] prglabel;
+  prglabel = new char[MAX_PATH];
   memcpy(prglabel, label, strlen(label)+1);
   printf("set %s\n", prglabel);
   return 0;
 }
+
+int setVersiomLabel(char * label) {
+  if (versionlabel != NULL) delete[] versionlabel;
+  versionlabel = new char[MAX_PATH];
+  memcpy(versionlabel , label, strlen(label)+1);
+  return 0;
+}
+
+int setMessageLabel(char * label) {
+  if (messagelabel != NULL) delete[] messagelabel;
+  messagelabel = new char[MAX_PATH];
+  memcpy(messagelabel , label, strlen(label)+1);
+  return 0;
+}
+

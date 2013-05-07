@@ -20,6 +20,8 @@ extern controlcollections_c * controls;
 extern setupfile_c * setup;
 extern staticlabel_c * progresslabel;
 extern edit_c * progname;
+extern edit_c * progversion;
+extern edit_c * progmessage;
 extern progress_c * progressbar;
 
 int init(HWND wnd);

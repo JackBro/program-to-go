@@ -10,6 +10,12 @@ int callTimer(HWND hwnd, DWORD timer) {
   } else if (timer == TIMER_STEP2) {
     KillTimer(hwnd, TIMER_STEP2);
     runIt(hwnd,2);
+  } else if (timer == TIMER_STEP3) {
+    KillTimer(hwnd, TIMER_STEP3);
+    runIt(hwnd,3);
+  } else if (timer == TIMER_STEP4) {
+    KillTimer(hwnd, TIMER_STEP4);
+    runIt(hwnd,4);
   }
   return 0;
 }
