@@ -37,11 +37,14 @@
 			<Add library="user32" />
 			<Add library="kernel32" />
 			<Add library="comctl32" />
+			<Add library="comdlg32" />
 		</Linker>
 		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
 		<Unit filename="../libs/libxml2/tinyxml2.h" />
 		<Unit filename="../share/class/button.cpp" />
 		<Unit filename="../share/class/button.h" />
+		<Unit filename="../share/class/buttonicon.cpp" />
+		<Unit filename="../share/class/buttonicon.h" />
 		<Unit filename="../share/class/collection.cpp" />
 		<Unit filename="../share/class/collection.h" />
 		<Unit filename="../share/class/controlcollections.cpp" />
@@ -50,6 +53,8 @@
 		<Unit filename="../share/class/dropdownlist.h" />
 		<Unit filename="../share/class/edit.cpp" />
 		<Unit filename="../share/class/edit.h" />
+		<Unit filename="../share/class/fileedit.cpp" />
+		<Unit filename="../share/class/fileedit.h" />
 		<Unit filename="../share/class/font.cpp" />
 		<Unit filename="../share/class/font.h" />
 		<Unit filename="../share/class/initcontrols.cpp" />

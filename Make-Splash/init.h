@@ -12,6 +12,7 @@
 #include "../share/class/languagebox.h"
 #include "../share/class/progress.h"
 #include "../share/class/edit.h"
+#include "../share/class/fileedit.h"
 #include "class/setupfile.h"
 #include "resource.h"
 #include "run.h"
@@ -23,6 +24,8 @@ extern edit_c * progname;
 extern edit_c * progversion;
 extern edit_c * progmessage;
 extern progress_c * progressbar;
+extern fileedit_c * leftpic;
+extern SystemDefault_c * SystemDefault;
 
 int init(HWND wnd);
 int init2(HWND wnd);

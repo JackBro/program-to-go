@@ -1,12 +1,17 @@
 #include "run.h"
 
 HANDLE splash;
+char splashbmp[] = "config/splash.bmp";
 
 int runIt(HWND wnd ,int step) {
   if (step == 0) {
-    progressbar->setRange(0,5);
+    progressbar->setRange(0,6);
     progresslabel->setLangId(5);
-    splash = createSplash(GetModuleHandle (0), wnd, "config/splash.bmp");
+    char * temp = new char[MAX_PATH];
+    memcpy(temp, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath)+1);
+    memcpy(temp+strlen(temp), splashbmp, strlen(splashbmp)+1);
+    splash = createSplash(GetModuleHandle (0), wnd, temp);
+    delete[] temp;
     ShowWindow((HWND)splash, SW_SHOW);
     progressbar->setValue(1);
     SetTimer(wnd, TIMER_STEP1, 100, NULL);
@@ -29,6 +34,12 @@ int runIt(HWND wnd ,int step) {
     progressbar->setValue(4);
     SetTimer(wnd, TIMER_STEP4, 100, NULL);
   } else if (step == 4) {
+    progresslabel->setLangId(11);
+    setLeftPic(leftpic->getText());
+    RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
+    progressbar->setValue(5);
+    SetTimer(wnd, TIMER_STEP5, 100, NULL);
+  } else if (step == 5) {
     RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
 
 //    MessageBox(0,"Call Run","",0);

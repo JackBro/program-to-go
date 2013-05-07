@@ -16,6 +16,9 @@ int callTimer(HWND hwnd, DWORD timer) {
   } else if (timer == TIMER_STEP4) {
     KillTimer(hwnd, TIMER_STEP4);
     runIt(hwnd,4);
+   } else if (timer == TIMER_STEP5) {
+    KillTimer(hwnd, TIMER_STEP5);
+    runIt(hwnd,5);
   }
   return 0;
 }

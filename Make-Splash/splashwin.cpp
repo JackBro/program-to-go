@@ -10,6 +10,8 @@ HFONT fontsmall;
 char * prglabel = NULL;
 char * versionlabel = NULL;
 char * messagelabel = NULL;
+HBITMAP lPic = 0;
+BITMAP qlBITMAP;
 
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   WNDCLASS wnd;
@@ -50,6 +52,7 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
                         NULL,
                         hInst,
                         NULL);
+
   DWORD tmp = GetWindowLongA( hwnd, GWL_STYLE );
   tmp &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
   SetWindowLongA( hwnd, GWL_STYLE, tmp );
@@ -86,7 +89,7 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
             HFONT hFont = (HFONT)SelectObject(hLocalDC, fontsmall);
             SetTextColor(hLocalDC, RGB(255,255,0));
             SetBkMode(hLocalDC, TRANSPARENT);
-            TextOut(hLocalDC, 65, 105, versionlabel, strlen(versionlabel));
+            TextOut(hLocalDC, 65, 110, versionlabel, strlen(versionlabel));
             SelectObject(hLocalDC, hFont);
           }
           if (messagelabel != NULL) {
@@ -95,6 +98,11 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
             SetBkMode(hLocalDC, TRANSPARENT);
             TextOut(hLocalDC, 65, 255, messagelabel, strlen(messagelabel));
             SelectObject(hLocalDC, hFont);
+          }
+          if (lPic != 0) {
+            HBITMAP hlOldBmp = (HBITMAP)SelectObject(hLocalDC, lPic);
+            BitBlt(hdc, 65, 130, qlBITMAP.bmWidth, qlBITMAP.bmHeight, hLocalDC, 0, 0, SRCCOPY);
+            SelectObject(hLocalDC, hlOldBmp);
           }
           if (qRet) {
             SelectObject(hLocalDC, hOldBmp);
@@ -113,7 +121,6 @@ int setPrgLabel(char * label) {
   if (prglabel != NULL) delete[] prglabel;
   prglabel = new char[MAX_PATH];
   memcpy(prglabel, label, strlen(label)+1);
-  printf("set %s\n", prglabel);
   return 0;
 }
 
@@ -131,3 +138,10 @@ int setMessageLabel(char * label) {
   return 0;
 }
 
+int setLeftPic(char * filename) {
+  lPic = (HBITMAP)LoadImage(NULL,filename, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+  if (lPic == 0) return 0;
+  int iRet = GetObject(reinterpret_cast<HGDIOBJ>(lPic), sizeof(BITMAP),reinterpret_cast<LPVOID>(&qlBITMAP));
+  if (!iRet) lPic=0;
+  return 0;
+}

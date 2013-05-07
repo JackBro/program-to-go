@@ -9,6 +9,7 @@
 
 
 ICON_MAIN ICON "images/icon.ico"
+ICON_FILE ICON "images/application.ico"
 
 //
 // Manifest resources

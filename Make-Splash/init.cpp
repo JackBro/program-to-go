@@ -10,10 +10,12 @@ edit_c * progname;
 edit_c * progversion;
 edit_c * progmessage;
 progress_c * progressbar;
+fileedit_c * leftpic;
+SystemDefault_c * SystemDefault;
 
 int * nextButtonClicked() {
   pages->nextPage();
-  if (pages->getPage() == 2) {
+  if (pages->getPage() == 3) {
     runIt(hwnd ,0);
   }
   return 0;
@@ -32,7 +34,7 @@ int * finishButtonClicked() {
 
 int init(HWND wnd) {
   hwnd = wnd;
-  SystemDefault_c * SystemDefault = new SystemDefault_c;
+  SystemDefault = new SystemDefault_c;
   setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
   language_c * language = new language_c(setup->getLang(), SystemDefault);
   setup->setLang(language->getCurLang());
@@ -71,6 +73,14 @@ int init(HWND wnd) {
   progmessage = (edit_c*)pages->addControl(
     controls->addControl(
        new edit_c(hwnd, 10, 145, 370, 24)));
+////////////
+  pages->newPage();
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Left picture :", 12, 10, 10, 200, 24)));
+  leftpic = (fileedit_c*)pages->addControl(
+    controls->addControl(
+       new fileedit_c(hwnd, ICON_FILE, 13, 10, 35, 370, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(
