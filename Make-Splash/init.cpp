@@ -12,6 +12,7 @@ edit_c * progmessage;
 progress_c * progressbar;
 fileedit_c * leftpic;
 fileedit_c * rightpic;
+fileedits_c * savefile;
 SystemDefault_c * SystemDefault;
 
 int * nextButtonClicked() {
@@ -84,10 +85,16 @@ int init(HWND wnd) {
        new fileedit_c(hwnd, ICON_FILE, 13, 10, 35, 370, 24)));
   pages->addControl(
     controls->addControl(
-       new staticlabel_c(hwnd, "Right picture :", 16, 65, 10, 200, 24)));
+       new staticlabel_c(hwnd, "Right picture :", 16, 10, 65, 200, 24)));
   rightpic = (fileedit_c*)pages->addControl(
     controls->addControl(
        new fileedit_c(hwnd, ICON_FILE, 13, 10, 90, 370, 24)));
+  pages->addControl(
+    controls->addControl(
+       new staticlabel_c(hwnd, "Save As:", 17, 10, 120, 200, 24)));
+  savefile = (fileedits_c*)pages->addControl(
+    controls->addControl(
+       new fileedits_c(hwnd, ICON_FILE, 13, 10, 145, 370, 24)));
 ////////////
   pages->newPage();
   progresslabel = (staticlabel_c*)pages->addControl(

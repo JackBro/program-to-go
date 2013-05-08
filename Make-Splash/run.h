@@ -8,6 +8,7 @@
 #include "../share/class/staticlabel.h"
 #include "../share/class/edit.h"
 #include "../share/class/fileedit.h"
+#include "../share/class/fileedits.h"
 #include "../share/class/progress.h"
 #include "../share/class/systemdefault.h"
 
@@ -19,6 +20,7 @@ extern edit_c * progmessage;
 extern fileedit_c * leftpic;
 extern SystemDefault_c * SystemDefault;
 extern fileedit_c * rightpic;
+extern fileedits_c * savefile;
 
 int runIt(HWND wnd ,int step);
 

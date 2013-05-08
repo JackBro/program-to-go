@@ -55,6 +55,8 @@
 		<Unit filename="../share/class/edit.h" />
 		<Unit filename="../share/class/fileedit.cpp" />
 		<Unit filename="../share/class/fileedit.h" />
+		<Unit filename="../share/class/fileedits.cpp" />
+		<Unit filename="../share/class/fileedits.h" />
 		<Unit filename="../share/class/font.cpp" />
 		<Unit filename="../share/class/font.h" />
 		<Unit filename="../share/class/initcontrols.cpp" />

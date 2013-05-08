@@ -13,6 +13,7 @@
 #include "../share/class/progress.h"
 #include "../share/class/edit.h"
 #include "../share/class/fileedit.h"
+#include "../share/class/fileedits.h"
 #include "class/setupfile.h"
 #include "resource.h"
 #include "run.h"
@@ -27,6 +28,7 @@ extern progress_c * progressbar;
 extern fileedit_c * leftpic;
 extern fileedit_c * rightpic;
 extern SystemDefault_c * SystemDefault;
+extern fileedits_c * savefile;
 
 int init(HWND wnd);
 int init2(HWND wnd);
