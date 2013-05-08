@@ -12,6 +12,8 @@ char * versionlabel = NULL;
 char * messagelabel = NULL;
 HBITMAP lPic = 0;
 BITMAP qlBITMAP;
+HBITMAP rPic = 0;
+BITMAP qrBITMAP;
 
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   WNDCLASS wnd;
@@ -104,6 +106,11 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
             BitBlt(hdc, 65, 130, qlBITMAP.bmWidth, qlBITMAP.bmHeight, hLocalDC, 0, 0, SRCCOPY);
             SelectObject(hLocalDC, hlOldBmp);
           }
+          if (rPic != 0) {
+            HBITMAP hlOldBmp = (HBITMAP)SelectObject(hLocalDC, rPic);
+            BitBlt(hdc, qBITMAP.bmWidth-qrBITMAP.bmWidth-65, 130, qrBITMAP.bmWidth, qrBITMAP.bmHeight, hLocalDC, 0, 0, SRCCOPY);
+            SelectObject(hLocalDC, hlOldBmp);
+          }
           if (qRet) {
             SelectObject(hLocalDC, hOldBmp);
             DeleteDC(hLocalDC);
@@ -143,5 +150,13 @@ int setLeftPic(char * filename) {
   if (lPic == 0) return 0;
   int iRet = GetObject(reinterpret_cast<HGDIOBJ>(lPic), sizeof(BITMAP),reinterpret_cast<LPVOID>(&qlBITMAP));
   if (!iRet) lPic=0;
+  return 0;
+}
+
+int setRightPic(char * filename) {
+  rPic = (HBITMAP)LoadImage(NULL,filename, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+  if (rPic == 0) return 0;
+  int iRet = GetObject(reinterpret_cast<HGDIOBJ>(rPic), sizeof(BITMAP),reinterpret_cast<LPVOID>(&qrBITMAP));
+  if (!iRet) rPic=0;
   return 0;
 }

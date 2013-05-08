@@ -18,6 +18,7 @@ extern progress_c * progressbar;
 extern edit_c * progmessage;
 extern fileedit_c * leftpic;
 extern SystemDefault_c * SystemDefault;
+extern fileedit_c * rightpic;
 
 int runIt(HWND wnd ,int step);
 

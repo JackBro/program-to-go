@@ -5,7 +5,7 @@ char splashbmp[] = "config/splash.bmp";
 
 int runIt(HWND wnd ,int step) {
   if (step == 0) {
-    progressbar->setRange(0,6);
+    progressbar->setRange(0,7);
     progresslabel->setLangId(5);
     char * temp = new char[MAX_PATH];
     memcpy(temp, SystemDefault->PrgPath, strlen(SystemDefault->PrgPath)+1);
@@ -34,12 +34,18 @@ int runIt(HWND wnd ,int step) {
     progressbar->setValue(4);
     SetTimer(wnd, TIMER_STEP4, 100, NULL);
   } else if (step == 4) {
-    progresslabel->setLangId(11);
+    progresslabel->setLangId(14);
     setLeftPic(leftpic->getText());
     RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
     progressbar->setValue(5);
     SetTimer(wnd, TIMER_STEP5, 100, NULL);
   } else if (step == 5) {
+    progresslabel->setLangId(15);
+    setRightPic(rightpic->getText());
+    RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
+    progressbar->setValue(6);
+    SetTimer(wnd, TIMER_STEP6, 100, NULL);
+  } else if (step == 6) {
     RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
 
 //    MessageBox(0,"Call Run","",0);

@@ -25,6 +25,7 @@ extern edit_c * progversion;
 extern edit_c * progmessage;
 extern progress_c * progressbar;
 extern fileedit_c * leftpic;
+extern fileedit_c * rightpic;
 extern SystemDefault_c * SystemDefault;
 
 int init(HWND wnd);

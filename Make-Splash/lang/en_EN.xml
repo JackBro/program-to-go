@@ -18,10 +18,10 @@
     <L11>Write messageline</L11>
     <L12>Left picture:</L12>
     <L13>picture (*.bmp);*.bmp;All files (*.*);*.*;;</L13>
+    <L14>Paint left picture</L14>
+    <L15>Paint right picture</L15>
+    <L16>Right picture:</L16>
 
-    <L14>Program to start not found</L14>
-    <L15>Copy start-program</L15>
-    <L16>Can not copy start-program</L16>
     <L17>Change Icon</L17>
     <L18>Can not copy icon</L18>
     <L19>Create "run.xml"</L19>

@@ -18,10 +18,10 @@
     <L11>Schreibe Notizzeile</L11>
     <L12>Linkes Bild:</L12>
     <L13>Bild (*.bmp);*.bmp;Alle Dateien (*.*);*.*;;</L13>
+    <L14>Zeichne linkes Bild</L14>
+    <L15>Zeichne rechtes Bild</L15>
+    <L16>Rechtes Bild:</L16>
 
-    <L14>auszuführendes Programm nicht gefunden</L14>
-    <L15>Kopiere Startprogramm</L15>
-    <L16>Kopiere von Startprogramm nicht möglich</L16>
     <L17>Anpassen vom Icon</L17>
     <L18>Kopieren vom Icon fehlgeschlagen</L18>
     <L19>Erzeugen von "run.xml"</L19>
