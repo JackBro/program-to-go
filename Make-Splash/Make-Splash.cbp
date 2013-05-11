@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-Ddebug" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -37,7 +38,6 @@
 			<Add library="user32" />
 			<Add library="kernel32" />
 			<Add library="comctl32" />
-			<Add library="comdlg32" />
 		</Linker>
 		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
 		<Unit filename="../libs/libxml2/tinyxml2.h" />

@@ -7,8 +7,6 @@
  */
 #include "_comdlg32.h"
 
-/** \todo both dialog with one parentclass */
-
 /////////////////////////////////////////////////////
 // Start Definitionen aus commdlg.h                //
 /////////////////////////////////////////////////////
@@ -98,11 +96,94 @@ _CommDlgExtendedError  __CommDlgExtendedError = NULL; /**< Speichert die Funktio
 /**
  *  Intialiesiert bei Bedarf die Biliothek, und setzt Variablen auf NULL
  */
-c_getopenfilename::c_getopenfilename()
-{
+c_getfilename::c_getfilename() {
   if (lib == NULL) {
     lib = LoadLibrary ("COMDLG32.dll") ;
   }
+  fname = NULL;
+  filter = NULL;
+  pfad = NULL;
+  hWnd = 0;
+}
+
+/**
+ *  Gibt bei Bedarf die Variablen wieder frei
+ */
+c_getfilename::~c_getfilename()
+{
+  if (filter != NULL) delete[] filter;
+  if (pfad != NULL) delete[] pfad;
+  if (fname != NULL) delete[] fname;
+}
+
+/**
+ *  Setzt den Filter
+ *  im Unterschied zu Windows wird ";" anstelle von 0 zum trennen benutzt,
+ *  am Ende muessen 2 ";" stehen
+ *  \param aFilter ein String der die Filterdefinition enthaelt
+ *  \return gibt immer 0 zurueck
+ */
+int c_getfilename::setFilter(char * aFilter) {
+  if (filter != NULL) delete[] filter;
+  filter = new char[strlen(aFilter)+1];
+  memcpy(filter, aFilter, strlen(aFilter)+1);
+  for (int i=strlen(filter); i>0; i--) {
+    if (filter[i] == ';') filter[i] = 0;
+  }
+  return 0;
+}
+
+/**
+ *  Setzt den Startordner
+ *  \param aPfad Orner der zu begin geoeffnet werden soll
+ *  \return gibt immer 0 zurueck
+ */
+int c_getfilename::setPfad(char * aPfad) {
+  if (pfad != NULL) delete[] pfad;
+  pfad = new char[strlen(aPfad)+1];
+  memcpy(pfad, aPfad, strlen(aPfad)+1);
+  return 0;
+}
+
+/**
+ *  Setzt das Elternfenster
+ *  \param ahWnd Elternfenster
+ *  \return gibt immer 0 zurueck
+ */
+int c_getfilename::setHWnd(HWND ahWnd) {
+  hWnd = ahWnd;
+  return 0;
+}
+
+/**
+ *  Erstellt die OFN Struktur, sichert den Palatz fuer fname zu
+ */
+
+void * c_getfilename::createOFN() {
+  if (fname == NULL) {
+    fname = new char[MAX_PATH];
+    fname[0] = 0;
+  }
+  _LPOPENFILENAMEA o = new _OPENFILENAMEA;
+  ZeroMemory(o, sizeof(_OPENFILENAMEA));
+  o->lStructSize = sizeof(_OPENFILENAMEA);
+  o->hwndOwner = hWnd;
+  o->lpstrFilter = filter;
+  o->lpstrFile = fname;
+  o->lpstrInitialDir = pfad;
+  o->nMaxFile = MAX_PATH;
+  o->Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+  ofn = o;
+  return ofn;
+}
+
+/////////////////////////////////////////////////////
+
+/**
+ *  Laedt bei Befdarf die Funktion aus der Bibliothek
+ */
+c_getopenfilename::c_getopenfilename()  : c_getfilename()
+{
   if (__GetOpenFileName == NULL) {
     __GetOpenFileName = (_GetOpenFileName) GetProcAddress (lib, "GetOpenFileNameA") ;
   }
@@ -111,20 +192,6 @@ c_getopenfilename::c_getopenfilename()
     __CommDlgExtendedError = (_CommDlgExtendedError) GetProcAddress (lib, "CommDlgExtendedError") ;
   }
 #endif
-  fname = NULL;
-  filter = NULL;
-  pfad = NULL;
-  hWnd = 0;
-}
-
-/**
- *  Gibt bei Bedarf die Variablen wieder frei
- */
-c_getopenfilename::~c_getopenfilename()
-{
-  if (filter != NULL) delete[] filter;
-  if (pfad != NULL) delete[] pfad;
-  if (fname != NULL) delete[] fname;
 }
 
 /**
@@ -133,76 +200,22 @@ c_getopenfilename::~c_getopenfilename()
  *  \return Gibt die ausgewaelte Datei zurueck
  */
 char * c_getopenfilename::get() {
-  if (fname == NULL) {
-    fname = new char[MAX_PATH];
-    fname[0] = 0;
-  }
-  _OPENFILENAMEA ofn;
-  ZeroMemory(&ofn, sizeof(ofn));
-  ofn.lStructSize = sizeof(ofn);
-  ofn.hwndOwner = hWnd;
-  ofn.lpstrFilter = filter;
-  ofn.lpstrFile = fname;
-  ofn.lpstrInitialDir = pfad;
-  ofn.nMaxFile = MAX_PATH;
-  ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-  if(!__GetOpenFileName(&ofn)) {
+  if(!__GetOpenFileName((_LPOPENFILENAMEA)createOFN())) {
 #ifdef debug
     printf ("GetOpenFileName Error: %d\n",__CommDlgExtendedError());
 #endif
   }
+  delete ofn;
   return fname;
-}
-
-/**
- *  Setzt den Filter
- *  im Unterschied zu Windows wird ";" anstelle von 0 zum trennen benutzt,
- *  am Ende muessen 2 ";" stehen
- *  \param aFilter ein String der die Filterdefinition enthaelt
- *  \return gibt immer 0 zurueck
- */
-int c_getopenfilename::setFilter(char * aFilter) {
-  if (filter != NULL) delete[] filter;
-  filter = new char[strlen(aFilter)+1];
-  memcpy(filter, aFilter, strlen(aFilter)+1);
-  for (int i=strlen(filter); i>0; i--) {
-    if (filter[i] == ';') filter[i] = 0;
-  }
-  return 0;
-}
-
-/**
- *  Setzt den Startordner
- *  \param aPfad Orner der zu begin geoeffnet werden soll
- *  \return gibt immer 0 zurueck
- */
-int c_getopenfilename::setPfad(char * aPfad) {
-  if (pfad != NULL) delete[] pfad;
-  pfad = new char[strlen(aPfad)+1];
-  memcpy(pfad, aPfad, strlen(aPfad)+1);
-  return 0;
-}
-
-/**
- *  Setzt das Elternfenster
- *  \param ahWnd Elternfenster
- *  \return gibt immer 0 zurueck
- */
-int c_getopenfilename::setHWnd(HWND ahWnd) {
-  hWnd = ahWnd;
-  return 0;
 }
 
 /////////////////////////////////////////////////////
 
 /**
- *  Intialiesiert bei Bedarf die Biliothek, und setzt Variablen auf NULL
+ *  Laedt bei Befdarf die Funktion aus der Bibliothek
  */
-c_getsavefilename::c_getsavefilename()
+c_getsavefilename::c_getsavefilename() : c_getfilename()
 {
-  if (lib == NULL) {
-    lib = LoadLibrary ("COMDLG32.dll") ;
-  }
   if (__GetSaveFileName == NULL) {
     __GetSaveFileName = (_GetSaveFileName) GetProcAddress (lib, "GetSaveFileNameA") ;
   }
@@ -211,20 +224,6 @@ c_getsavefilename::c_getsavefilename()
     __CommDlgExtendedError = (_CommDlgExtendedError) GetProcAddress (lib, "CommDlgExtendedError") ;
   }
 #endif
-  fname = NULL;
-  filter = NULL;
-  pfad = NULL;
-  hWnd = 0;
-}
-
-/**
- *  Gibt bei Bedarf die Variablen wieder frei
- */
-c_getsavefilename::~c_getsavefilename()
-{
-  if (filter != NULL) delete[] filter;
-  if (pfad != NULL) delete[] pfad;
-  if (fname != NULL) delete[] fname;
 }
 
 /**
@@ -233,20 +232,7 @@ c_getsavefilename::~c_getsavefilename()
  *  \return Gibt die ausgewaelte Datei zurueck
  */
 char * c_getsavefilename::get() {
-  if (fname == NULL) {
-    fname = new char[MAX_PATH];
-    fname[0] = 0;
-  }
-  _OPENFILENAMEA ofn;
-  ZeroMemory(&ofn, sizeof(ofn));
-  ofn.lStructSize = sizeof(ofn);
-  ofn.hwndOwner = hWnd;
-  ofn.lpstrFilter = filter;
-  ofn.lpstrFile = fname;
-  ofn.lpstrInitialDir = pfad;
-  ofn.nMaxFile = MAX_PATH;
-  ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-  if(!__GetSaveFileName(&ofn)) {
+  if(!__GetSaveFileName((_LPOPENFILENAMEA)createOFN())) {
 #ifdef debug
     printf ("GetOpenFileName Error: %d\n",__CommDlgExtendedError());
 #endif
@@ -254,41 +240,3 @@ char * c_getsavefilename::get() {
   return fname;
 }
 
-/**
- *  Setzt den Filter
- *  im Unterschied zu Windows wird ";" anstelle von 0 zum trennen benutzt,
- *  am Ende muessen 2 ";" stehen
- *  \param aFilter ein String der die Filterdefinition enthaelt
- *  \return gibt immer 0 zurueck
- */
-int c_getsavefilename::setFilter(char * aFilter) {
-  if (filter != NULL) delete[] filter;
-  filter = new char[strlen(aFilter)+1];
-  memcpy(filter, aFilter, strlen(aFilter)+1);
-  for (int i=strlen(filter); i>0; i--) {
-    if (filter[i] == ';') filter[i] = 0;
-  }
-  return 0;
-}
-
-/**
- *  Setzt den Startordner
- *  \param aPfad Orner der zu begin geoeffnet werden soll
- *  \return gibt immer 0 zurueck
- */
-int c_getsavefilename::setPfad(char * aPfad) {
-  if (pfad != NULL) delete[] pfad;
-  pfad = new char[strlen(aPfad)+1];
-  memcpy(pfad, aPfad, strlen(aPfad)+1);
-  return 0;
-}
-
-/**
- *  Setzt das Elternfenster
- *  \param ahWnd Elternfenster
- *  \return gibt immer 0 zurueck
- */
-int c_getsavefilename::setHWnd(HWND ahWnd) {
-  hWnd = ahWnd;
-  return 0;
-}
