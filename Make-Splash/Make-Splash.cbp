@@ -41,6 +41,8 @@
 		</Linker>
 		<Unit filename="../libs/libxml2/tinyxml2.cpp" />
 		<Unit filename="../libs/libxml2/tinyxml2.h" />
+		<Unit filename="../share/class/_comdlg32.cpp" />
+		<Unit filename="../share/class/_comdlg32.h" />
 		<Unit filename="../share/class/button.cpp" />
 		<Unit filename="../share/class/button.h" />
 		<Unit filename="../share/class/buttonicon.cpp" />

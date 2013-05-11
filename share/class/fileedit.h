@@ -7,6 +7,7 @@
 #include "initcontrols.h"
 #include "edit.h"
 #include "buttonicon.h"
+#include "_comdlg32.h"
 
 class fileedit_c : public initcontrols_c
 {

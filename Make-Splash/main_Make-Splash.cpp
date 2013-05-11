@@ -19,6 +19,8 @@
 #include "init.h"
 #include "timer.h"
 
+#include "../share/class/_comdlg32.h"
+
 HINSTANCE hInst; /**< Halten der Instance vom Programm */
 
 /** \brief Hauptnachrichtenschleife
@@ -111,5 +113,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     DispatchMessage(&msg);
   }
   return msg.wParam;
+
 }
 

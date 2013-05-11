@@ -33,28 +33,14 @@ bool fileedit_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
   if (!ok) {
     ok = ((HWND)lParam == button->Wnd);
     if (ok) {
-      OPENFILENAME ofn;
-      char szFileName[MAX_PATH] = "";
-      char * pfad = NULL;
+      c_getopenfilename * ofn = new c_getopenfilename;
+      ofn->setHWnd(hwnd);
+      ofn->setFilter(lang->getLangText(aTextLabel));
       if (getdefPfad != NULL) {
-        pfad = getdefPfad();
+        ofn->setPfad(getdefPfad());
       }
-      char * filter = lang->getLangText(aTextLabel);
-      int len = strlen(filter);
-      for (int i=0; i<len; i++) {if (filter[i] == ';'){filter[i]=0;};};
-      ZeroMemory(&ofn, sizeof(ofn));
-      ofn.lStructSize = sizeof(ofn); // SEE NOTE BELOW
-      ofn.hwndOwner = hwnd;
-      ofn.lpstrFilter = filter;
-      ofn.lpstrFile = szFileName;
-      ofn.lpstrInitialDir = pfad;
-      ofn.nMaxFile = MAX_PATH;
-      ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY|OFN_ALLOWMULTISELECT;
-      ofn.lpstrDefExt = "";
-      if(GetOpenFileName(&ofn)) {
-        edit->setText(szFileName);
-	  }
-	  delete pfad;
+      edit->setText(ofn->get());
+      delete ofn;
     }
   }
   return ok;
