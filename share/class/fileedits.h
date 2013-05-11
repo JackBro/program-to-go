@@ -7,6 +7,7 @@
 #include "initcontrols.h"
 #include "edit.h"
 #include "buttonicon.h"
+#include "_comdlg32.h"
 
 class fileedits_c : public initcontrols_c
 {
@@ -31,4 +32,4 @@ class fileedits_c : public initcontrols_c
         cb_getText getdefPfad;
 };
 
-#endif 
+#endif
