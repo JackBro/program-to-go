@@ -1,3 +1,11 @@
+/*! \file Make-Splash/init.cpp
+ *  \brief Initialiesiert das Hauptfenster
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
+
 #include "init.h"
 
 HWND hwnd;

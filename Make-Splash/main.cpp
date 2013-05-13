@@ -1,4 +1,4 @@
-/*! \file main_Make-Splash.cpp
+/*! \file Make-Splash/main.cpp
  *  \brief Die Hauptdatei vom Projekt "Splash-Screen"
  *
  * \author Frank Holler
@@ -18,8 +18,6 @@
 #include "resource.h"
 #include "init.h"
 #include "timer.h"
-
-#include "../share/class/_comdlg32.h"
 
 HINSTANCE hInst; /**< Halten der Instance vom Programm */
 
