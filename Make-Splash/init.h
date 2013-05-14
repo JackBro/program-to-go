@@ -25,19 +25,18 @@
 #include "resource.h"
 #include "run.h"
 
-extern controlcollections_c * controls;
-extern setupfile_c * setup;
-extern staticlabel_c * progresslabel;
-extern edit_c * progname;
-extern edit_c * progversion;
-extern edit_c * progmessage;
-extern progress_c * progressbar;
-extern fileedit_c * leftpic;
-extern fileedit_c * rightpic;
-extern SystemDefault_c * SystemDefault;
-extern fileedits_c * savefile;
+extern controlcollections_c * controls; /**< Speichert alle Visuellen Elemente */
+extern setupfile_c * setup; /**< Speichert die Grundeinstellungen */
+extern staticlabel_c * progresslabel; /**< Speichert das Label fuer die Anzeige des Fortschritts */
+extern edit_c * progname; /**< Speichert das Element fuer die Eingabe des Namens */
+extern edit_c * progversion;  /**< Speichert das Element fuer die Eingabe der Version */
+extern edit_c * progmessage;  /**< Speichert das Element fuer die Eingabe des Kommentares */
+extern progress_c * progressbar;  /**< Speichert das den Zugriff auf die Progressbar */
+extern fileedit_c * leftpic;  /**< Speichert den Ort der Datei des linken Bildes */
+extern fileedit_c * rightpic; /**< Speichert den Ort der Datei des rechten Bildes */
+extern SystemDefault_c * SystemDefault; /**< Speichert die Startinformationen des Programms */
+extern fileedits_c * savefile; /**< Speichert das Element wo das Bild gespeichert werden soll */
 
 int init(HWND wnd);
-int init2(HWND wnd);
 
 #endif // INIT_H

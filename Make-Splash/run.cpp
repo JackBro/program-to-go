@@ -47,7 +47,11 @@ int runIt(HWND wnd ,int step) {
     SetTimer(wnd, TIMER_STEP6, 100, NULL);
   } else if (step == 6) {
     RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
+    progresslabel->setLangId(18);
+    if (savePic(savefile->getText())) {
 
+    }
+    progressbar->setValue(7);
 //    MessageBox(0,"Call Run","",0);
   }
   return 0;

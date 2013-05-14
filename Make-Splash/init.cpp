@@ -41,7 +41,11 @@ int * finishButtonClicked() {
   return 0;
 }
 
-
+/** \brief Intialiesiert das Hauptfenster
+ *
+ * \param wnd Handle des Fensters
+ * \return immer 0
+ */
 int init(HWND wnd) {
   hwnd = wnd;
   SystemDefault = new SystemDefault_c;
@@ -133,11 +137,6 @@ int init(HWND wnd) {
   } else {
     pages->setPage(1);
   }
-  SetTimer(hwnd,TIMER_START,10,NULL);
   return 0;
 }
 
-int init2(HWND wnd) {
-
-  return 0;
-}

@@ -14,6 +14,7 @@ HBITMAP lPic = 0;
 BITMAP qlBITMAP;
 HBITMAP rPic = 0;
 BITMAP qrBITMAP;
+HWND mywnd;
 
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   WNDCLASS wnd;
@@ -54,6 +55,7 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
                         NULL,
                         hInst,
                         NULL);
+  mywnd = hwnd;
 
   DWORD tmp = GetWindowLongA( hwnd, GWL_STYLE );
   tmp &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
@@ -159,4 +161,72 @@ int setRightPic(char * filename) {
   int iRet = GetObject(reinterpret_cast<HGDIOBJ>(rPic), sizeof(BITMAP),reinterpret_cast<LPVOID>(&qrBITMAP));
   if (!iRet) rPic=0;
   return 0;
+}
+
+bool savePic(char * fname)
+{
+  bool ret = false;
+  // get screen rectangle
+  RECT windowRect;
+  GetWindowRect(mywnd, &windowRect);
+  // bitmap dimensions
+  int bitmap_dx = windowRect.right - windowRect.left;
+  int bitmap_dy = windowRect.bottom - windowRect.top;
+  // create file
+  HANDLE f = CreateFile(fname,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+  if (f == 0) return ret;
+  printf("file %d\n",f);
+  // save bitmap file headers
+  BITMAPFILEHEADER fileHeader;
+  BITMAPINFOHEADER infoHeader;
+
+  fileHeader.bfType      = 0x4d42;
+  fileHeader.bfSize      = 0;
+  fileHeader.bfReserved1 = 0;
+  fileHeader.bfReserved2 = 0;
+  fileHeader.bfOffBits   = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+
+  infoHeader.biSize          = sizeof(infoHeader);
+  infoHeader.biWidth         = bitmap_dx;
+  infoHeader.biHeight        = bitmap_dy;
+  infoHeader.biPlanes        = 1;
+  infoHeader.biBitCount      = 24;
+  infoHeader.biCompression   = BI_RGB;
+  infoHeader.biSizeImage     = 0;
+  infoHeader.biXPelsPerMeter = 0;
+  infoHeader.biYPelsPerMeter = 0;
+  infoHeader.biClrUsed       = 0;
+  infoHeader.biClrImportant  = 0;
+
+  DWORD fwrite;
+  WriteFile(f,&fileHeader,sizeof(BITMAPFILEHEADER),&fwrite,NULL);
+  if (sizeof(BITMAPFILEHEADER) != fwrite) return ret;
+  printf("header %d\n",fwrite);
+  WriteFile(f,&infoHeader,sizeof(BITMAPINFOHEADER),&fwrite,NULL);
+  if (sizeof(BITMAPINFOHEADER) != fwrite) return ret;
+  printf("header %d\n",fwrite);
+
+  // dibsection information
+  BITMAPINFO info;
+  info.bmiHeader = infoHeader;
+
+  // ------------------
+  // THE IMPORTANT CODE
+  // ------------------
+  // create a dibsection and blit the window contents to the bitmap
+  HDC winDC = GetWindowDC(mywnd);
+  HDC memDC = CreateCompatibleDC(winDC);
+  BYTE* memory = 0;
+  HBITMAP bitmap = CreateDIBSection(winDC, &info, DIB_RGB_COLORS, (void**)&memory, 0, 0);
+  SelectObject(memDC, bitmap);
+  BitBlt(memDC, 0, 0, bitmap_dx, bitmap_dy, winDC, 0, 0, SRCCOPY);
+  DeleteDC(memDC);
+  ReleaseDC(mywnd, winDC);
+
+  // save dibsection data
+  int bytes = (((24*bitmap_dx + 31) & (~31))/8)*bitmap_dy;
+  WriteFile(f,memory,bytes,&fwrite,NULL);
+  DeleteObject(bitmap);
+  CloseHandle(f);
+  return ret;
 }

@@ -8,7 +8,7 @@
 
 /*! \mainpage Make Splash
  *
- *  Tool zum erstellen einfachen Splashsreens
+ *  Tool zum erstellen eines einfachen Splashsreens
  */
 
 #include <windows.h>
