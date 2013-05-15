@@ -23,9 +23,9 @@
     <L16>Right picture:</L16>
     <L17>Save as:</L17>
     <L18>Save the splashscreen</L18>
+    <L19>Fertig</L19>
+    <L20>Could not create splash-file</L20>
 
-    <L19>Create "run.xml"</L19>
-    <L20>Select Splashscreen:</L20>
     <L21>picture;*.bmp;all;*.*;;</L21>
     <L22>Waittime (ms):</L22>
     <L23>Hold after start (ms):</L23>

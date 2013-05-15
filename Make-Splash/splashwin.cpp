@@ -28,10 +28,6 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   wnd.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
   wnd.lpszMenuName = NULL;                     //no menu
   wnd.lpszClassName = TEXT("ProgrammStarterSplashWin");
-  if(!RegisterClass(&wnd)) {
-    MessageBox(NULL, "This Program Requires Windows NT", "Error", MB_OK);
-    return 0;
-  }
   HWND hwnd;
 
   Picture = (HBITMAP)LoadImage(NULL,fName, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
@@ -229,4 +225,9 @@ bool savePic(char * fname)
   DeleteObject(bitmap);
   CloseHandle(f);
   return ret;
+}
+
+int closeSplashwin() {
+  SendMessage(mywnd,WM_CLOSE,0,0);
+  return 0;
 }

@@ -1,10 +1,24 @@
+/*! \file Make-Splash/run.cpp
+ *  \brief Routinen zum erstellen des Splash-bildes
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
+
 #include "run.h"
 
 HANDLE splash;
 char splashbmp[] = "config/splash.bmp";
-
+/** \brief Fuerhrt die einzelnen Routinen zum erstellen des Bildes aus
+ *
+ * \param wnd Handle des Fensters
+ * \param step Nummer des Schrittes der ausgefuert werden soll
+ * \return immer 0
+ */
 int runIt(HWND wnd ,int step) {
   if (step == 0) {
+    pages->disableButtons();
     progressbar->setRange(0,7);
     progresslabel->setLangId(5);
     char * temp = new char[MAX_PATH];
@@ -49,9 +63,13 @@ int runIt(HWND wnd ,int step) {
     RedrawWindow((HWND)splash, NULL, NULL, RDW_INVALIDATE | RDW_ERASE);
     progresslabel->setLangId(18);
     if (savePic(savefile->getText())) {
-
+      progresslabel->setLangId(19);
+      progressbar->setValue(7);
+    } else {
+      progresslabel->setLangId(20);
     }
-    progressbar->setValue(7);
+
+    pages->enableButtons();
 //    MessageBox(0,"Call Run","",0);
   }
   return 0;
