@@ -25,14 +25,12 @@
     <L18>Speichern des Splash-Bildes</L18>
     <L19>Finish</L19>
     <L20>Splashdatei konnte nicht erstellt werden</L20>
+    <L21>Datei</L21>
+    <L22>Öffnen</L22>
+    <L23>Speichern</L23>
+    <L24>Speichern unter</L24>
 
-    <L21>Bild;*.bmp;Alle Dateien;*.*;;</L21>
-    <L22>Wartezeit (in ms):</L22>
-    <L23>Haltezeit nach Start (in ms):</L23>
-    <L24>Datei</L24>
-    <L25>Öffnen</L25>
-    <L26>Speichern</L26>
-    <L27>Speichern unter</L27>
+
     <L28>Konfigdaten (*.conf);*.conf;Alle Dateien (*.*);*.*;;</L28>
     <L29>Fertig</L29>
   </List>

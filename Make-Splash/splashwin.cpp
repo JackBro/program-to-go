@@ -28,6 +28,7 @@ HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   wnd.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
   wnd.lpszMenuName = NULL;                     //no menu
   wnd.lpszClassName = TEXT("ProgrammStarterSplashWin");
+  RegisterClass(&wnd);
   HWND hwnd;
 
   Picture = (HBITMAP)LoadImage(NULL,fName, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
@@ -171,7 +172,7 @@ bool savePic(char * fname)
   // create file
   HANDLE f = CreateFile(fname,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
   if (f == 0) return ret;
-  printf("file %d\n",f);
+
   // save bitmap file headers
   BITMAPFILEHEADER fileHeader;
   BITMAPINFOHEADER infoHeader;
@@ -197,10 +198,10 @@ bool savePic(char * fname)
   DWORD fwrite;
   WriteFile(f,&fileHeader,sizeof(BITMAPFILEHEADER),&fwrite,NULL);
   if (sizeof(BITMAPFILEHEADER) != fwrite) return ret;
-  printf("header %d\n",fwrite);
+
   WriteFile(f,&infoHeader,sizeof(BITMAPINFOHEADER),&fwrite,NULL);
   if (sizeof(BITMAPINFOHEADER) != fwrite) return ret;
-  printf("header %d\n",fwrite);
+
 
   // dibsection information
   BITMAPINFO info;
@@ -224,10 +225,11 @@ bool savePic(char * fname)
   WriteFile(f,memory,bytes,&fwrite,NULL);
   DeleteObject(bitmap);
   CloseHandle(f);
+  ret = true;
   return ret;
 }
 
-int closeSplashwin() {
+int  closeSplashWin() {
   SendMessage(mywnd,WM_CLOSE,0,0);
   return 0;
 }

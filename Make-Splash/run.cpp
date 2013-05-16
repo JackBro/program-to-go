@@ -8,8 +8,8 @@
 
 #include "run.h"
 
-HANDLE splash;
-char splashbmp[] = "config/splash.bmp";
+HANDLE splash; /**< Haelt das Handle des Splashfensters */
+char splashbmp[] = "config/splash.bmp"; /**< String zum "leeren" Splash-bildes */
 /** \brief Fuerhrt die einzelnen Routinen zum erstellen des Bildes aus
  *
  * \param wnd Handle des Fensters
@@ -68,7 +68,7 @@ int runIt(HWND wnd ,int step) {
     } else {
       progresslabel->setLangId(20);
     }
-
+    closeSplashWin();
     pages->enableButtons();
 //    MessageBox(0,"Call Run","",0);
   }

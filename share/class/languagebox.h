@@ -11,6 +11,8 @@ class languagebox_c : public dropdownlist_c
         int selectByText(char * text);
         char * getCurText();
         int setLangList();
+        virtual bool event(HWND hwnd, WPARAM wParam, LPARAM lParam);
+        cb_event onClick;
     protected:
     private:
 };

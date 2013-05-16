@@ -10,6 +10,6 @@ int setMessageLabel(char * label);
 int setLeftPic(char * filename);
 int setRightPic(char * filename);
 bool savePic(char * filename);
-int closeSplash();
+int  closeSplashWin();
 
 #endif // SPLASHWIN_H_INCLUDED

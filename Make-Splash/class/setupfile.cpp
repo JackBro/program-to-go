@@ -42,6 +42,7 @@ int setupfile_c::setLang(const char * aLang) {
       data->InsertEndChild(xml->NewElement("Language"));
       data = xml->FirstChildElement("Config")->FirstChildElement("Language");
     }
+    if (aLang != NULL) data->DeleteChildren();
     if (aLang != NULL) data->InsertEndChild(xml->NewText(aLang));
     changed = true;
   }

@@ -8,7 +8,7 @@
 
 #include "init.h"
 
-HWND hwnd;
+HWND hwnd; /**< Speichert das Handle des Hauptfensters */
 
 pages_c * pages;
 controlcollections_c * controls;
@@ -22,7 +22,14 @@ fileedit_c * leftpic;
 fileedit_c * rightpic;
 fileedits_c * savefile;
 SystemDefault_c * SystemDefault;
+menu_c * menu;
+language_c * language;
+languagebox_c * langlist;
 
+/** \brief Funktion fuer den Weiter Button
+ *
+ * \return immer 0
+ */
 int * nextButtonClicked() {
   pages->nextPage();
   if (pages->getPage() == 3) {
@@ -31,14 +38,29 @@ int * nextButtonClicked() {
   return 0;
 }
 
+/** \brief Funktion fuer den Zurueck Button
+ *
+ * \return immer 0
+ */
 int * prevButtonClicked() {
   pages->prevPage();
   return 0;
 }
 
+/** \brief Funktion fuer den Exit Button
+ *
+ * \return immer 0
+ */
 int * finishButtonClicked() {
   SendMessage(hwnd,WM_DESTROY,0,0);
   return 0;
+}
+
+int * languageClicked() {
+  language->setCurrentByLabel(langlist->getText());
+  controls->setCurLanguage();
+  setup->setLang(language->getCurLang());
+  menu->setLanguage(language);
 }
 
 /** \brief Intialiesiert das Hauptfenster
@@ -50,7 +72,7 @@ int init(HWND wnd) {
   hwnd = wnd;
   SystemDefault = new SystemDefault_c;
   setup = new setupfile_c(SystemDefault->PrgPath,"config\\config.xml");
-  language_c * language = new language_c(setup->getLang(), SystemDefault);
+  language = new language_c(setup->getLang(), SystemDefault);
   setup->setLang(language->getCurLang());
   controls = new controlcollections_c;
   controls->setLanguage(language);
@@ -64,9 +86,11 @@ int init(HWND wnd) {
   pages->addControl(
     controls->addControl(
        new staticlabel_c(hwnd, "Language:", 1, 10, 10, 200, 24)));
-  languagebox_c * langlist = (languagebox_c*)pages->addControl(
+  langlist = (languagebox_c*)pages->addControl(
     controls->addControl(
        new languagebox_c(hwnd, 10, 35, 370, 12)));
+  langlist->onClick = languageClicked;
+
 ////////////
   pages->newPage();
   pages->addControl(
@@ -129,8 +153,17 @@ int init(HWND wnd) {
       new button_c(hwnd, "Finish", 4, 297, 237, 85, 24)));
   pages->closeButton->onClick = finishButtonClicked;
 ////////////
+  menu = new menu_c;
+  menu_c * submenu = new menu_c;
+  submenu->Append(MENU_LOAD, 22, "Load");
+  submenu->Append(MENU_SAVE, 23, "Save");
+  submenu->Append(MENU_SAVEAS, 24, "Save as");
+  menu->AppendMenu(0, 21, "File", submenu);
+  menu->setMenu(hwnd);
+////////////
   langlist->setLangList();
   controls->setCurLanguage();
+  menu->setLanguage(language);
 ////////////
   if (setup->changed) {
     pages->setPage(0);

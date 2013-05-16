@@ -21,6 +21,7 @@
 #include "../share/class/edit.h"
 #include "../share/class/fileedit.h"
 #include "../share/class/fileedits.h"
+#include "../share/class/menu.h"
 #include "class/setupfile.h"
 #include "resource.h"
 #include "run.h"

@@ -4,6 +4,7 @@
 
 languagebox_c::languagebox_c(HWND hWnd, int left, int top, int width, int height):dropdownlist_c(hWnd, true, left,top,width,height)
 {
+
 }
 
 languagebox_c::~languagebox_c()
@@ -34,3 +35,11 @@ char * languagebox_c::getCurText() {
   SendMessage(Wnd,CB_GETLBTEXT,i,(LPARAM)text);
   return text;
 }
+
+bool languagebox_c::event(HWND hwnd, WPARAM wParam, LPARAM lParam) {
+  if (Wnd == (HWND)lParam) {
+    if (onClick != NULL) {onClick(); }
+  }
+  return false;
+}
+
