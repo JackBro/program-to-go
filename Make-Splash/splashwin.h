@@ -1,3 +1,10 @@
+/*! \file Make-Splash/Splashwin.h
+ *  \brief Poutinen fuer ein Splashwin zum Erstellen und betrachten des Bildes
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
 #ifndef SPLASHWIN_H_INCLUDED
 #define SPLASHWIN_H_INCLUDED
 

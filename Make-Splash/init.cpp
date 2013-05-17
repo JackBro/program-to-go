@@ -22,9 +22,9 @@ fileedit_c * leftpic;
 fileedit_c * rightpic;
 fileedits_c * savefile;
 SystemDefault_c * SystemDefault;
-menu_c * menu;
+menu_c * menu; /**< Speichert das Hauptmenu */
 language_c * language;
-languagebox_c * langlist;
+languagebox_c * langlist; /**< Speicht die Box fuer die Sprachauswahl */
 
 /** \brief Funktion fuer den Weiter Button
  *
@@ -56,6 +56,10 @@ int * finishButtonClicked() {
   return 0;
 }
 
+/** \brief Funktion fuer die Aenderung der Sprache
+ *
+ * \return immer 0
+ */
 int * languageClicked() {
   language->setCurrentByLabel(langlist->getText());
   controls->setCurLanguage();

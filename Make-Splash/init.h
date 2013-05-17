@@ -38,6 +38,7 @@ extern fileedit_c * rightpic; /**< Speichert den Ort der Datei des rechten Bilde
 extern SystemDefault_c * SystemDefault; /**< Speichert die Startinformationen des Programms */
 extern fileedits_c * savefile; /**< Speichert das Element wo das Bild gespeichert werden soll */
 extern pages_c * pages; /**< Speichert die Seitenverwaltung des Dialoges */
+extern language_c * language; /**< Speichert die Sprachen */
 
 int init(HWND wnd);
 

@@ -29,9 +29,9 @@
     <L22>Öffnen</L22>
     <L23>Speichern</L23>
     <L24>Speichern unter</L24>
+    <L25>Konfigdaten (*.conf);*.conf;Alle Dateien (*.*);*.*;;</L25>
 
 
-    <L28>Konfigdaten (*.conf);*.conf;Alle Dateien (*.*);*.*;;</L28>
     <L29>Fertig</L29>
   </List>
 </LanguageData>

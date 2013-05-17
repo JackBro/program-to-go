@@ -16,6 +16,6 @@
 #define TIMER_STEP5 6 /**< Timer ID fuer den 6. Schritt */
 #define TIMER_STEP6 7 /**< Timer ID fuer den 7. Schritt */
 // ID of Menuitems
-#define MENU_SAVE 2001
-#define MENU_SAVEAS 2002
-#define MENU_LOAD 2003
+#define MENU_SAVE 2001 /**< Speichert die ID fuer den Meuepunpt Speichern */
+#define MENU_SAVEAS 2002 /**< Speichert die ID fuer den Meuepunpt Speichern als */
+#define MENU_LOAD 2003 /**< Speichert die ID fuer den Meuepunpt Laden */

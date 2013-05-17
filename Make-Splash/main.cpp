@@ -18,6 +18,7 @@
 #include "resource.h"
 #include "init.h"
 #include "timer.h"
+#include "LoadSave.h"
 
 HINSTANCE hInst; /**< Halten der Instance vom Programm */
 
@@ -44,7 +45,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       return 0;
     }
     case WM_COMMAND: {
-      controls->event(hwnd, wParam, lParam);
+      if (wParam == MENU_SAVE) {
+        SaveData(hwnd, language);
+      } else {
+        controls->event(hwnd, wParam, lParam);
+      }
       return TRUE;
     }
     case WM_TIMER:{

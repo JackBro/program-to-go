@@ -1,21 +1,44 @@
+/*! \file Make-Splash/Splashwin.cpp
+ *  \brief Poutinen fuer ein Splashwin zum Erstellen und betrachten des Bildes
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
 #include "splashwin.h"
 
 #include <stdio.h>
 
-LRESULT CALLBACK WndProcSplash(HWND, UINT, WPARAM, LPARAM);
-HBITMAP Picture;
-BITMAP qBITMAP;
-HFONT fontbig;
-HFONT fontsmall;
-char * prglabel = NULL;
-char * versionlabel = NULL;
-char * messagelabel = NULL;
-HBITMAP lPic = 0;
-BITMAP qlBITMAP;
-HBITMAP rPic = 0;
-BITMAP qrBITMAP;
-HWND mywnd;
+/** \brief Callback Funktion fuer das Splashwindow
+ *
+ * \param hwnd Handle des Windows fuer das die Nachricht bestimmt ist
+ * \param msg Nachricht
+ * \param wParam 1. Parameter
+ * \param lParam 2. Parameter
+ * \return gibt den Zustand der Abarbeitung wieder
+ */
+LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+HBITMAP Picture; /**< Speicher das leere Splashbild */
+BITMAP qBITMAP; /**< Speicher die Bildeigenschaften */
+HFONT fontbig; /**< Grosse Schrift */
+HFONT fontsmall; /**< kleine Schrift */
+char * prglabel = NULL; /**< Speichert den Text des Programmlabels */
+char * versionlabel = NULL; /**< Speichert den Text der Programmversion */
+char * messagelabel = NULL; /**< Speichert den Text der Messagezeile */
+HBITMAP lPic = 0; /**< Speichert das linke Bild */
+BITMAP qlBITMAP; /**< Speichert die Eigenschsften des linken Bildes */
+HBITMAP rPic = 0; /**< Speichert das rechte Bild */
+BITMAP qrBITMAP; /**< Speichert die Eigenschsften des rechten Bildes */
+HWND mywnd; /**< Speicher das Handle des Splashwin */
 
+/** \brief Erstellt das Splashwindow
+ *
+ * \param hInst HINSTANCE Instance des Processes
+ * \param pWnd HWND Eleternfenster
+ * \param fName char* Name der Bilddatei die geladen werden soll
+ * \return HANDLE des erstellten Fensters
+ *
+ */
 HANDLE createSplash(HINSTANCE hInst, HWND pWnd, char * fName) {
   WNDCLASS wnd;
   wnd.style = CS_HREDRAW | CS_VREDRAW;
@@ -123,6 +146,12 @@ LRESULT CALLBACK WndProcSplash(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
   return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
+/** \brief Setzt den Text fuer das Programmlabel
+ *
+ * \param label char* Text des Programmlabels
+ * \return immer 0
+ *
+ */
 int setPrgLabel(char * label) {
   if (prglabel != NULL) delete[] prglabel;
   prglabel = new char[MAX_PATH];
@@ -130,6 +159,12 @@ int setPrgLabel(char * label) {
   return 0;
 }
 
+/** \brief Setzt den Text fuer die Version
+ *
+ * \param label char* Text der Version
+ * \return immer 0
+ *
+ */
 int setVersiomLabel(char * label) {
   if (versionlabel != NULL) delete[] versionlabel;
   versionlabel = new char[MAX_PATH];
@@ -137,6 +172,12 @@ int setVersiomLabel(char * label) {
   return 0;
 }
 
+/** \brief Setzt den Text fuer die Nachrichtenzeile
+ *
+ * \param label char* Text der Nachricht
+ * \return immer 0
+ *
+ */
 int setMessageLabel(char * label) {
   if (messagelabel != NULL) delete[] messagelabel;
   messagelabel = new char[MAX_PATH];
@@ -144,6 +185,12 @@ int setMessageLabel(char * label) {
   return 0;
 }
 
+/** \brief Laedt das linke Bild
+ *
+ * \param filename char* Dateiname des linken Bildes
+ * \return immer 0
+ *
+ */
 int setLeftPic(char * filename) {
   lPic = (HBITMAP)LoadImage(NULL,filename, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   if (lPic == 0) return 0;
@@ -152,6 +199,12 @@ int setLeftPic(char * filename) {
   return 0;
 }
 
+/** \brief Laedt das rechte Bild
+ *
+ * \param filename char* Dateiname des rechten Bildes
+ * \return immer 0
+ *
+ */
 int setRightPic(char * filename) {
   rPic = (HBITMAP)LoadImage(NULL,filename, IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
   if (rPic == 0) return 0;
@@ -160,6 +213,13 @@ int setRightPic(char * filename) {
   return 0;
 }
 
+/** \brief Speicher das Bild ab
+ *
+ * \param fname char* Dateiname unter dem das Bild gespeichert werden soll
+ * \return bool TRUE wenn erflogreich
+ * \return bool FALSE wenn ein Fehler aufgetreten ist
+ *
+ */
 bool savePic(char * fname)
 {
   bool ret = false;
@@ -229,6 +289,11 @@ bool savePic(char * fname)
   return ret;
 }
 
+/** \brief Schliesst das Fenster
+ *
+ * \return immer 0
+ *
+ */
 int  closeSplashWin() {
   SendMessage(mywnd,WM_CLOSE,0,0);
   return 0;

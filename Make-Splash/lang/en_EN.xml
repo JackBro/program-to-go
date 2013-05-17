@@ -23,14 +23,13 @@
     <L16>Right picture:</L16>
     <L17>Save as:</L17>
     <L18>Save the splashscreen</L18>
-    <L19>Fertig</L19>
+    <L19>Finish</L19>
     <L20>Could not create splash-file</L20>
     <L21>File</L21>
     <L22>Open</L22>
     <L23>Save</L23>
     <L24>Save As</L24>
+    <L25>Config data (*.conf);*.conf;All files (*.*);*.*;;</L25>
 
-    <L28>Config data (*.conf);*.conf;All files (*.*);*.*;;</L28>
-    <L29>Finish</L29>
   </List>
 </LanguageData>
