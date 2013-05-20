@@ -53,3 +53,74 @@ int SaveData(HWND wnd, language_c * language) {
     doc->SaveFile(Name);
   }
 }
+
+/** \brief Speichert die Datei ab, unter neuem Filenamen
+ *
+ * \param wnd HWND Handle des Elternfensters
+ * \param language language_c* Sprachen
+ * \return immer 0
+ *
+ */
+int SaveAsData(HWND hwnd, language_c * language) {
+  char * temp = Name;
+  Name = NULL;
+  SaveData(hwnd, language);
+  if (Name == NULL) {
+    Name = temp;
+  } else {
+    if (temp != NULL) delete[] temp;
+  }
+  return 0;
+}
+
+/** \brief Laedt die Konfigurationsdaten
+ *
+ * \param wnd HWND Handle des Elternfensters
+ * \param language language_c* Sprachen
+ * \return immer 0
+ *
+ */
+int LoadData(HWND hwnd, language_c * language)
+{
+  if (Name != NULL) delete[] Name;
+  c_getopenfilename * getName = new c_getopenfilename;
+  getName->setFilter(language->getLang(25));
+  Name = getName->get();
+  if (Name != NULL) {
+    tinyxml2::XMLDocument * doc = new tinyxml2::XMLDocument;
+    doc->LoadFile(Name);
+    tinyxml2::XMLElement * data = doc->FirstChildElement("Data");
+    if (data != NULL) {
+      tinyxml2::XMLElement * xpage = data->FirstChildElement("Text");
+      if (xpage != NULL) {
+        tinyxml2::XMLElement * field = xpage->FirstChildElement("Name");
+        if (field != NULL) {
+          progname->setText((char*)field->GetText());
+        }
+        field = xpage->FirstChildElement("Version");
+        if (field != NULL) {
+          progversion->setText((char*)field->GetText());
+        }
+        field = xpage->FirstChildElement("Message");
+        if (field != NULL) {
+          progmessage->setText((char*)field->GetText());
+        }
+      }
+      xpage = data->FirstChildElement("Picture");
+      if (xpage != NULL) {
+        tinyxml2::XMLElement * field = xpage->FirstChildElement("Left");
+        if (field != NULL) {
+          leftpic->setText((char*)field->GetText());
+        }
+        field = xpage->FirstChildElement("Right");
+        if (field != NULL) {
+          rightpic->setText((char*)field->GetText());
+        }
+      }
+      xpage = data->FirstChildElement("Save");
+      if (xpage != NULL) {
+        savefile->setText((char*)xpage->GetText());
+      }
+    }
+  }
+}

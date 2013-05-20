@@ -47,7 +47,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND: {
       if (wParam == MENU_SAVE) {
         SaveData(hwnd, language);
-      } else {
+      } else if (wParam == MENU_SAVEAS) {
+        SaveAsData(hwnd, language);
+      } else if (wParam == MENU_LOAD) {
+        LoadData(hwnd, language);
+      } else{
         controls->event(hwnd, wParam, lParam);
       }
       return TRUE;

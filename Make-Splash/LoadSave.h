@@ -23,6 +23,7 @@ extern fileedit_c * rightpic;
 extern fileedits_c * savefile;
 
 int SaveData(HWND wnd, language_c * language);
-
+int SaveAsData(HWND hwnd, language_c * language);
+int LoadData(HWND hwnd, language_c * language);
 
 #endif // LOADSAVE_H
