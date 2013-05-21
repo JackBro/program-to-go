@@ -1,5 +1,5 @@
 /*! \file Make-Splash/main.cpp
- *  \brief Die Hauptdatei vom Projekt "Splash-Screen"
+ *  \brief Die Hauptdatei vom Projekt "Make-Splash"
  *
  * \author Frank Holler
  * \date 2013.05

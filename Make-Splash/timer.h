@@ -1,3 +1,10 @@
+/*! \file Make-Splash/timer.h
+ *  \brief Verwaltet die Timerereignisse
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
 #ifndef TIMER_H
 #define TIMER_H
 

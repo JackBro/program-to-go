@@ -16,9 +16,12 @@ class SystemDefault_c
         bool DriveRemovable();
         int HiVersion;
         int LoVersion;
+        int getCmdCount();
     protected:
     private:
       int DriveMode;
+      char * CmdLine;
+      int CmdCount;
 };
 
 #endif // SYSTEMDEFAULT_H

@@ -1,5 +1,19 @@
+/*! \file Make-Splash/timer.cpp
+ *  \brief Verwaltet die Timerereignisse
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
 #include "timer.h"
 
+/** \brief Leitealle Timerereignisse den Proceduren zu
+ *
+ * \param hwnd HWND Handele des Fensters
+ * \param timer DWORD Timer-ID
+ * \return immer 0
+ *
+ */
 int callTimer(HWND hwnd, DWORD timer) {
   if (timer == TIMER_STEP1) {
     KillTimer(hwnd, TIMER_STEP1);
