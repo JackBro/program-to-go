@@ -17,6 +17,7 @@ class SystemDefault_c
         int HiVersion;
         int LoVersion;
         int getCmdCount();
+        char * getCmdParam(int i);
     protected:
     private:
       int DriveMode;

@@ -29,7 +29,9 @@ SystemDefault_c::SystemDefault_c()
   LoVersion = Version.dwMinorVersion;
   CmdLine = GetCommandLine();
   CmdCount = -1;
-  printf("%s %d\n",CmdLine, getCmdCount());
+  for (int i=0; i<getCmdCount(); i++) {
+    printf("%s %d\n",getCmdParam(i), i);
+  }
 }
 
 SystemDefault_c::~SystemDefault_c()
@@ -69,4 +71,60 @@ int SystemDefault_c::getCmdCount() {
     c = CmdCount;
   }
   return c;
+}
+
+char * SystemDefault_c::getCmdParam(int i) {
+  char * pos = CmdLine;
+  char * start;
+  if (i<getCmdCount()) {
+    int c = 0;
+    start = pos;
+    while ((c < i) && (strlen(pos)>0)) {
+      bool useFuss = false;
+      useFuss = pos[0] == '\"';
+      if (useFuss) {
+        pos = pos + 1;
+        while ((strlen(pos) > 0) && (pos[0] != '\"')) {
+          pos = pos + 1;
+        }
+        pos = pos + 1;
+      } else {
+        while ((strlen(pos) > 0) && (pos[0] != ' ')) {
+          pos = pos + 1;
+        }
+      }
+      while ((strlen(pos) > 0) && (pos[0] == ' ')) {
+        pos = pos + 1;
+      }
+      c++;
+      start = pos;
+    }
+  }
+  if (start != NULL) {
+    char * ende = start;
+    bool useFuss = ende[0] == '\"';
+    if (useFuss) {
+      ende = ende + 1;
+      while ((strlen(ende) > 0) && (ende[0] != '\"')) {
+        ende = ende + 1;
+      }
+      ende = ende + 1;
+    } else {
+      while ((strlen(ende) > 0) && (ende[0] != ' ')) {
+        ende = ende + 1;
+      }
+    }
+    int len = strlen(start)-strlen(ende);
+    char * ret = new char[len+1];
+    useFuss = start[0] == '\"';
+    if (useFuss) {
+      memcpy(ret,start+1,len-1);
+      ret[len-2] = 0;
+    } else {
+      memcpy(ret,start,len);
+      ret[len] = 0;
+    }
+    return ret;
+  }
+  return NULL;
 }
