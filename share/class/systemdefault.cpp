@@ -29,9 +29,7 @@ SystemDefault_c::SystemDefault_c()
   LoVersion = Version.dwMinorVersion;
   CmdLine = GetCommandLine();
   CmdCount = -1;
-  for (int i=0; i<getCmdCount(); i++) {
-    printf("%s %d\n",getCmdParam(i), i);
-  }
+  printf("%s \n",getCmdShort("l"));
 }
 
 SystemDefault_c::~SystemDefault_c()
@@ -126,5 +124,19 @@ char * SystemDefault_c::getCmdParam(int i) {
     }
     return ret;
   }
+  return NULL;
+}
+
+char * SystemDefault_c::getCmdShort(char * Label) {
+  char * aLabel = new char[strlen(Label)+2];
+  aLabel[0] = '/';
+  memcpy(&aLabel[1],Label,strlen(Label)+1);
+  int i = 1;
+  while ((i < getCmdCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
+  if (strcmp(getCmdParam(i),aLabel) == 0) {
+    delete[] aLabel;
+    return getCmdParam(i+1);
+  }
+  delete[] aLabel;
   return NULL;
 }

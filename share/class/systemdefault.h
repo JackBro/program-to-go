@@ -18,6 +18,7 @@ class SystemDefault_c
         int LoVersion;
         int getCmdCount();
         char * getCmdParam(int i);
+        char * getCmdShort(char * Label);
     protected:
     private:
       int DriveMode;

@@ -1,7 +1,20 @@
+/*! \file Make-Splash/class/setupfile.cpp
+ *  \brief Die Hauptdatei vom Projekt "Make-Splash"
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
 #include "setupfile.h"
 
 #include <stdio.h>
 
+/** \brief Laedit die Grundeinstellungen
+ *
+ * \param aPfad const char* Pfad des Programms
+ * \param aFile const char* Filename im Programmpfad
+ *
+ */
 setupfile_c::setupfile_c(const char * aPfad, const char * aFile)
 {
   changed = false;
@@ -12,11 +25,18 @@ setupfile_c::setupfile_c(const char * aPfad, const char * aFile)
   xml->LoadFile(fName);
 }
 
+/** \brief Giebt zum Schluss das XML Dokument frei
+ */
 setupfile_c::~setupfile_c()
 {
    delete xml;
 }
 
+/** \brief Ermittel die Sprache in der Konfiguration
+ *
+ * \return char* Sprachcode
+ *
+ */
 char * setupfile_c::getLang() {
   tinyxml2::XMLElement * data = xml->FirstChildElement("Config");
   char * ret = NULL;
@@ -29,6 +49,12 @@ char * setupfile_c::getLang() {
   return ret;
 }
 
+/** \brief Setzt den Sprachcode
+ *
+ * \param aLang const char* Sprachcode
+ * \return immer 0
+ *
+ */
 int setupfile_c::setLang(const char * aLang) {
   if ((getLang() == NULL) || (strcmp(getLang(),aLang) != 0)) {
     tinyxml2::XMLElement * data = xml->FirstChildElement("Config");
@@ -49,6 +75,11 @@ int setupfile_c::setLang(const char * aLang) {
   return 0;
 }
 
+/** \brief Prueft ob das Dokument geaendert wurde und speicher bei Bedarf
+ *
+ * \return immer 0
+ *
+ */
 int setupfile_c::checkSave() {
   if (changed) {
     char * folder = new char[MAX_PATH];
