@@ -24,6 +24,7 @@
 #include "../share/class/menu.h"
 #include "class/setupfile.h"
 #include "resource.h"
+#include "LoadSave.h"
 #include "run.h"
 
 extern controlcollections_c * controls; /**< Speichert alle Visuellen Elemente */
@@ -41,5 +42,6 @@ extern pages_c * pages; /**< Speichert die Seitenverwaltung des Dialoges */
 extern language_c * language; /**< Speichert die Sprachen */
 
 int init(HWND wnd);
+int init2(HWND wnd);
 
 #endif // INIT_H

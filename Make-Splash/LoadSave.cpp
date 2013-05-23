@@ -86,9 +86,20 @@ int LoadData(HWND hwnd, language_c * language)
   c_getopenfilename * getName = new c_getopenfilename;
   getName->setFilter(language->getLang(25));
   Name = getName->get();
-  if (Name != NULL) {
+  LoadData(Name);
+  return 0;
+}
+
+/** \brief Laedt die Konfigurationsdaten
+ *
+ * \param char * aPfad Name des Files
+ * \return immer 0
+ *
+ */
+int LoadData(char * aPfad) {
+  if (aPfad != NULL) {
     tinyxml2::XMLDocument * doc = new tinyxml2::XMLDocument;
-    doc->LoadFile(Name);
+    doc->LoadFile(aPfad);
     tinyxml2::XMLElement * data = doc->FirstChildElement("Data");
     if (data != NULL) {
       tinyxml2::XMLElement * xpage = data->FirstChildElement("Text");
@@ -123,4 +134,5 @@ int LoadData(HWND hwnd, language_c * language)
       }
     }
   }
+  return 0;
 }

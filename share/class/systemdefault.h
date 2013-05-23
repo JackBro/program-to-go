@@ -19,6 +19,7 @@ class SystemDefault_c
         int getCmdCount();
         char * getCmdParam(int i);
         char * getCmdShort(char * Label);
+        bool hasCmdShort(char * Label);
     protected:
     private:
       int DriveMode;

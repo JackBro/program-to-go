@@ -9,6 +9,7 @@
 #define ICON_MAIN   301 /**< Haupticon */
 #define ICON_FILE   302 /**< Icon fuer die Filedialogbuttons */
 // ID of Timer
+#define TIMER_START 1 /**< Timer ID fuer die Abarbeitung der Kommandline */
 #define TIMER_STEP1 2 /**< Timer ID fuer den 2. Schritt */
 #define TIMER_STEP2 3 /**< Timer ID fuer den 3. Schritt */
 #define TIMER_STEP3 4 /**< Timer ID fuer den 4. Schritt */

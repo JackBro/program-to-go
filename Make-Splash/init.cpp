@@ -174,6 +174,26 @@ int init(HWND wnd) {
   } else {
     pages->setPage(1);
   }
+////////////
+  SetTimer(hwnd, TIMER_START, 100, 0);
   return 0;
 }
 
+/** \brief 2. Teil der Initialiesierung (Commandline Auswertung)
+ *
+ * \param wnd HWND Handel des Fensters
+ * \return immer 0
+ *
+ */
+int init2(HWND wnd) {
+  char * Pfad = SystemDefault->getCmdShort("l");
+  if (Pfad != NULL) {
+    LoadData(Pfad);
+    delete[] Pfad;
+  }
+  if (SystemDefault->hasCmdShort("r")) {
+    pages->setPage(3);
+    runIt(wnd,0);
+  }
+  return 0;
+}
