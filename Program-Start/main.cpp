@@ -1,3 +1,17 @@
+/*! \file Program-Start/main.cpp
+ *  \brief Die Hauptdatei vom Projekt "Program-Start"
+ *
+ * \author Frank Holler
+ * \date 2013.05
+ * \copyright GNU Public License.
+ */
+
+/*! \mainpage Program-Start
+ *
+ *  Starter fuer die Programme der einige Einstellungen setzen kann
+ *  * Kompatibelmode von Windows
+ *  * Uerbergabe der Parameter
+ */
 #if run
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x502
@@ -11,19 +25,79 @@
 #include "..\share\tools.h"
 #include "splashwin.h"
 
-HINSTANCE hInst;
-layer_c * layer;
-char * TempFolder = NULL;
+HINSTANCE hInst; /**< Speichert die Instance des Programms */
+layer_c * layer; /**< Speichert die Registrydaten fuer den Kompatiblitaetsmode */
+char * TempFolder = NULL; /**< Speichert den Folder fuer die Zwichenspeicherung der der Programmdateien im Kommpatiblitaetsmode */
 
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-bool TimerClose = false;
-bool AppClose = false;
-bool SplashClose = false;
-int mintime = 0;
-HANDLE splashWin;
+bool TimerClose = false; /**< Timer fuer mindestlaufzeit des Programms abgelaufen  */
+bool AppClose = false; /**< Programm beendet kann geschlossen werden */
+bool SplashClose = false; /**< Splashscreen wurde geschlossen */
+int mintime = 0; /**< Minimale Laufzeit des Programms in ms */
+HANDLE splashWin; /**< Handle des Splashwindows */
+bool hasStarted = false; /**< Program wurde gestartet */
 
-bool hasStarted = false;
+/** \brief Hauptnachrichtenschleife
+ *
+ * \param hwnd Das Handle des Fensters fuer das die Nachricht bestimmt ist
+ * \param msg Die zu bearbeitende Nachricht
+ * \param wParam 1. Parameter
+ * \param lParam 2. Parameter
+ * \return gibt den Bearbeitungsstaus zurueck
+ */
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+  switch(msg) {
+    case WM_DESTROY: {
+      if (TempFolder != NULL) {DeleteFolder(TempFolder);}
+      PostQuitMessage(0);
+      return 0; }
+    case WM_CLOSE : {
+      if (TimerClose) {
+        SendMessage(hwnd, WM_DESTROY, 0,0);
+      } else {
+        AppClose = true;
+      }
+      return 0;}
+    case WM_TIMER : {
+      if (wParam == TIMER_MIN) {
+        KillTimer(hwnd,TIMER_MIN);
+        if (AppClose) {
+          SendMessage(hwnd, WM_DESTROY, 0,0);
+        } else {
+          TimerClose = true;
+        }
+      }
+      if (wParam == TIMER_SPLASH_STOP) {
+        KillTimer(hwnd,TIMER_SPLASH_STOP);
+        KillTimer(hwnd,TIMER_SPLASH_START);
+        SplashClose = true;
+        if (splashWin != 0) {SendMessage((HWND)splashWin,WM_CLOSE,0,0);}
+      }
+      if (wParam == TIMER_SPLASH_START) {
+        KillTimer(hwnd,TIMER_SPLASH_START);
+        if (!SplashClose) {
+          char * fSplash = new char[MAX_PATH];
+          memcpy(fSplash, systemdefault->PrgPath, strlen(systemdefault->PrgPath)+1);
+          StripSlash(fSplash);
+          fSplash[strlen(fSplash)+1] = 0; fSplash[strlen(fSplash)] = '\\';
+          memcpy(fSplash+strlen(fSplash), runconfig->getSplashName(), strlen(runconfig->getSplashName())+1);
+          splashWin = createSplash(hInst, hwnd, fSplash);
+          delete[] fSplash;
+        }
+      }
+      return 0;}
+  }
+  return DefWindowProc(hwnd, msg, wParam, lParam);
+}
 
+/** \brief Hauptprocedure von Make-Splash
+ *
+ * \param hInstance ID der Instance vom Program
+ * \param hPrevInstance ID der Instance vom aufrufenden Programm
+ * \param lpCmdLine Commandline mit dem das Programm aufgerufenb wird
+ * \param iCmdShow Gibt an wie das Programm angezeigt werden soll
+ * \return gibt den Fehlerstatus zurueck
+ */
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int iCmdShow)
 {
 //////////////////////////////////////////////////////////////
@@ -158,64 +232,3 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   return msg.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    switch(msg)
-    {
-    case WM_INITDIALOG:
-    {
-    }
-    case WM_DESTROY:
-      if (TempFolder != NULL) {DeleteFolder(TempFolder);}
-      PostQuitMessage(0);
-      return 0;
-    case WM_CLOSE : {
-      if (TimerClose) {
-        SendMessage(hwnd, WM_DESTROY, 0,0);
-      } else {
-        AppClose = true;
-      }
-      return 0;
-    }
-    case WM_TIMER : {
-      if (wParam == TIMER_MIN) {
-        KillTimer(hwnd,TIMER_MIN);
-        if (AppClose) {
-          SendMessage(hwnd, WM_DESTROY, 0,0);
-        } else {
-          TimerClose = true;
-        }
-      }
-      if (wParam == TIMER_SPLASH_STOP) {
-        KillTimer(hwnd,TIMER_SPLASH_STOP);
-        KillTimer(hwnd,TIMER_SPLASH_START);
-        SplashClose = true;
-        if (splashWin != 0) {SendMessage((HWND)splashWin,WM_CLOSE,0,0);}
-      }
-      if (wParam == TIMER_SPLASH_START) {
-        KillTimer(hwnd,TIMER_SPLASH_START);
-        if (!SplashClose) {
-          char * fSplash = new char[MAX_PATH];
-          memcpy(fSplash, systemdefault->PrgPath, strlen(systemdefault->PrgPath)+1);
-          StripSlash(fSplash);
-          fSplash[strlen(fSplash)+1] = 0; fSplash[strlen(fSplash)] = '\\';
-          memcpy(fSplash+strlen(fSplash), runconfig->getSplashName(), strlen(runconfig->getSplashName())+1);
-          splashWin = createSplash(hInst, hwnd, fSplash);
-          delete[] fSplash;
-        }
-      }
-      return 0;
-    }
-
-    return TRUE;
-
-    case WM_COMMAND:
-    {
-        switch(LOWORD(wParam))
-        {
-        }
-    }
-    return TRUE;
-    }
-  return DefWindowProc(hwnd, msg, wParam, lParam);
-}

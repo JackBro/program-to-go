@@ -11,7 +11,7 @@
 #include "registry.h"
 
 
-class layer_c : public registry_c
+class layer_c : public c_registry
 {
     public:
         layer_c(char * exefile,char * layer);

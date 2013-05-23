@@ -3,11 +3,11 @@
 
 #include <windows.h>
 
-class registry_c
+class c_registry
 {
     public:
-        registry_c();
-        virtual ~registry_c();
+        c_registry();
+        virtual ~c_registry();
         int OpenKey(HKEY aKey, char * sKey);
         int QueryValue(char * Value, char * data, DWORD * Size);
         int SetValue(char * Value, char * data);
