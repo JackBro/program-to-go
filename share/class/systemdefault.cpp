@@ -132,7 +132,7 @@ char * SystemDefault_c::getCmdShort(char * Label) {
   memcpy(&aLabel[1],Label,strlen(Label)+1);
   int i = 1;
   while ((i < getCmdCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
-  if (strcmp(getCmdParam(i),aLabel) == 0) {
+  if ((i < getCmdCount()) &&(strcmp(getCmdParam(i),aLabel) == 0)) {
     delete[] aLabel;
     return getCmdParam(i+1);
   }

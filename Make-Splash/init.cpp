@@ -187,13 +187,13 @@ int init(HWND wnd) {
  */
 int init2(HWND wnd) {
   char * Pfad = SystemDefault->getCmdShort("l");
-  if (Pfad != NULL) {
-    LoadData(Pfad);
-    delete[] Pfad;
-  }
-  if (SystemDefault->hasCmdShort("r")) {
+//  if (Pfad != NULL) {
+//    LoadData(Pfad);
+//    delete[] Pfad;
+//  }
+/*  if (SystemDefault->hasCmdShort("r")) {
     pages->setPage(3);
     runIt(wnd,0);
-  }
+  }*/
   return 0;
 }
