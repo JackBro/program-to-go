@@ -8,7 +8,7 @@
 #include <stdio.h>
 #endif
 
-#include "registry.h"
+#include "../../share/class/registry.h"
 
 
 class layer_c : public c_registry

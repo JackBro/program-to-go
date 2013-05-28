@@ -1,4 +1,4 @@
-/*! \file share/class/registry.cpp
+/*! \file share/class/registry.h
  *  \brief Kapsellung der Registryfunktionen
  *
  * \author Frank Holler

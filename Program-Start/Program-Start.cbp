@@ -48,6 +48,8 @@
 		<Unit filename="../share/class/collection.h" />
 		<Unit filename="../share/class/file.cpp" />
 		<Unit filename="../share/class/file.h" />
+		<Unit filename="../share/class/registry.cpp" />
+		<Unit filename="../share/class/registry.h" />
 		<Unit filename="../share/class/systemdefault.cpp" />
 		<Unit filename="../share/class/systemdefault.h" />
 		<Unit filename="../share/class/textfile.cpp" />
@@ -58,8 +60,6 @@
 		<Unit filename="../share/tools.h" />
 		<Unit filename="class/layer.cpp" />
 		<Unit filename="class/layer.h" />
-		<Unit filename="class/registry.cpp" />
-		<Unit filename="class/registry.h" />
 		<Unit filename="class/runconfig.cpp" />
 		<Unit filename="class/runconfig.h" />
 		<Unit filename="init.cpp" />
