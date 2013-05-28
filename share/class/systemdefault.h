@@ -2,8 +2,9 @@
 #define SYSTEMDEFAULT_H
 
 #include <windows.h>
+#include "commandline.h"
 
-class SystemDefault_c
+class SystemDefault_c : public c_commandline
 {
     public:
         char ExeFile[MAX_PATH];
@@ -16,15 +17,13 @@ class SystemDefault_c
         bool DriveRemovable();
         int HiVersion;
         int LoVersion;
-        int getCmdCount();
+//        int getCmdCount();
         char * getCmdParam(int i);
         char * getCmdShort(char * Label);
         bool hasCmdShort(char * Label);
     protected:
     private:
       int DriveMode;
-      char * CmdLine;
-      int CmdCount;
 };
 
 #endif // SYSTEMDEFAULT_H

@@ -27,8 +27,6 @@ SystemDefault_c::SystemDefault_c()
   GetVersionEx(&Version);
   HiVersion = Version.dwMajorVersion;
   LoVersion = Version.dwMinorVersion;
-  CmdLine = GetCommandLine();
-  CmdCount = -1;
 }
 
 SystemDefault_c::~SystemDefault_c()
@@ -40,40 +38,10 @@ bool SystemDefault_c::DriveRemovable() {
   return (DRIVE_CDROM == DriveMode) || (DRIVE_REMOVABLE == DriveMode);
 }
 
-int SystemDefault_c::getCmdCount() {
-  int c = 0;
-  if (CmdCount == -1) {
-    char * pos = CmdLine;
-    bool useFuss = false;
-    while (strlen(pos)>0) {
-      useFuss = pos[0] == '\"';
-      if (useFuss) {
-        pos = pos + 1;
-        while ((strlen(pos) > 0) && (pos[0] != '\"')) {
-          pos = pos + 1;
-        }
-        pos = pos + 1;
-      } else {
-        while ((strlen(pos) > 0) && (pos[0] != ' ')) {
-          pos = pos + 1;
-        }
-      }
-      while ((strlen(pos) > 0) && (pos[0] == ' ')) {
-        pos = pos + 1;
-      }
-      c++;
-    }
-    CmdCount = c;
-  } else {
-    c = CmdCount;
-  }
-  return c;
-}
-
 char * SystemDefault_c::getCmdParam(int i) {
-  char * pos = CmdLine;
+  char * pos = cmdline;
   char * start;
-  if (i<getCmdCount()) {
+  if (i<cmdGetCount()) {
     int c = 0;
     start = pos;
     while ((c < i) && (strlen(pos)>0)) {
@@ -131,8 +99,8 @@ char * SystemDefault_c::getCmdShort(char * Label) {
   aLabel[0] = '/';
   memcpy(&aLabel[1],Label,strlen(Label)+1);
   int i = 1;
-  while ((i < getCmdCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
-  if ((i < getCmdCount()) &&(strcmp(getCmdParam(i),aLabel) == 0)) {
+  while ((i < cmdGetCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
+  if ((i < cmdGetCount()) &&(strcmp(getCmdParam(i),aLabel) == 0)) {
     delete[] aLabel;
     return getCmdParam(i+1);
   }
@@ -145,7 +113,7 @@ bool SystemDefault_c::hasCmdShort(char * Label) {
   aLabel[0] = '/';
   memcpy(&aLabel[1],Label,strlen(Label)+1);
   int i = 1;
-  while ((i < getCmdCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
+  while ((i < cmdGetCount()) && (strcmp(getCmdParam(i),aLabel) != 0)) i++;
   if (strcmp(getCmdParam(i),aLabel) == 0) {
     delete[] aLabel;
     return true;

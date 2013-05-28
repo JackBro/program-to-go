@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="x" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -46,6 +47,8 @@
 		<Unit filename="../share/class/charcollection.h" />
 		<Unit filename="../share/class/collection.cpp" />
 		<Unit filename="../share/class/collection.h" />
+		<Unit filename="../share/class/commandline.cpp" />
+		<Unit filename="../share/class/commandline.h" />
 		<Unit filename="../share/class/file.cpp" />
 		<Unit filename="../share/class/file.h" />
 		<Unit filename="../share/class/registry.cpp" />

@@ -24,7 +24,7 @@ _RegCloseKey __RegCloseKey = NULL; /**< Speichert die Addrsse von RegCloseKey */
  */
 c_registry::c_registry()
 {
-   If (lib==0) lib = LoadLibrary("ADVAPI32.DLL");
+   if (lib==0) lib = LoadLibrary("ADVAPI32.DLL");
 }
 
 /** \brief Schließt die Klasse

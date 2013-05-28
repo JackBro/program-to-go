@@ -176,7 +176,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       hasStarted = true;
       if (!FileExists(exefile)) {CanStart = false;}
       if (CanStart) {
-        CreateProcess( exefile, NULL, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
+        CreateProcess( exefile, systemdefault->cmdGetParams(), NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
       }
       SetTimer(hwnd,TIMER_MIN,mintime, NULL);
       SetTimer(hwnd, TIMER_SPLASH_STOP, runconfig->getSplashPost(), 0);
