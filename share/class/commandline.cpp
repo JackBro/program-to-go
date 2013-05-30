@@ -197,9 +197,11 @@ bool c_commandline::cmdHasShort(char * Label)
   memcpy(&aLabel[1],Label,strlen(Label)+1);
   int i = 1;
   while ((i < cmdGetCount()) && (strcmp(cmdGetParam(i),aLabel) != 0)) i++;
-  if (strcmp(cmdGetParam(i),aLabel) == 0) {
-    delete[] aLabel;
-    return true;
+  if (i < cmdGetCount()) {
+    if (strcmp(cmdGetParam(i),aLabel) == 0) {
+      delete[] aLabel;
+      return true;
+    }
   }
   return false;
 }

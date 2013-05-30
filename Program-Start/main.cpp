@@ -176,7 +176,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
       hasStarted = true;
       if (!FileExists(exefile)) {CanStart = false;}
       if (CanStart) {
-        CreateProcess( exefile, systemdefault->cmdGetParams(), NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
+        if (strlen(systemdefault->cmdGetParams()) >0) {
+          char * full = new char[strlen(exefile)+strlen(systemdefault->cmdGetParams())+4];
+          sprintf(full,"\"%s\" %s",exefile,systemdefault->cmdGetParams());
+          CreateProcess( NULL, full, NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
+          delete[] full;
+        } else {
+          CreateProcess( exefile, systemdefault->cmdGetParams(), NULL, NULL, TRUE, 0, NULL, appdir, &info, &processInfo);
+        }
       }
       SetTimer(hwnd,TIMER_MIN,mintime, NULL);
       SetTimer(hwnd, TIMER_SPLASH_STOP, runconfig->getSplashPost(), 0);

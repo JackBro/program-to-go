@@ -70,7 +70,7 @@ int runIt(HWND wnd ,int step) {
     }
     closeSplashWin();
     pages->enableButtons();
-    if (SystemDefault->hasCmdShort("c")) SendMessage(wnd, WM_CLOSE, 0, 0);
+    if (SystemDefault->cmdHasShort("c")) SendMessage(wnd, WM_CLOSE, 0, 0);
   }
   return 0;
 }

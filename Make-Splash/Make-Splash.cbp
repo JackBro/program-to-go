@@ -52,6 +52,8 @@
 		<Unit filename="../share/class/buttonicon.h" />
 		<Unit filename="../share/class/collection.cpp" />
 		<Unit filename="../share/class/collection.h" />
+		<Unit filename="../share/class/commandline.cpp" />
+		<Unit filename="../share/class/commandline.h" />
 		<Unit filename="../share/class/controlcollections.cpp" />
 		<Unit filename="../share/class/controlcollections.h" />
 		<Unit filename="../share/class/dropdownlist.cpp" />
