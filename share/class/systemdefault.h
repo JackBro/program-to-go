@@ -17,10 +17,6 @@ class SystemDefault_c : public c_commandline
         bool DriveRemovable();
         int HiVersion;
         int LoVersion;
-//        int getCmdCount();
-        char * getCmdParam(int i);
-        char * getCmdShort(char * Label);
-        bool hasCmdShort(char * Label);
     protected:
     private:
       int DriveMode;
